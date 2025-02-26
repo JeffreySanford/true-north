@@ -1,1 +1,822 @@
+@use '@angular/material' as mat;
+@use 'sass:color';
+@use './styles/variables' as vars;
+@use './styles/common' as common;
+
+@include mat.core();
+
+// Define Military/Veteran-inspired colors at the top of the file
+$navy-blue: #003087;
+$army-green: #4b5320;
+$army-green-dark: #3a4019; // Darker version for hover states (pre-computed instead of using color.adjust)
+$service-gold: #ffd700;
+$veteran-silver: #c0c0c0;
+$honor-red: #BF0A30;
+
+// American flag colors for reference:
+// Red: #BF0A30
+// White: #FFFFFF
+// Blue: #002868
+
+:root {
+  // Theme variables with default values
+  --primary-color: #{vars.$patriotic-blue};
+  --accent-color: #{vars.$patriotic-red};
+  --background-color: #{vars.$patriotic-white};
+  --text-color: #{vars.$text};
+  --patriotic-red: #{vars.$patriotic-red};
+  --patriotic-white: #{vars.$patriotic-white};
+  --patriotic-blue: #{vars.$patriotic-blue};
+  --theme-intensity: 1.0;
+  --animation-speed: 1;
+}
+
+html, body { height: 100%; margin: 0; font-family: 'Roboto', sans-serif; }
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(90deg, #BF0A30, #002868, white);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.page-container {
+  min-height: calc(100vh - 128px); /* Adjust for header/footer height */
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: url('/assets/backgrounds/globe-digital.jpg') center/cover no-repeat;
+}
+
+.page-container:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(217deg, rgba(0,40,104,0) 0%, rgba(0,40,104,0.1) 50%, rgba(0,40,104,0) 100%);
+  background-size: 400% 400%;
+  pointer-events: none;
+  z-index: -1;
+  animation: radar-scan 15s ease infinite;
+}
+
+.section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 20px;
+  min-height: 400px;
+  transition: all 0.5s ease;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.patriotic-overlay {
+  background: radial-gradient(ellipse at center, 
+    rgba(0, 40, 104, 0.7) 0%, 
+    rgba(0, 0, 0, 0.8) 100%);
+}
+
+.patriotic-accent {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(to right, #BF0A30 33%, white 33%, white 66%, #002868 66%);
+  box-shadow: 0 0 10px rgba(255,255,255,0.7);
+  position: relative;
+  overflow: hidden;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      rgba(255,255,255,0) 0%, 
+      rgba(255,255,255,0.3) 50%, 
+      rgba(255,255,255,0) 100%);
+    animation: shimmer 2s infinite;
+  }
+}
+
+.content {
+  max-width: 600px;
+  text-align: center;
+  color: white;
+  padding: 40px;
+  background: rgba(0, 25, 65, 0.9); // Slightly more opaque for better readability
+  border: 2px solid $service-gold;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: $service-gold;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    z-index: 1;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 10px;
+    background: $service-gold;
+    z-index: 0;
+  }
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  letter-spacing: 1px;
+}
+
+.section-subtitle {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #f8f8f8;
+  font-style: italic;
+}
+
+.separator {
+  width: 50%;
+  height: 3px;
+  margin: 15px auto 25px;
+  background: linear-gradient(to right, #BF0A30, #FFFFFF, #002868);
+}
+
+.section-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: justify;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.section-details {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 25px;
+  text-align: left;
+  
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+    
+    .detail-icon {
+      color: $service-gold;
+      margin-right: 10px;
+      font-size: 1.1rem;
+      height: 1.1rem;
+      width: 1.1rem;
+    }
+  }
+}
+
+.action-button {
+  background-color: $army-green !important;
+  color: white !important;
+  padding: 10px 20px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  border-radius: 4px !important;
+  border: 1px solid $service-gold !important;
+  transition: all 0.3s ease !important;
+  margin-top: 15px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2) !important;
+  
+  &:hover {
+    background-color: $army-green-dark !important; // Using pre-computed darker color
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  // Add tactical button press effect
+  &:active {
+    transform: scale(0.95) !important;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  // Add tactical light indicator
+  &::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+}
+
+footer mat-toolbar {
+  background: linear-gradient(90deg, $honor-red, $navy-blue);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.active-section {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+  transform: translateY(0);
+  animation: fadeIn 0.7s ease-out;
+  animation: section-glow 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.transition-effect {
+  animation: flashBackground 0.5s ease;
+  animation: enhanced-transition 1s ease;
+}
+
+@keyframes flashBackground {
+  0%, 100% {
+    background-blend-mode: normal;
+  }
+  50% {
+    background-blend-mode: luminosity;
+  }
+}
+
+@keyframes enhanced-transition {
+  0% {
+    filter: saturate(100%) contrast(100%);
+  }
+  50% {
+    filter: saturate(150%) contrast(120%) brightness(110%);
+  }
+  100% {
+    filter: saturate(100%) contrast(100%);
+  }
+}
+
+.company-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  margin-left: 10px;
+  
+  .title {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  
+  .subtitle {
+    font-size: 0.8rem;
+    opacity: 0.9;
+  }
+}
+
+.hero-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+  width: 100%;
+  margin-bottom: 30px;
+  will-change: transform, opacity;
+  
+  .hero-title {
+    font-size: 5rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    letter-spacing: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .hero-tag {
+    font-size: 2rem;
+    color: $service-gold;
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    margin-bottom: 15px;
+  }
+  
+  .hero-location {
+    font-size: 1.2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 15px;
+    border-radius: 20px;
+  }
+}
+
+.section-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  will-change: transform, opacity;
+  
+  mat-icon {
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+    color: $service-gold;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  }
+}
+
+.veteran-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 60px;
+  height: 60px;
+  background-image: url('/assets/images/veteran-badge.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.motto-banner {
+  width: 100%;
+  padding: 20px 0;
+  margin: 30px 0;
+  background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0.6) 0%, 
+    rgba(0, 48, 135, 0.8) 50%, 
+    rgba(0, 0, 0, 0.6) 100%);
+  text-align: center;
+  
+  .motto-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-style: italic;
+    color: $service-gold;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  }
+}
+
+.footer-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+  flex-wrap: wrap;
+  
+  .footer-section {
+    padding: 0 20px;
+    
+    h4 {
+      color: $service-gold;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    
+    p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.copyright {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+}
+
+.patriotic-accent {
+  background: linear-gradient(to right, 
+    $honor-red 33%, 
+    white 33%, white 66%, 
+    $navy-blue 66%);
+  box-shadow: 0 0 10px $service-gold;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.section-icon, 
+.section-title, 
+.section-subtitle, 
+.separator, 
+.section-content, 
+.section-details, 
+.action-button {
+  will-change: transform, opacity;
+}
+
+// Stunning ripple effect for transitions
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 70%);
+  transform: scale(0);
+  pointer-events: none;
+  z-index: 10;
+  animation: ripple-animation 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes ripple-animation {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+@keyframes section-glow {
+  0% {
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+  }
+}
+
+@keyframes radar-scan {
+  0%, 100% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+}
+
+// Enhanced military-inspired elements
+.military-pattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background-image: url('/assets/images/camouflage-pattern.png');
+  background-size: contain;
+  opacity: 0.1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+// Flag wave animation
+.patriotic-flag {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 50px;
+  background-image: url('/assets/images/us-flag.png');
+  background-size: cover;
+  transform-origin: left center;
+  animation: flag-wave 6s ease-in-out infinite;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes flag-wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+// Military rank insignia inspired decoration
+.rank-decoration {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(45deg, $navy-blue, color.adjust($navy-blue, $lightness: -10%));
+  border: 2px solid $service-gold;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &::after {
+    content: '★';
+    color: $service-gold;
+    font-size: 14px;
+  }
+}
+
+// American eagle silhouette
+.eagle-silhouette {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-image: url('/assets/images/eagle-silhouette.png');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: -1;
+}
+
+// Combat mission style section transitions
+@keyframes mission-transition {
+  0% {
+    clip-path: circle(0% at center);
+    filter: grayscale(100%) brightness(50%);
+  }
+  100% {
+    clip-path: circle(150% at center);
+    filter: grayscale(0%) brightness(100%);
+  }
+}
+
+.active-section .content {
+  animation: mission-transition 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+// Tactical HUD inspired overlay
+.tactical-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(transparent 49%, rgba(0, 40, 104, 0.03) 50%, transparent 51%),
+    linear-gradient(90deg, transparent 49%, rgba(0, 40, 104, 0.03) 50%, transparent 51%);
+  background-size: 50px 50px;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+// Compass rose animation in background
+.compass-rose {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background-image: url('/assets/images/compass-rose.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.03;
+  z-index: -2;
+  pointer-events: none;
+  animation: slow-spin 120s linear infinite;
+}
+
+@keyframes slow-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+// Enhanced scroll behavior
+html {
+  scroll-behavior: smooth;
+  
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient($honor-red, $navy-blue);
+    border-radius: 5px;
+  }
+}
+
+// Responsive adjustments for military precision across devices
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .hero-title {
+    font-size: 3.5rem !important;
+  }
+  
+  .hero-tag {
+    font-size: 1.5rem !important;
+  }
+  
+  .compass-rose {
+    width: 300px;
+    height: 300px;
+  }
+}
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: vars.$font-family-main;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Theme mode classes
+.theme-mode-dark {
+  --background-color: #121212;
+  --text-color: #FFFFFF;
+  
+  .mat-toolbar {
+    background: linear-gradient(to right, #000428, #004e92);
+    color: white;
+  }
+  
+  .mat-card {
+    background-color: #1E1E1E;
+    color: white;
+  }
+}
+
+.theme-mode-tactical {
+  --background-color: #0A0E14;
+  --text-color: #7CFC00;
+  
+  font-family: 'Roboto Mono', monospace;
+  
+  .mat-toolbar {
+    background: #1B3022;
+    color: #7CFC00;
+    border-bottom: 1px solid #7CFC00;
+  }
+  
+  .mat-card {
+    background-color: rgba(27, 48, 34, 0.8);
+    color: #7CFC00;
+    border: 1px solid #7CFC00;
+    box-shadow: 0 0 10px rgba(124, 252, 0, 0.3);
+  }
+  
+  .mat-button, .mat-raised-button {
+    font-family: 'Roboto Mono', monospace;
+  }
+  
+  .section-container {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/assets/images/grid.png');
+      background-size: 100px 100px;
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: -1;
+    }
+  }
+}
+
+// Military branch specific styles
+.branch-army {
+  .patriotic-flag {
+    background: repeating-linear-gradient(
+      to right,
+      #4B5320 0px,
+      #4B5320 20px,
+      #FFC000 20px,
+      #FFC000 40px
+    );
+  }
+}
+
+.branch-navy {
+  .patriotic-flag {
+    background: repeating-linear-gradient(
+      to right,
+      #000080 0px,
+      #000080 20px,
+      #D4AF37 20px,
+      #D4AF37 40px
+    );
+  }
+}
+
+.branch-airforce {
+  .patriotic-flag {
+    background: repeating-linear-gradient(
+      to right,
+      #0078D7 0px,
+      #0078D7 20px,
+      white 20px,
+      white 40px
+    );
+  }
+}
+
+.branch-marines {
+  .patriotic-flag {
+    background: repeating-linear-gradient(
+      to right,
+      #8B0000 0px,
+      #8B0000 20px,
+      #FFCC00 20px,
+      #FFCC00 40px
+    );
+  }
+}
+
+.branch-coastguard {
+  .patriotic-flag {
+    background: repeating-linear-gradient(
+      to right,
+      #003366 0px,
+      #003366 20px,
+      #F9A602 20px,
+      #F9A602 40px
+    );
+  }
+}
+
+// Animated elements
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.tactical-element {
+  animation: pulse 2s infinite;
+  animation-play-state: if(var(--animation-speed) == 1, running, paused);
+}
+
+// Intensity modifiers
+.intensity-modifier {
+  opacity: var(--theme-intensity);
+}

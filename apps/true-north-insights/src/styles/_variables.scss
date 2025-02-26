@@ -1,0 +1,52 @@
+@use 'sass:color';
+
+// Place your variables here
+// Example:
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+
+// Colors
+$primary-blue: #002868;
+$primary-red: #BF0A30;
+$primary-white: #FFFFFF;
+$primary-off-white: #F8F8F8;
+$primary-dark: #333333;
+$primary-gold: #FFD700;
+
+// Military/Veteran-inspired colors
+$navy-blue: #003087;
+$army-green: #4b5320;
+$service-gold: #ffd700;
+$veteran-silver: #c0c0c0;
+$honor-red: #BF0A30;
+
+// American flag colors
+$patriotic-red: #BF0A30;
+$patriotic-white: #FFFFFF;
+$patriotic-blue: #002868;
+$patriotic-blue-dark: color.adjust($patriotic-blue, $lightness: -10%); // Fixed deprecated darken
+
+// Text colors
+$text: #333333;
+
+// Dimensions
+$header-height: 64px;
+$footer-height: 120px;
+$section-padding: 30px;
+$content-max-width: 1200px;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Typography
+$font-family-main: 'Roboto', sans-serif;
+$font-family-headers: 'Montserrat', sans-serif;
+$font-family-alt: 'Roboto Condensed', sans-serif;
+
+// Animation 
+$transition-fast: 0.2s ease;
+$transition-medium: 0.3s ease;
+$transition-slow: 0.5s ease;

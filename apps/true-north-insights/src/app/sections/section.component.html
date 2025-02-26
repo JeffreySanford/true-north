@@ -1,0 +1,47 @@
+<p>section works!</p>
+
+<section appParallax style="background: linear-gradient(90deg, #BF0A30, #FFFFFF, #002868); min-height: 400px;">
+  <h3>Patriotic Section with Parallax</h3>
+</section>
+
+<div class="section-container" 
+     [ngClass]="[getThemeClass(), getBranchClass()]" 
+     [@highlightBorder]="borderState"
+     (mouseenter)="onMouseEnter()"
+     (mouseleave)="onMouseLeave()">
+     
+  <div class="stars-bg" *ngIf="showStars"></div>
+  <div class="military-emblem" *ngIf="militaryBranch !== 'none'"></div>
+  
+  <div class="ribbon" *ngIf="active">
+    <span class="ribbon-content">FEATURED</span>
+  </div>
+  
+  <div class="section-header">
+    <div class="section-icon" *ngIf="icon">
+      <mat-icon>{{icon}}</mat-icon>
+    </div>
+    <div>
+      <h2 class="section-title">{{title}}</h2>
+      <h3 class="section-subtitle">{{subtitle}}</h3>
+    </div>
+  </div>
+  
+  <div class="section-separator"></div>
+  
+  <div class="section-content">
+    <p>{{content}}</p>
+  </div>
+  
+  <div class="section-image" *ngIf="imagePath">
+    <img [src]="imagePath" [alt]="title">
+  </div>
+  
+  <div class="section-footer">
+    <button class="action-button">{{buttonText}}</button>
+  </div>
+  
+  <div class="patriotic-stripes"></div>
+</div>
+
+<ng-content></ng-content>

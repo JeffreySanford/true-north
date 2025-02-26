@@ -1,0 +1,313 @@
+@use 'sass:color';
+@use '../../styles' as styles;
+@use '../../styles/variables' as vars;
+@use '../../styles/common' as common;
+
+.section-container {
+  position: relative;
+  padding: 30px;
+  margin: 20px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  color: white;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.theme-red {
+  background: linear-gradient(135deg, #BF0A30 0%, #8A0022 100%);
+  border-left: 5px solid #FFFFFF;
+  
+  .military-emblem::before {
+    color: #FFFFFF;
+  }
+  
+  .action-button {
+    &:hover {
+      background-color: white;
+      color: #BF0A30;
+    }
+  }
+}
+
+.theme-white {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  color: #002868;
+  border-left: 5px solid #002868;
+  
+  .section-title, .section-subtitle {
+    color: #002868;
+  }
+  
+  .separator {
+    background: linear-gradient(to right, #002868, #BF0A30);
+  }
+  
+  .action-button {
+    border-color: #002868;
+    color: #002868;
+    
+    &:hover {
+      background-color: #002868;
+      color: white;
+    }
+  }
+  
+  .stars-bg {
+    opacity: 0.1;
+  }
+}
+
+.theme-blue {
+  background: linear-gradient(135deg, vars.$patriotic-blue 0%, color.adjust(vars.$patriotic-blue, $lightness: -15%) 100%);
+  border-left: 5px solid #FFFFFF;
+  
+  .action-button {
+    &:hover {
+      background-color: white;
+      color: vars.$patriotic-blue;
+    }
+  }
+}
+
+.section-header {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.section-icon {
+  margin-right: 15px;
+  
+  mat-icon {
+    font-size: 2.5rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    color: white;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+  }
+}
+
+.section-title {
+  font-size: 2rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.section-separator {
+  width: 100px;
+  height: 3px;
+  background-color: white;
+  margin-bottom: 20px;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background-color: #BF0A30;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30%;
+    background-color: #002868;
+  }
+}
+
+.section-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.section-image {
+  margin: 20px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,40,104,0.1), rgba(191,10,48,0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover::after {
+    opacity: 1;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.section-footer {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.action-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+.stars-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.2;
+  background-image: url('/assets/images/stars.png');
+  background-size: cover;
+}
+
+.military-emblem {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  height: 40px;
+  width: 40px;
+  opacity: 0.5;
+  
+  &::before {
+    font-family: 'Material Icons';
+    font-size: 40px;
+  }
+}
+
+// Military branch styling
+.branch-army .military-emblem::before {
+  content: 'military_tech';
+  color: #4B5320;
+}
+
+.branch-navy .military-emblem::before {
+  content: 'sailing';
+  color: #000080;
+}
+
+.branch-airforce .military-emblem::before {
+  content: 'flight_takeoff';
+  color: #0078D7;
+}
+
+.branch-marines .military-emblem::before {
+  content: 'whatshot';
+  color: #8B0000;
+}
+
+.branch-coastguard .military-emblem::before {
+  content: 'anchor';
+  color: #F9A602;
+}
+
+// Ribbon effect
+.ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  z-index: 1;
+  
+  &::before, &::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    display: block;
+    border: 5px solid #BF0A30;
+  }
+  
+  .ribbon-content {
+    position: absolute;
+    top: 25px;
+    right: -50px;
+    transform: rotate(45deg);
+    background-color: #BF0A30;
+    color: white;
+    padding: 5px 40px;
+    font-size: 0.8rem;
+    text-align: center;
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  }
+}
+
+// Patriotic decoration
+.patriotic-stripes {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: repeating-linear-gradient(
+    to right,
+    #BF0A30 0px,
+    #BF0A30 20px,
+    white 20px,
+    white 40px,
+    #002868 40px,
+    #002868 60px
+  );
+}

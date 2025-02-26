@@ -1,0 +1,135 @@
+@use 'sass:color';
+// Common styles that can be imported by both the main styles.scss and component scss files
+// Import variables for use in this file
+@use './variables' as vars;
+
+// Export common mixins, functions, and basic shared styles
+
+// Common mixins
+@mixin patriotic-gradient {
+  background: linear-gradient(
+    to right,
+    vars.$patriotic-red,
+    vars.$patriotic-blue
+  );
+}
+
+@mixin patriotic-text-shadow {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+@mixin section-padding {
+  padding: vars.$section-padding;
+}
+
+@mixin responsive-container {
+  width: 100%;
+  max-width: vars.$content-max-width;
+  margin: 0 auto;
+}
+
+// Common transitions
+@mixin smooth-transition {
+  transition: all vars.$transition-medium;
+}
+
+// Box shadow levels
+@mixin box-shadow($level) {
+  @if $level == 1 {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  } @else if $level == 2 {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  } @else if $level == 3 {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  } @else {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Text shadow levels
+@mixin text-shadow($level) {
+  @if $level == 1 {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  } @else if $level == 2 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  } @else if $level == 3 {
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  } @else {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// Flag stripes
+@mixin flag-stripes($height) {
+  height: $height;
+  background: linear-gradient(
+    90deg,
+    vars.$patriotic-red 0%,
+    vars.$patriotic-red 33%,
+    vars.$patriotic-white 33%,
+    vars.$patriotic-white 66%,
+    vars.$patriotic-blue 66%,
+    vars.$patriotic-blue 100%
+  );
+}
+
+// Military texture
+@mixin military-texture {
+  background-image: url('/assets/images/camo-texture.png');
+  background-size: cover;
+}
+
+// Stars background
+@mixin stars-background($opacity) {
+  background-color: vars.$patriotic-blue;
+  background-image: url('/assets/images/stars-background.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, $opacity);
+  }
+}
+
+// Patriotic button
+@mixin patriotic-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all vars.$transition-medium;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-2px);
+    @include box-shadow(2);
+  }
+
+  &:active {
+    transform: translateY(0);
+    @include box-shadow(1);
+  }
+}
+
+// Common element styles
+%centered-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%patriotic-border {
+  border: 2px solid vars.$service-gold;
+  box-shadow: 0 0 10px rgba(vars.$service-gold, 0.3);
+}

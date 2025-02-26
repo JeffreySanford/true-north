@@ -1,0 +1,430 @@
+@use 'sass:color';
+@use '../styles' as styles;
+@use '../styles/variables' as vars;
+@use '../styles/common' as common;
+@use '../styles/mixins' as mixins;
+
+html,
+body {
+  height: 100%;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  background-image: url('/assets/backgrounds/us-flag.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  .active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  @include mixins.box-shadow(1);
+  background: linear-gradient(to right, vars.$patriotic-blue, vars.$patriotic-blue-dark);
+  
+  .mat-icon {
+    margin-right: 5px;
+  }
+}
+
+.logo {
+  width: 3em;
+  height: 3em;
+  margin: 0 auto;
+  margin-right: 10px;
+  display: block;
+  position: relative;
+  background-color: red;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: sparkle 2s infinite;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      box-shadow: 0 0 5px 5px white;
+    }
+    50% {
+      box-shadow: 0 0 20px 20px white;
+    }
+  }
+}
+
+.company-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  
+  .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    @include mixins.text-shadow(1);
+  }
+  
+  .subtitle {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.page-container {
+  min-height: calc(100vh - #{vars.$header-height} - #{vars.$footer-height});
+  position: relative;
+  overflow: hidden;
+  padding-bottom: vars.$footer-height;
+  
+  .tactical-hud {
+    position: fixed;
+    top: vars.$header-height;
+    right: 0;
+    width: 200px;
+    height: 100px;
+    background-image: url('/assets/images/tactical-hud.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .compass-rose {
+    position: fixed;
+    bottom: vars.$footer-height + 20px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
+    background-image: url('/assets/images/compass.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .eagle-silhouette {
+    position: fixed;
+    top: vars.$header-height + 20px;
+    left: -30px;
+    width: 200px;
+    height: 150px;
+    background-image: url('/assets/images/eagle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+.hero-banner {
+  text-align: center;
+  padding: 60px 20px;
+  position: relative;
+  @include mixins.stars-background(0.3);
+  
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: vars.$patriotic-white;
+    margin-bottom: 15px;
+    @include mixins.text-shadow(3);
+    
+    @media (max-width: vars.$breakpoint-md) {
+      font-size: 2.5rem;
+    }
+  }
+  
+  .hero-tag {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: vars.$patriotic-white;
+    margin-bottom: 10px;
+    @include mixins.text-shadow(2);
+  }
+  
+  .hero-location {
+    font-size: 1.2rem;
+    color: vars.$patriotic-white;
+    @include mixins.text-shadow(1);
+  }
+  
+  .patriotic-flag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    @include mixins.flag-stripes(5px);
+  }
+}
+
+.section {
+  position: relative;
+  padding: 20px;
+  max-width: vars.$content-max-width;
+  margin: 20px auto;
+  
+  &.active-section {
+    .content {
+      @include mixins.box-shadow(3);
+      transform: translateY(-5px);
+    }
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  .patriotic-overlay {
+    background: linear-gradient(135deg, 
+      rgba(vars.$patriotic-red, 0.05) 0%, 
+      rgba(vars.$patriotic-white, 0.05) 50%, 
+      rgba(vars.$patriotic-blue, 0.05) 100%
+    );
+  }
+  
+  .content {
+    position: relative;
+    background-color: white;
+    border-radius: 8px;
+    padding: vars.$section-padding;
+    @include mixins.box-shadow(2);
+    transition: all vars.$transition-medium;
+    overflow: hidden;
+    
+    &:hover {
+      @include mixins.box-shadow(3);
+      transform: translateY(-5px);
+    }
+  }
+  
+  .rank-decoration {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    background-image: url('/assets/images/rank.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+  }
+  
+  .military-pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    @include mixins.military-texture;
+    opacity: 0.05;
+    z-index: -1;
+  }
+  
+  .section-icon {
+    display: inline-block;
+    background-color: vars.$patriotic-blue;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    @include mixins.box-shadow(1);
+    
+    .mat-icon {
+      font-size: 2rem;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+  
+  .section-title {
+    font-family: vars.$font-family-headers;
+    font-size: 2.2rem;
+    color: vars.$patriotic-blue;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-subtitle {
+    font-size: 1.2rem;
+    color: vars.$patriotic-red;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  .separator {
+    height: 3px;
+    width: 100px;
+    background: linear-gradient(to right, vars.$patriotic-red, vars.$patriotic-blue);
+    margin-bottom: 20px;
+  }
+  
+  .section-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: vars.$text;
+    margin-bottom: 30px;
+  }
+  
+  .section-details {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      
+      .detail-icon {
+        color: vars.$patriotic-blue;
+        margin-right: 10px;
+      }
+    }
+  }
+  
+  .action-button {
+    @include mixins.patriotic-button;
+    background-color: vars.$patriotic-blue;
+    
+    &:hover {
+      background-color: vars.$patriotic-red;
+    }
+  }
+  
+  .veteran-badge {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 60px;
+    height: 60px;
+    background-image: url('/assets/images/veteran-badge.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+  }
+  
+  .patriotic-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    @include mixins.flag-stripes(4px);
+  }
+}
+
+.motto-banner {
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(vars.$patriotic-blue, 0.8);
+  margin: 40px 0;
+  position: relative;
+  
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    left: 0;
+  }
+  
+  &::before {
+    top: 0;
+    background-color: vars.$patriotic-red;
+  }
+  
+  &::after {
+    bottom: 0;
+    background-color: vars.$patriotic-red;
+  }
+  
+  .motto-text {
+    font-family: vars.$font-family-alt;
+    font-size: 2rem;
+    color: vars.$patriotic-white;
+    font-style: italic;
+    letter-spacing: 1px;
+    @include mixins.text-shadow(2);
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: vars.$footer-height;
+  margin-top: 40px;
+  background: linear-gradient(to bottom, vars.$patriotic-blue, vars.$patriotic-blue-dark);
+  color: white;
+  text-align: center;
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: vars.$content-max-width;
+    margin: 0 auto;
+    padding: 20px;
+    
+    @media (max-width: vars.$breakpoint-md) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  
+  .footer-section {
+    h4 {
+      color: vars.$patriotic-white;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+    }
+    
+    p {
+      color: rgba(vars.$patriotic-white, 0.8);
+      margin: 5px 0;
+    }
+  }
+  
+  .copyright {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    color: rgba(vars.$patriotic-white, 0.6);
+    border-top: 1px solid rgba(vars.$patriotic-white, 0.2);
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+}

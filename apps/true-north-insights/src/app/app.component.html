@@ -1,1 +1,91 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary" class="sticky">
+    <img [src]="logo" class="logo" (click)="onLogoClick()" alt="True North Logo" appParallaxMouse [parallaxRatio]="0.05">
+    <div class="company-title">
+      <span class="title">True North, LLC</span>
+      <span class="subtitle">Veteran-Led Technology</span>
+    </div>
+    <span class="spacer"></span>
+    <a mat-button *ngFor="let section of sections" 
+       (click)="onSectionClick(section, $event)" 
+       [class.active]="activeSection === section.name">
+       <mat-icon>{{section.icon}}</mat-icon> {{section.name}}
+    </a>
+  </mat-toolbar>
+  
+  <div class="page-container" [@pageTransition]="activeSection">
+    <app-animated-background [theme]="'patriotic'"></app-animated-background>
+    <div class="tactical-hud"></div>
+    <div class="compass-rose"></div>
+    <div class="eagle-silhouette"></div>
+    
+    <div class="hero-banner" *ngIf="activeSection === 'About Us'" [@heroAnimation]>
+      <h1 class="hero-title">TRUE NORTH</h1>
+      <div class="hero-tag">We Are Legendary</div>
+      <div class="hero-location">Jamestown, North Dakota</div>
+      <div class="patriotic-flag"></div>
+    </div>
+    
+    <div *ngFor="let section of sections" 
+         class="section"
+         [class.active-section]="activeSection === section.name"
+         [@sectionAnimation]="activeSection === section.name ? 'in' : 'out'"
+         appParallaxMouse [parallaxRatio]="0.03">
+      <div class="overlay patriotic-overlay"></div>
+      <div class="content">
+        <div class="rank-decoration" *ngIf="section.name === 'Veterans' || section.name === 'Mission'"></div>
+        <div class="military-pattern"></div>
+        <div class="section-icon">
+          <mat-icon>{{section.icon}}</mat-icon>
+        </div>
+        <h1 class="section-title">{{ section.name }}</h1>
+        <h3 class="section-subtitle">{{ section.description }}</h3>
+        <div class="separator"></div>
+        <p class="section-content">{{ section.content }}</p>
+        
+        <ul class="section-details" *ngIf="section.details">
+          <li *ngFor="let detail of section.details">
+            <mat-icon class="detail-icon">check_circle</mat-icon>
+            <span>{{detail}}</span>
+          </li>
+        </ul>
+        
+        <button mat-raised-button color="accent" class="action-button">
+          {{ section.buttonText }}
+        </button>
+        <div class="veteran-badge" *ngIf="section.name === 'Veterans'"></div>
+        <div class="patriotic-accent"></div>
+      </div>
+    </div>
+    
+    <div class="motto-banner">
+      <div class="motto-text">"Be Legendary"</div>
+    </div>
+    
+    <router-outlet></router-outlet>
+  </div>
+  
+  <footer class="footer">
+    <mat-toolbar color="primary">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>True North, LLC</h4>
+          <p>Jamestown, North Dakota</p>
+          <p>Veteran-Owned & Operated</p>
+        </div>
+        <div class="footer-section">
+          <h4>Core Values</h4>
+          <p>Veteran Support</p>
+          <p>Technical Excellence</p>
+          <p>Integrity & Service</p>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>info&#64;truenorth.tech</p>
+          <p>701-555-0100</p>
+        </div>
+      </div>
+      <div class="copyright">
+        <span>Proudly Made in America © 2025 True North, LLC</span>
+      </div>
+    </mat-toolbar>
+  </footer>
