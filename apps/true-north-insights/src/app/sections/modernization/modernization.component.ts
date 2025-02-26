@@ -1,6 +1,8 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ScrollService } from '../../common/services/scroll.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 const DESIRED_MAX_ZOOM = 1.1;
 
@@ -22,7 +24,8 @@ const DESIRED_MAX_ZOOM = 1.1;
     ])
   ]
 })
-export class ModernizationComponent implements AfterViewInit {
+export class ModernizationComponent implements OnInit, AfterViewInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   initialScrollY: number = 0;
   isVisible = false;
   buttonState = 'default';
@@ -34,15 +37,28 @@ export class ModernizationComponent implements AfterViewInit {
 
   constructor(private scrollService: ScrollService) {}
 
+  ngOnInit(): void {
+    // Initialization code
+  }
+
   ngAfterViewInit(): void {
-    this.initialScrollY = window.scrollY;
-    this.scrollService.scrollPosition$.next(this.initialScrollY);
-    this.scrollService.scrollPosition$.subscribe((scrollY: number) => {
-      const sectionTop = this.initialScrollY;
-      const sectionBottom = sectionTop + this.sectionHeight;
-      const viewportTop = scrollY;
-      const viewportBottom = scrollY + window.innerHeight;
-      this.isVisible = sectionTop < viewportBottom && sectionBottom > viewportTop;
-    });
+    try {
+      this.initialScrollY = window.scrollY;
+      this.scrollService.scrollPosition$.next(this.initialScrollY);
+      this.scrollService.scrollPosition$.subscribe((scrollY: number) => {
+        const sectionTop = this.initialScrollY;
+        const sectionBottom = sectionTop + this.sectionHeight;
+        const viewportTop = scrollY;
+        const viewportBottom = scrollY + window.innerHeight;
+        this.isVisible = sectionTop < viewportBottom && sectionBottom > viewportTop;
+      });
+    } catch (error) {
+      console.error('Error in ngAfterViewInit:', error);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

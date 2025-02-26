@@ -1,0 +1,105 @@
+<!-- Compact display -->
+<div class="tactical-display" (click)="toggleExpandedView()" *ngIf="!isExpanded">
+  <div class="tactical-header">
+    <div class="title">TACTICAL</div>
+    <div class="status" [ngClass]="tacticalInfo.threatLevel.toLowerCase()">
+      {{tacticalInfo.threatLevel}}
+    </div>
+  </div>
+  
+  <div class="tactical-content">
+    <div class="canvas-container">
+      <canvas #tacticalCanvas class="tactical-canvas"></canvas>
+      <div class="overlay-elements">
+        <div class="crosshair"></div>
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="tactical-footer">
+    <div class="boot-element scan-line"></div>
+    <div class="timestamp">{{(tacticalInfo.systemStatus === 'ONLINE' ? (date | date:'HH:mm:ss') : '--:--:--')}}</div>
+  </div>
+</div>
+
+<!-- Expanded display overlay -->
+<div class="tactical-expanded-backdrop" *ngIf="isExpanded" (click)="closeExpandedView($event)">
+  <div class="tactical-expanded-content">
+    <div class="expanded-header">
+      <h2>TACTICAL COMMAND INTERFACE</h2>
+      <button class="close-button" (click)="toggleExpandedView()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+    <div class="expanded-body">
+      <div class="tactical-expanded-display">
+        <div class="section-title">TACTICAL DISPLAY</div>
+        <div class="expanded-display-container">
+          <div class="canvas-container">
+            <canvas #tacticalCanvas class="tactical-canvas"></canvas>
+            <div class="overlay-elements">
+              <div class="crosshair"></div>
+              <div class="corner top-left"></div>
+              <div class="corner top-right"></div>
+              <div class="corner bottom-left"></div>
+              <div class="corner bottom-right"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="additional-info">
+          <div class="info-panel">
+            <h3>Unit Status</h3>
+            <ul class="status-list">
+              <li><span class="status friendly"></span> Friendly Units: Operational</li>
+              <li><span class="status enemy"></span> Hostile Units: Detected</li>
+              <li><span class="status neutral"></span> Neutral Units: Monitored</li>
+            </ul>
+          </div>
+          
+          <div class="info-panel">
+            <h3>Tactical Controls</h3>
+            <div class="control-buttons">
+              <button class="tactical-btn">Zoom +</button>
+              <button class="tactical-btn">Zoom -</button>
+              <button class="tactical-btn">Track</button>
+              <button class="tactical-btn">Filter</button>
+            </div>
+          </div>
+          
+          <div class="info-panel">
+            <h3>System Status</h3>
+            <div class="params-grid">
+              <div class="param">
+                <label>Security Level:</label>
+                <span>{{tacticalInfo.securityLevel}}</span>
+              </div>
+              <div class="param">
+                <label>Threat Level:</label>
+                <span>{{tacticalInfo.threatLevel}}</span>
+              </div>
+              <div class="param">
+                <label>Personnel:</label>
+                <span>{{tacticalInfo.activePersonnel}} Active</span>
+              </div>
+              <div class="param">
+                <label>Coordinates:</label>
+                <span>{{tacticalInfo.coordinates.lat.toFixed(4)}}, {{tacticalInfo.coordinates.lng.toFixed(4)}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="expanded-footer">
+      <div class="system-status">{{tacticalInfo.systemStatus}}</div>
+      <div class="timestamp">{{ date | date:'HH:mm:ss' }}</div>
+    </div>
+  </div>
+</div>

@@ -95,9 +95,26 @@ export class AppComponent {
   subtitle = 'A Veteran-Led Technology Firm';
   logo = 'assets/images/true-north-logo.png';
   backgroundImageUrl = 'assets/backgrounds/globe-digital.jpg';
-  activeSection = 'AboutUs';
+  activeSection = 'Tactical'; // Set default to Tactical to display it first
   
   sections = [
+    { 
+      name: 'Tactical', // Add the Tactical section to the navigation
+      route: '/tactical', 
+      description: 'Command and Control Visualization',
+      content: `Real-time tactical display showing situational awareness with integrated radar system. 
+                Monitor battlefield conditions, track friendly and enemy units, and maintain command and control 
+                in a secure environment. Advanced visualization capabilities provide critical intelligence for
+                decision makers.`,
+      buttonText: 'Tactical Details',
+      icon: 'radar',
+      details: [
+        'Real-time unit tracking and monitoring',
+        'Integrated threat detection system',
+        'Secure communications interface',
+        'Multi-domain operational awareness'
+      ]
+    },
     { 
       name: 'About Us', 
       route: '/about', 

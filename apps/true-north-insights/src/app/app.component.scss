@@ -135,6 +135,67 @@ body {
   }
 }
 
+// Update tactical container styles
+.tactical-container {
+  position: fixed;
+  width: 100%;
+  z-index: 900;
+  top: vars.$header-height + 10px; // Position below the header with a small gap
+  pointer-events: none; // Allow clicks to pass through the container
+}
+
+.tactical-display-section, 
+.radar-section {
+  width: 15%;
+  height: 25vh;
+  position: absolute;
+  pointer-events: auto; // Re-enable pointer events for the actual displays
+  opacity: 0.7; // Make them translucent
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  
+  &:hover {
+    opacity: 1; // Full opacity on hover
+    transform: scale(1.05); // Slightly enlarge on hover
+  }
+}
+
+.tactical-display-section {
+  left: 10px; // Position on the left side
+}
+
+.radar-section {
+  right: 10px; // Position on the right side
+}
+
+/* Ensure displays render on top of other elements */
+app-tactical-display,
+app-radar-display {
+  display: block;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+  .tactical-display-section,
+  .radar-section {
+    width: 20%; // Slightly larger on mobile
+    height: 8vh; // Slightly shorter on mobile
+    opacity: 0.5; // More transparent on mobile to be less intrusive
+  }
+  
+  .tactical-display-section {
+    left: 5px; // Less offset on mobile
+  }
+  
+  .radar-section {
+    right: 5px; // Less offset on mobile
+  }
+}
+
 .hero-banner {
   text-align: center;
   padding: 60px 20px;

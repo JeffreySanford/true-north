@@ -18,6 +18,16 @@
     <div class="compass-rose"></div>
     <div class="eagle-silhouette"></div>
     
+    <!-- Fixed tactical container always visible -->
+    <div class="tactical-container">
+      <div class="tactical-display-section">
+        <app-tactical-display></app-tactical-display>
+      </div>
+      <div class="radar-section">
+        <app-radar-display></app-radar-display>
+      </div>
+    </div>
+    
     <div class="hero-banner" *ngIf="activeSection === 'About Us'" [@heroAnimation]>
       <h1 class="hero-title">TRUE NORTH</h1>
       <div class="hero-tag">We Are Legendary</div>

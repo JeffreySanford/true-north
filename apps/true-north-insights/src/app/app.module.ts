@@ -40,6 +40,10 @@ import { ThemeSelectorComponent } from './common/components/theme-selector.compo
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HomeComponent } from './sections/home/home.component';
 import { ServiceDetailComponent } from './sections/service-detail/service-detail.component';
+import { CommonModule, DatePipe } from '@angular/common';
+import { TacticalDisplayComponent } from './components/tactical-display/tactical-display.component';
+import { RadarDisplayComponent } from './components/radar-display/radar-display.component';
+import { OverlayService } from './services/overlay.service';
 
 @NgModule({
   declarations: [
@@ -55,9 +59,12 @@ import { ServiceDetailComponent } from './sections/service-detail/service-detail
     VeteranResourcesComponent,
     ThemeSelectorComponent,
     HomeComponent,
-    ServiceDetailComponent
+    ServiceDetailComponent,
+    TacticalDisplayComponent,
+    RadarDisplayComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule,
@@ -85,8 +92,9 @@ import { ServiceDetailComponent } from './sections/service-detail/service-detail
     MatIconModule,
     MatSlideToggleModule
   ],
-  providers: [ScrollService, provideAnimationsAsync(), PatrioticThemeService],
+  providers: [ScrollService, provideAnimationsAsync(), PatrioticThemeService, DatePipe, OverlayService],
   bootstrap: [AppComponent],
+  exports: [ParallaxDirective, ParallaxMouseDirective, TacticalDisplayComponent]
 })
 export class AppModule {
   constructor(private patrioticThemeService: PatrioticThemeService) {

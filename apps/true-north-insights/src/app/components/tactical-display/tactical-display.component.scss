@@ -1,0 +1,115 @@
+/* filepath: /C:/repos/true-north/apps/true-north-insights/src/app/components/tactical-view/tactical-view.component.scss */
+$blue-primary: #003087;
+$blue-glow: #0055BB;
+$red-alert: #BB0000;
+$amber: #FFBF00;
+$text-color: #FFFFFF;
+$panel-bg: rgba(0, 16, 41, 0.85);
+$panel-border: rgba(0, 84, 187, 0.7);
+$teal-border: #00d8d8;
+
+.tactical-view-container {
+  display: flex;
+  width: 100%;
+  height: 600px;
+  gap: 20px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 3px solid #00d8d8;
+  border-radius: 8px;
+  position: relative;
+  z-index: 900;
+  box-shadow: 0 0 30px rgba(0, 216, 216, 0.5);
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+.tactical-display-section {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.radar-section {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+/* Ensure displays render on top of other elements */
+app-tactical-display,
+app-radar-display {
+  display: block;
+  height: 100%;
+  z-index: 1000;
+  position: relative;
+}
+
+.tactical-display {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #000814;
+  color: $text-color;
+  font-family: 'Roboto Mono', monospace;
+  border: 2px solid $teal-border;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 216, 216, 0.4);
+  position: relative;
+  z-index: 1000;
+}
+
+.tactical-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: $panel-bg;
+  border-bottom: 1px solid $teal-border;
+  height: 40px;
+  
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba($blue-glow, 0.8);
+  }
+  
+  .status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    
+    &.low {
+      background-color: rgba(0, 128, 0, 0.3);
+      border: 1px solid rgba(0, 128, 0, 0.8);
+    }
+    
+    &.medium {
+      background-color: rgba(255, 191, 0, 0.3);
+      border: 1px solid rgba(255, 191, 0, 0.8);
+    }
+    
+    &.high {
+      background-color: rgba(187, 0, 0, 0.3);
+      border: 1px solid rgba(187, 0, 0, 0.8);
+      animation: pulse 1s infinite;
+    }
+  }
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+  .tactical-view-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 800px;
+  }
+  
+  .tactical-display-section,
+  .radar-section {
+    height: 400px;
+  }
+}

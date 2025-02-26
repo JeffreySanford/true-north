@@ -1,0 +1,14 @@
+<div class="radar-display" (click)="openDetailedView()">
+  <div class="radar-header">
+    <div class="title">RADAR</div>
+    <div class="status">{{radarStatus.mode}}</div>
+  </div>
+  
+  <div class="radar-content">
+    <canvas #radarCanvas class="radar-canvas"></canvas>
+  </div>
+  
+  <div class="radar-footer">
+    SYS v2.4
+  </div>
+</div>

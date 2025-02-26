@@ -1,0 +1,142 @@
+/* filepath: /C:/repos/true-north/apps/true-north-insights/src/app/components/radar-display/radar-display.component.scss */
+$teal-border: #00d8d8;
+$panel-bg: rgba(0, 16, 41, 0.85);
+$text-color: #FFFFFF;
+
+.radar-display {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #001008;
+  color: $text-color;
+  font-family: 'Roboto Mono', monospace;
+  border: 2px solid $teal-border;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 216, 216, 0.4);
+  position: relative;
+  z-index: 1000;
+}
+
+.radar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: $panel-bg;
+  border-bottom: 1px solid $teal-border;
+  height: 40px;
+  
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+    color: #00ff00;
+  }
+  
+  .status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #00ff00;
+    border: 1px solid rgba(0, 255, 0, 0.5);
+  }
+}
+
+.radar-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.radar-canvas {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 8, 4, 0.9);
+}
+
+.radar-info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background-color: rgba(0, 16, 8, 0.7);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 4px;
+  
+  .radar-info-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    
+    .label {
+      color: rgba(0, 255, 0, 0.7);
+      margin-right: 10px;
+    }
+    
+    .value {
+      color: #00ff00;
+      font-weight: bold;
+    }
+  }
+}
+
+.radar-footer {
+  height: 30px;
+  background-color: $panel-bg;
+  border-top: 1px solid $teal-border;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 255, 0, 0.8);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.contact-legend {
+  position: absolute;
+  bottom: 40px;
+  right: 10px;
+  background-color: rgba(0, 16, 8, 0.7);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 4px;
+  padding: 8px;
+  
+  .legend-title {
+    font-size: 12px;
+    color: rgba(0, 255, 0, 0.7);
+    margin-bottom: 5px;
+    text-align: center;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 11px;
+    
+    .color-sample {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+      
+      &.friendly {
+        background-color: rgb(0, 100, 255);
+      }
+      
+      &.hostile {
+        background-color: rgb(255, 0, 0);
+      }
+      
+      &.unknown {
+        background-color: rgb(255, 255, 0);
+      }
+    }
+  }
+}
