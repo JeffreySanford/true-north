@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, OnDestroy, Input, Renderer2 } from '@angular/core';
 import { interval, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -10,9 +10,14 @@ import { take } from 'rxjs/operators';
 })
 export class TacticalDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('tacticalCanvas') tacticalCanvas!: ElementRef<HTMLCanvasElement>;
-  private ctx!: CanvasRenderingContext2D;
+  @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
+  
+  // Add separate contexts for each canvas
+  private tacticalCtx!: CanvasRenderingContext2D;
+  private compassCtx!: CanvasRenderingContext2D;
+  
   private animationFrameId: number = 0;
-  private gridSize: number = 20;
+  private gridSize: number = 16; // Reduced from 20
   private entities: any[] = [];
   date: Date = new Date();
   
@@ -31,7 +36,15 @@ export class TacticalDisplayComponent implements OnInit, AfterViewInit, OnDestro
     activePersonnel: 42
   };
 
-  constructor() {
+  @Input() size: number = 300;
+  @Input() brightness: number = 1.5; // Increased brightness
+  @Input() zIndex: number = 5; // Higher z-index
+  @Input() parallaxRatio: number = 0.2;
+  
+  private animationFrame: number = 0;
+  private rotation: number = 0;
+
+  constructor(private renderer: Renderer2) {
     // Update date every second when in expanded view
     interval(1000).subscribe(() => {
       if (this.isExpanded) {
@@ -51,80 +64,171 @@ export class TacticalDisplayComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngAfterViewInit(): void {
-    const canvas = this.tacticalCanvas.nativeElement;
-    this.ctx = canvas.getContext('2d')!;
+    // Get canvas contexts using Renderer2
+    this.setupTacticalCanvas();
+    this.setupMainCanvas(); // This method had the error
     
-    // Set canvas dimensions
-    this.resizeCanvas();
-    window.addEventListener('resize', this.resizeCanvas.bind(this));
+    // Simulate boot sequence
+    this.runBootSequence();
     
     // Start animation
     this.animate();
     
-    // Simulate boot sequence
-    this.runBootSequence();
+    // Set up resize listener with Renderer2
+    this.setupResizeListener();
+  }
+  
+  /**
+   * Set up the tactical canvas with Renderer2
+   */
+  private setupTacticalCanvas(): void {
+    if (!this.tacticalCanvas) {
+      console.warn('Tactical canvas not found');
+      return;
+    }
+    
+    const canvasElement = this.tacticalCanvas.nativeElement;
+    const context = canvasElement.getContext('2d');
+    
+    if (!context) {
+      console.error('Could not get tactical canvas context');
+      return;
+    }
+    
+    this.tacticalCtx = context;
+    
+    // Set initial canvas dimensions
+    this.resizeCanvas();
+  }
+  
+  /**
+   * Set up the compass canvas with Renderer2 - Add null checks
+   */
+  private setupMainCanvas(): void {
+    if (!this.canvasRef) {
+      console.warn('Compass canvas not found');
+      return; // Return early if canvas reference is missing
+    }
+    
+    const canvasElement = this.canvasRef.nativeElement;
+    const context = canvasElement.getContext('2d');
+    
+    if (!context) {
+      console.error('Could not get compass canvas context');
+      return;
+    }
+    
+    this.compassCtx = context;
+    
+    // Set canvas dimensions
+    this.renderer.setAttribute(canvasElement, 'width', this.size.toString());
+    this.renderer.setAttribute(canvasElement, 'height', this.size.toString());
+    
+    // Set canvas styles
+    this.renderer.setStyle(canvasElement, 'position', 'absolute');
+    this.renderer.setStyle(canvasElement, 'z-index', this.zIndex.toString());
+  }
+  
+  /**
+   * Set up window resize event listener with Renderer2
+   */
+  private setupResizeListener(): void {
+    // Use Renderer2 to listen for window resize events
+    const window = this.renderer.listen('window', 'resize', () => {
+      this.resizeCanvas();
+    });
   }
 
+  /**
+   * Resize the tactical canvas using Renderer2
+   */
   resizeCanvas(): void {
-    const canvas = this.tacticalCanvas.nativeElement;
-    canvas.width = canvas.parentElement!.clientWidth;
-    canvas.height = canvas.parentElement!.clientHeight;
+    if (!this.tacticalCanvas) return;
+    
+    const canvasElement = this.tacticalCanvas.nativeElement;
+    const parentElement = this.renderer.parentNode(canvasElement);
+    
+    if (!parentElement) return;
+    
+    const width = parentElement.clientWidth;
+    const height = parentElement.clientHeight;
+    
+    // Set canvas dimensions using Renderer2
+    this.renderer.setAttribute(canvasElement, 'width', width.toString());
+    this.renderer.setAttribute(canvasElement, 'height', height.toString());
   }
 
   animate(): void {
-    this.ctx.clearRect(0, 0, this.tacticalCanvas.nativeElement.width, this.tacticalCanvas.nativeElement.height);
+    // Clear tactical canvas
+    if (this.tacticalCtx && this.tacticalCanvas) {
+      const canvasElement = this.tacticalCanvas.nativeElement;
+      this.tacticalCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+      
+      // Draw grid and entities on tactical canvas
+      this.drawGrid();
+      this.drawEntities();
+    }
     
-    // Draw grid
-    this.drawGrid();
+    // Update rotation
+    this.rotation += 0.005;
     
-    // Draw entities
-    this.drawEntities();
+    // Draw compass on the compass canvas if available
+    this.drawCompass();
     
     // Continue animation
     this.animationFrameId = requestAnimationFrame(() => this.animate());
   }
 
   drawGrid(): void {
-    const { width, height } = this.tacticalCanvas.nativeElement;
+    if (!this.tacticalCtx || !this.tacticalCanvas) return;
+    
+    const canvasElement = this.tacticalCanvas.nativeElement;
+    const width = canvasElement.width;
+    const height = canvasElement.height;
+    
+    // Dynamically adjust grid size based on container dimensions
+    const containerSize = Math.min(width, height);
+    const adaptiveGridSize = Math.max(10, Math.floor(containerSize / 20));
+    this.gridSize = adaptiveGridSize;
     
     // Use teal color for grid but more translucent
-    this.ctx.strokeStyle = 'rgba(0, 216, 216, 0.2)'; // More translucent grid
-    this.ctx.lineWidth = 0.5; // Thinner lines
+    this.tacticalCtx.strokeStyle = 'rgba(0, 216, 216, 0.15)'; // Even more translucent grid
+    this.tacticalCtx.lineWidth = 0.5; // Thin lines
     
     // Draw fewer vertical lines for a cleaner look
     for (let x = 0; x <= width; x += this.gridSize * 2) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(x, 0);
-      this.ctx.lineTo(x, height);
-      this.ctx.stroke();
+      this.tacticalCtx.beginPath();
+      this.tacticalCtx.moveTo(x, 0);
+      this.tacticalCtx.lineTo(x, height);
+      this.tacticalCtx.stroke();
     }
     
     // Draw fewer horizontal lines for a cleaner look
     for (let y = 0; y <= height; y += this.gridSize * 2) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(0, y);
-      this.ctx.lineTo(width, y);
-      this.ctx.stroke();
+      this.tacticalCtx.beginPath();
+      this.tacticalCtx.moveTo(0, y);
+      this.tacticalCtx.lineTo(width, y);
+      this.tacticalCtx.stroke();
     }
     
     // Draw main axes
-    this.ctx.strokeStyle = 'rgba(0, 216, 216, 0.4)'; // More translucent axes
-    this.ctx.lineWidth = 0.8; // Thinner lines
+    this.tacticalCtx.strokeStyle = 'rgba(0, 216, 216, 0.3)'; // Slightly more translucent axes
+    this.tacticalCtx.lineWidth = 0.7; // Thinner lines
     
     const centerX = width / 2;
     const centerY = height / 2;
     
     // X-axis
-    this.ctx.beginPath();
-    this.ctx.moveTo(0, centerY);
-    this.ctx.lineTo(width, centerY);
-    this.ctx.stroke();
+    this.tacticalCtx.beginPath();
+    this.tacticalCtx.moveTo(0, centerY);
+    this.tacticalCtx.lineTo(width, centerY);
+    this.tacticalCtx.stroke();
     
     // Y-axis
-    this.ctx.beginPath();
-    this.ctx.moveTo(centerX, 0);
-    this.ctx.lineTo(centerX, height);
-    this.ctx.stroke();
+    this.tacticalCtx.beginPath();
+    this.tacticalCtx.moveTo(centerX, 0);
+    this.tacticalCtx.lineTo(centerX, height);
+    this.tacticalCtx.stroke();
   }
   
   generateRandomEntities(): void {
@@ -181,9 +285,17 @@ export class TacticalDisplayComponent implements OnInit, AfterViewInit, OnDestro
   }
   
   drawEntities(): void {
-    const { width, height } = this.tacticalCanvas.nativeElement;
+    if (!this.tacticalCtx || !this.tacticalCanvas) return;
+    
+    const canvasElement = this.tacticalCanvas.nativeElement;
+    const width = canvasElement.width;
+    const height = canvasElement.height;
     const centerX = width / 2;
     const centerY = height / 2;
+    
+    // Get container dimensions to scale entities appropriately
+    const containerSize = Math.min(width, height);
+    const entityBaseSize = containerSize / 50; // Dynamic scaling based on container size
     
     // Update entity positions
     for (const entity of this.entities) {
@@ -204,31 +316,34 @@ export class TacticalDisplayComponent implements OnInit, AfterViewInit, OnDestro
       const screenX = centerX + entity.x * (width / 2 * 0.9);
       const screenY = centerY + entity.y * (height / 2 * 0.9);
       
+      // Calculate entity size based on container dimensions
+      const entitySize = entityBaseSize * (entity.size / 8);
+      
       // Draw entity
-      this.ctx.fillStyle = entity.color;
-      this.ctx.beginPath();
+      this.tacticalCtx.fillStyle = entity.color;
+      this.tacticalCtx.beginPath();
       
       if (entity.type === 'friendly') {
         // Draw friendly unit as square
-        this.ctx.rect(screenX - entity.size/2, screenY - entity.size/2, entity.size, entity.size);
+        this.tacticalCtx.rect(screenX - entitySize/2, screenY - entitySize/2, entitySize, entitySize);
       } else if (entity.type === 'enemy') {
         // Draw enemy unit as triangle
-        this.ctx.moveTo(screenX, screenY - entity.size/2);
-        this.ctx.lineTo(screenX + entity.size/2, screenY + entity.size/2);
-        this.ctx.lineTo(screenX - entity.size/2, screenY + entity.size/2);
-        this.ctx.closePath();
+        this.tacticalCtx.moveTo(screenX, screenY - entitySize/2);
+        this.tacticalCtx.lineTo(screenX + entitySize/2, screenY + entitySize/2);
+        this.tacticalCtx.lineTo(screenX - entitySize/2, screenY + entitySize/2);
+        this.tacticalCtx.closePath();
       } else {
         // Draw neutral unit as circle
-        this.ctx.arc(screenX, screenY, entity.size/2, 0, Math.PI * 2);
+        this.tacticalCtx.arc(screenX, screenY, entitySize/2, 0, Math.PI * 2);
       }
       
-      this.ctx.fill();
+      this.tacticalCtx.fill();
       
-      // Draw entity ID
-      this.ctx.font = '10px monospace';
-      this.ctx.fillText(entity.id, screenX + entity.size/2 + 2, screenY + 3);
-      
-      // Draw selection circle for mouseover (future feature)
+      // Draw entity ID with smaller font size appropriate to container size
+      const fontSize = Math.max(8, Math.floor(containerSize / 50));
+      this.tacticalCtx.font = `${fontSize}px monospace`;
+      this.tacticalCtx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      this.tacticalCtx.fillText(entity.id, screenX + entitySize/2 + 2, screenY + 3);
     }
   }
   
@@ -246,24 +361,33 @@ export class TacticalDisplayComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
   
+  /**
+   * Run the boot sequence using Renderer2 to manipulate DOM
+   */
   runBootSequence(): void {
+    // Query boot elements using document.querySelectorAll (consider using @ViewChildren in a real app)
     const bootElements = document.querySelectorAll('.boot-element');
     
     interval(200).pipe(
       take(bootElements.length)
     ).subscribe((index) => {
-      bootElements[index].classList.add('active');
+      // Add 'active' class using Renderer2
+      this.renderer.addClass(bootElements[index], 'active');
     });
   }
   
+  /**
+   * Toggle expanded view using Renderer2 to manipulate styles
+   */
   toggleExpandedView(): void {
     this.isExpanded = !this.isExpanded;
     this.expandedSubject.next(this.isExpanded);
     
+    // Use Renderer2 to update body styles
     if (this.isExpanded) {
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when expanded
+      this.renderer.setStyle(document.body, 'overflow', 'hidden'); // Prevent scrolling when expanded
     } else {
-      document.body.style.overflow = ''; // Restore scrolling
+      this.renderer.removeStyle(document.body, 'overflow'); // Restore scrolling
     }
     
     // If expanded, resize canvas after the animation completes
@@ -274,20 +398,109 @@ export class TacticalDisplayComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
   
+  /**
+   * Close expanded view on backdrop click using Renderer2 to check classes
+   */
   closeExpandedView(event: MouseEvent): void {
-    // Only close if clicking the backdrop
-    if ((event.target as HTMLElement).classList.contains('tactical-expanded-backdrop')) {
+    const clickedElement = event.target as HTMLElement;
+    
+    // Check if the element has the backdrop class
+    if (clickedElement && clickedElement.classList.contains('tactical-expanded-backdrop')) {
       this.toggleExpandedView();
     }
   }
   
+  /**
+   * Draw the compass rose on the compass canvas
+   */
+  drawCompass(): void {
+    // Only draw if the compass context is available
+    if (!this.compassCtx || !this.canvasRef) return;
+    
+    const canvas = this.canvasRef.nativeElement;
+    this.compassCtx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(centerX, centerY) - 10;
+    
+    // Set a higher global composite operation for increased brightness
+    this.compassCtx.globalCompositeOperation = 'lighter';
+    
+    // Draw compass rose with increased brilliance
+    this.compassCtx.save();
+    this.compassCtx.translate(centerX, centerY);
+    this.compassCtx.rotate(this.rotation);
+    
+    // Draw main circle
+    this.compassCtx.beginPath();
+    this.compassCtx.arc(0, 0, radius, 0, Math.PI * 2);
+    this.compassCtx.strokeStyle = `rgba(255, 255, 255, ${0.7 * this.brightness})`;
+    this.compassCtx.lineWidth = 2;
+    this.compassCtx.stroke();
+    
+    // Draw cardinal directions with glow effect
+    const directions = ['N', 'E', 'S', 'W'];
+    directions.forEach((dir, i) => {
+      const angle = (i * Math.PI / 2);
+      const x = Math.cos(angle) * (radius - 25);
+      const y = Math.sin(angle) * (radius - 25);
+      
+      // Draw directional line
+      this.compassCtx.beginPath();
+      this.compassCtx.moveTo(0, 0);
+      this.compassCtx.lineTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
+      this.compassCtx.strokeStyle = `rgba(0, 191, 255, ${0.8 * this.brightness})`;
+      this.compassCtx.lineWidth = 2;
+      this.compassCtx.stroke();
+      
+      // Add text with glow
+      this.compassCtx.font = 'bold 16px Arial';
+      this.compassCtx.textAlign = 'center';
+      this.compassCtx.textBaseline = 'middle';
+      
+      // Text glow
+      this.compassCtx.shadowColor = `rgba(0, 191, 255, ${this.brightness})`;
+      this.compassCtx.shadowBlur = 10;
+      this.compassCtx.fillStyle = 'white';
+      this.compassCtx.fillText(dir, x, y);
+      this.compassCtx.shadowBlur = 0;
+    });
+    
+    // Add cross pattern with glow
+    for (let i = 0; i < 8; i++) {
+      const angle = (i * Math.PI / 4);
+      this.compassCtx.beginPath();
+      this.compassCtx.moveTo(0, 0);
+      this.compassCtx.lineTo(Math.cos(angle) * (radius - 40), Math.sin(angle) * (radius - 40));
+      this.compassCtx.strokeStyle = `rgba(191, 10, 48, ${0.6 * this.brightness})`;
+      this.compassCtx.lineWidth = 1;
+      this.compassCtx.stroke();
+    }
+    
+    // Draw center point with glow
+    this.compassCtx.beginPath();
+    this.compassCtx.arc(0, 0, 5, 0, Math.PI * 2);
+    this.compassCtx.fillStyle = `rgba(255, 255, 255, ${this.brightness})`;
+    this.compassCtx.shadowColor = 'white';
+    this.compassCtx.shadowBlur = 15;
+    this.compassCtx.fill();
+    this.compassCtx.shadowBlur = 0;
+    
+    this.compassCtx.restore();
+  }
+  
   ngOnDestroy(): void {
+    // Cancel animation frames
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
     }
-    window.removeEventListener('resize', this.resizeCanvas);
     
-    // Restore scrolling if component is destroyed while expanded
-    document.body.style.overflow = '';
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+    }
+    
+    // Restore body overflow style using Renderer2
+    this.renderer.removeStyle(document.body, 'overflow');
   }
 }

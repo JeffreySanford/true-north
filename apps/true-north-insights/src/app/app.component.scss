@@ -4,26 +4,216 @@
 @use '../styles/common' as common;
 @use '../styles/mixins' as mixins;
 
+:host {
+  display: block;
+  height: 100%;
+}
+
+.app-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  
+  @media (max-width: vars.$breakpoint-sm) {
+    padding: 10px;
+  }
+}
+
+.toolbar {
+  background: linear-gradient(90deg, vars.$patriotic-red, vars.$patriotic-blue);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: vars.$z-index-header;
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+    img {
+      height: 40px;
+      margin-right: 10px;
+    }
+  }
+  
+  .nav-links {
+    display: flex;
+    margin-left: 20px;
+    
+    a {
+      padding: 0 15px;
+      color: white;
+      text-decoration: none;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background-color: vars.$service-gold;
+        transition: width 0.3s ease;
+      }
+      
+      &:hover, &.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        
+        &::after {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+.spacer {
+  flex: 1;
+}
+
+.footer {
+  background-color: vars.$patriotic-blue-dark;
+  color: white;
+  padding: 40px 20px;
+  
+  .footer-content {
+    max-width: vars.$content-max-width;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    
+    .footer-section {
+      h3 {
+        color: vars.$service-gold;
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        font-weight: 600;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          width: 40px;
+          height: 3px;
+          background-color: vars.$service-gold;
+        }
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
+          margin-bottom: 10px;
+          
+          a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            
+            mat-icon {
+              font-size: 16px;
+              height: 16px;
+              width: 16px;
+              margin-right: 8px;
+              color: vars.$service-gold;
+            }
+            
+            &:hover {
+              color: vars.$service-gold;
+            }
+          }
+        }
+      }
+      
+      p {
+        line-height: 1.6;
+      }
+    }
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .social-links {
+      margin-bottom: 15px;
+      
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        margin: 0 5px;
+        color: white;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background-color: vars.$service-gold;
+          color: vars.$patriotic-blue-dark;
+          transform: translateY(-3px);
+        }
+      }
+    }
+    
+    .copyright {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+.stars-bg {
+  @include mixins.stars-background(0.3);
+  padding: 40px 0;
+  color: white;
+  text-align: center;
+}
+
+/* ===== Global Styles ===== */
 html,
 body {
   height: 100%;
   color: white;
   text-align: center;
-  padding: 20px;
   background-image: url('/assets/backgrounds/us-flag.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border: 1px solid #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-  .active {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Header Styles ===== */
+header {
+  position: relative;
+  z-index: 1000;
 }
 
 .sticky {
@@ -86,62 +276,22 @@ body {
   flex: 1 1 auto;
 }
 
-.page-container {
-  min-height: calc(100vh - #{vars.$header-height} - #{vars.$footer-height});
-  position: relative;
-  overflow: hidden;
-  padding-bottom: vars.$footer-height;
+.main-nav {
+  display: flex;
+  align-items: center;
   
-  .tactical-hud {
-    position: fixed;
-    top: vars.$header-height;
-    right: 0;
-    width: 200px;
-    height: 100px;
-    background-image: url('/assets/images/tactical-hud.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 10;
-  }
-  
-  .compass-rose {
-    position: fixed;
-    bottom: vars.$footer-height + 20px;
-    left: 20px;
-    width: 100px;
-    height: 100px;
-    background-image: url('/assets/images/compass.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 10;
-  }
-  
-  .eagle-silhouette {
-    position: fixed;
-    top: vars.$header-height + 20px;
-    left: -30px;
-    width: 200px;
-    height: 150px;
-    background-image: url('/assets/images/eagle.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.1;
-    pointer-events: none;
-    z-index: 10;
+  a.active {
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }
 
-// Update tactical container styles
+/* ===== Tactical Container ===== */
 .tactical-container {
   position: fixed;
   width: 100%;
   z-index: 900;
-  top: vars.$header-height + 10px; // Position below the header with a small gap
-  pointer-events: none; // Allow clicks to pass through the container
+  top: vars.$header-height + 10px;
+  pointer-events: none;
 }
 
 .tactical-display-section, 
@@ -149,25 +299,24 @@ body {
   width: 15%;
   height: 25vh;
   position: absolute;
-  pointer-events: auto; // Re-enable pointer events for the actual displays
-  opacity: 0.7; // Make them translucent
+  pointer-events: auto;
+  opacity: 0.7;
   transition: opacity 0.3s ease, transform 0.3s ease;
   
   &:hover {
-    opacity: 1; // Full opacity on hover
-    transform: scale(1.05); // Slightly enlarge on hover
+    opacity: 1;
+    transform: scale(1.05);
   }
 }
 
 .tactical-display-section {
-  left: 10px; // Position on the left side
+  left: 10px;
 }
 
 .radar-section {
-  right: 10px; // Position on the right side
+  right: 10px;
 }
 
-/* Ensure displays render on top of other elements */
 app-tactical-display,
 app-radar-display {
   display: block;
@@ -178,28 +327,81 @@ app-radar-display {
   cursor: pointer;
 }
 
-/* Media query for mobile responsiveness */
-@media (max-width: 768px) {
-  .tactical-display-section,
-  .radar-section {
-    width: 20%; // Slightly larger on mobile
-    height: 8vh; // Slightly shorter on mobile
-    opacity: 0.5; // More transparent on mobile to be less intrusive
-  }
-  
-  .tactical-display-section {
-    left: 5px; // Less offset on mobile
-  }
-  
-  .radar-section {
-    right: 5px; // Less offset on mobile
-  }
+/* ===== Main Content ===== */
+.page-container {
+  min-height: calc(100vh - #{vars.$header-height} - #{vars.$footer-height});
+  position: relative;
+  overflow: hidden;
+  padding-bottom: vars.$footer-height;
+}
+
+.parallax-container {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+.tactical-hud {
+  position: fixed;
+  top: vars.$header-height;
+  right: 0;
+  width: 200px;
+  height: 100px;
+  background-image: url('/assets/images/tactical-hud.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bottom-elements {
+  position: fixed;
+  bottom: vars.$footer-height;
+  width: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.compass-rose {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 100px;
+  height: 100px;
+  background-image: url('/assets/images/compass.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+}
+
+.eagle-silhouette {
+  position: absolute;
+  bottom: 20px;
+  right: -30px;
+  width: 200px;
+  height: 150px;
+  background-image: url('/assets/images/eagle.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+
+/* ===== Section Styles ===== */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-banner {
   text-align: center;
   padding: 60px 20px;
   position: relative;
+  width: 100%;
   @include mixins.stars-background(0.3);
   
   .hero-title {
@@ -243,6 +445,10 @@ app-radar-display {
   padding: 20px;
   max-width: vars.$content-max-width;
   margin: 20px auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   &.active-section {
     .content {
@@ -277,6 +483,7 @@ app-radar-display {
     @include mixins.box-shadow(2);
     transition: all vars.$transition-medium;
     overflow: hidden;
+    width: 100%;
     
     &:hover {
       @include mixins.box-shadow(3);
@@ -403,11 +610,14 @@ app-radar-display {
   }
 }
 
+.motto-section {
+  padding: 40px 0;
+}
+
 .motto-banner {
   text-align: center;
   padding: 30px 20px;
   background: rgba(vars.$patriotic-blue, 0.8);
-  margin: 40px 0;
   position: relative;
   
   &::before, &::after {
@@ -438,16 +648,13 @@ app-radar-display {
   }
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: vars.$footer-height;
-  margin-top: 40px;
+/* ===== Footer Styles ===== */
+.site-footer {
   background: linear-gradient(to bottom, vars.$patriotic-blue, vars.$patriotic-blue-dark);
   color: white;
   text-align: center;
+  position: relative;
+  z-index: 900;
   
   .footer-content {
     display: flex;
@@ -487,5 +694,35 @@ app-radar-display {
     border-top: 1px solid rgba(vars.$patriotic-white, 0.2);
     margin-top: 10px;
     font-size: 0.9rem;
+    
+    .mat-icon {
+      font-size: 16px;
+      height: 16px;
+      width: 16px;
+      vertical-align: middle;
+      color: vars.$patriotic-red;
+    }
+  }
+}
+
+/* ===== Media Queries ===== */
+@media (max-width: 768px) {
+  .tactical-display-section,
+  .radar-section {
+    width: 20%;
+    height: 8vh;
+    opacity: 0.5;
+  }
+  
+  .tactical-display-section {
+    left: 5px;
+  }
+  
+  .radar-section {
+    right: 5px;
+  }
+  
+  .section {
+    padding: 10px;
   }
 }

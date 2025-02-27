@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { trigger, state, style, animate, transition, query, stagger, group, animateChild } from '@angular/animations';
+import { TransitionService } from './common/services/transition.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: false,
   animations: [
     trigger('sectionAnimation', [
       state('in', style({
@@ -87,10 +87,29 @@ import { trigger, state, style, animate, transition, query, stagger, group, anim
           }))
         ], { optional: true })
       ])
+    ]),
+    trigger('pageTransition', [
+      transition('* => *', [
+        style({ opacity: 0.8 }),
+        animate('500ms ease-in-out', style({ opacity: 1 }))
+      ])
+    ]),
+    trigger('sectionAnimation', [
+      state('in', style({ opacity: 1, transform: 'translateY(0)' })),
+      state('out', style({ opacity: 0.3, transform: 'translateY(20px)' })),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('600ms ease-in-out'))
+    ]),
+    trigger('heroAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-50px)' }),
+        animate('800ms 300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
     ])
-  ]
+  ],
+  standalone: false
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'True North Insights';
   subtitle = 'A Veteran-Led Technology Firm';
   logo = 'assets/images/true-north-logo.png';
@@ -206,7 +225,12 @@ export class AppComponent {
     }
   ];
   
-  constructor() {
+  @ViewChild('pageContainer', { static: false }) pageContainerRef!: ElementRef;
+  private sectionInitialized = false; // Flag to prevent multiple initializations
+  
+  constructor(
+    private transitionService: TransitionService
+  ) {
     console.log('AppComponent is working...');
   }
 
@@ -216,6 +240,25 @@ export class AppComponent {
     
     // Initialize tactical display elements
     this.initTacticalDisplay();
+    
+    // Set up parallax scroll effect
+    this.initParallaxScrolling();
+  }
+  
+  ngAfterViewInit(): void {
+    // Set page container reference in transition service
+    if (this.pageContainerRef) {
+      // Use setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
+      setTimeout(() => {
+        this.transitionService.setPageContainer(this.pageContainerRef);
+        
+        // Only initialize section once
+        if (!this.sectionInitialized) {
+          this.sectionInitialized = true;
+          this.initializeActiveSection();
+        }
+      });
+    }
   }
   
   // Create subtle ambient movement in background
@@ -251,14 +294,101 @@ export class AppComponent {
     }, 5000);
   }
 
+  // Initialize parallax scrolling effects
+  initParallaxScrolling() {
+    const parallaxContainer = document.querySelector('.parallax-container');
+    if (parallaxContainer) {
+      parallaxContainer.addEventListener('scroll', () => {
+        this.handleParallaxScroll();
+      });
+    }
+  }
+  
+  // Handle parallax scrolling effects
+  handleParallaxScroll() {
+    const scrollPosition = window.scrollY;
+    
+    // Adjust background opacity based on scroll position
+    document.querySelectorAll('.section').forEach((element: Element) => {
+      // Properly cast Element to HTMLElement
+      const section = element as HTMLElement;
+      
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top;
+      const sectionHeight = rect.height;
+      
+      // Calculate distance from viewport center
+      const distanceFromCenter = Math.abs(sectionTop + sectionHeight / 2 - window.innerHeight / 2);
+      
+      // Apply opacity based on visibility in viewport
+      const opacity = 1 - Math.min(distanceFromCenter / (window.innerHeight / 1.5), 1);
+      section.style.opacity = opacity.toString();
+      
+      // Parallax effect for section content
+      const translateY = (rect.top * 0.2);
+      const content = section.querySelector('.content') as HTMLElement;
+      if (content) {
+        content.style.transform = `translateY(${translateY}px)`;
+      }
+    });
+  }
+  
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    this.updateActiveSection();
+  }
+  
+  // Update active section based on scroll position
+  updateActiveSection() {
+    const scrollPosition = window.scrollY + window.innerHeight / 2;
+    
+    let currentSection = this.sections[0].name;
+    document.querySelectorAll('.section').forEach((element: Element) => {
+      // Properly cast Element to HTMLElement
+      const section = element as HTMLElement;
+      
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+        const sectionId = section.id;
+        const matchingSection = this.sections.find(s => s.name.toLowerCase().replace(/\s+/g, '-') === sectionId);
+        if (matchingSection) {
+          currentSection = matchingSection.name;
+        }
+      }
+    });
+    
+    if (this.activeSection !== currentSection) {
+      this.activeSection = currentSection;
+      this.playTacticalSound();
+    }
+  }
+
   onLogoClick() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   
   onSectionClick(section: { name: string, route: string }, event: any) {
+    event.preventDefault();
+    
+    // Only proceed if changing to a different section
+    if (this.activeSection === section.name) return;
+    
+    const previousSection = this.activeSection;
+    this.activeSection = section.name;
+    
+    // Use transition service
+    this.transitionService.triggerTransition(previousSection, section.name);
+    
     this.createRippleEffect(event);
     
     document.querySelector('.page-container')?.classList.add('transition-effect');
+    
+    // Find the section element and scroll to it
+    const sectionId = section.name.toLowerCase().replace(/\s+/g, '-');
+    const sectionElement = document.getElementById(sectionId);
+    if (sectionElement) {
+      sectionElement.scrollIntoView({ behavior: 'smooth' });
+    }
     
     setTimeout(() => {
       this.activeSection = section.name;
@@ -301,6 +431,17 @@ export class AppComponent {
       audio.play();
     } catch (e) {
       console.log('Audio playback not supported');
+    }
+  }
+  
+  // Initialize active section without causing circular updates
+  initializeActiveSection(): void {
+    if (this.activeSection) {
+      console.log("Initializing active section:", this.activeSection);
+      const section = this.sections.find(s => s.name === this.activeSection);
+      if (section) {
+        this.transitionService.triggerTransition('', this.activeSection);
+      }
     }
   }
 }

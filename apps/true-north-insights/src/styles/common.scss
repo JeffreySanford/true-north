@@ -5,7 +5,7 @@
 
 // Export common mixins, functions, and basic shared styles
 
-// Common mixins
+// Patriotic gradient - unique to common.scss
 @mixin patriotic-gradient {
   background: linear-gradient(
     to right,
@@ -20,6 +20,10 @@
 
 @mixin section-padding {
   padding: vars.$section-padding;
+  
+  @media (max-width: vars.$breakpoint-sm) {
+    padding: vars.$mobile-section-padding;
+  }
 }
 
 @mixin responsive-container {
@@ -33,55 +37,9 @@
   transition: all vars.$transition-medium;
 }
 
-// Box shadow levels
-@mixin box-shadow($level) {
-  @if $level == 1 {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  } @else if $level == 2 {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  } @else if $level == 3 {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  } @else {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-}
-
-// Text shadow levels
-@mixin text-shadow($level) {
-  @if $level == 1 {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  } @else if $level == 2 {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  } @else if $level == 3 {
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-  } @else {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  }
-}
-
-// Flag stripes
-@mixin flag-stripes($height) {
-  height: $height;
-  background: linear-gradient(
-    90deg,
-    vars.$patriotic-red 0%,
-    vars.$patriotic-red 33%,
-    vars.$patriotic-white 33%,
-    vars.$patriotic-white 66%,
-    vars.$patriotic-blue 66%,
-    vars.$patriotic-blue 100%
-  );
-}
-
-// Military texture
-@mixin military-texture {
-  background-image: url('/assets/images/camo-texture.png');
-  background-size: cover;
-}
-
-// Stars background
-@mixin stars-background($opacity) {
-  background-color: vars.$patriotic-blue;
+// Stars background - enhanced with parameters
+@mixin stars-background($opacity: 0.3, $color: vars.$patriotic-blue) {
+  background-color: $color;
   background-image: url('/assets/images/stars-background.png');
   background-size: cover;
   background-position: center;
@@ -98,28 +56,19 @@
   }
 }
 
-// Patriotic button
-@mixin patriotic-button {
-  display: inline-block;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all vars.$transition-medium;
-  position: relative;
-
-  &:hover {
-    transform: translateY(-2px);
-    @include box-shadow(2);
-  }
-
-  &:active {
-    transform: translateY(0);
-    @include box-shadow(1);
-  }
+// American flag style stripes mixin
+@mixin flag-stripes($height: 5px) {
+  height: $height * 3;
+  background: repeating-linear-gradient(
+    to bottom,
+    vars.$patriotic-red $height * 0,
+    vars.$patriotic-red $height,
+    vars.$patriotic-white $height,
+    vars.$patriotic-white $height * 2,
+    vars.$patriotic-blue $height * 2,
+    vars.$patriotic-blue $height * 3
+  );
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.2);
 }
 
 // Common element styles
@@ -132,4 +81,70 @@
 %patriotic-border {
   border: 2px solid vars.$service-gold;
   box-shadow: 0 0 10px rgba(vars.$service-gold, 0.3);
+}
+
+// Responsive mixins
+@mixin for-phone-only {
+  @media (max-width: vars.$breakpoint-xs) { @content; }
+}
+
+@mixin for-tablet-portrait-up {
+  @media (min-width: vars.$breakpoint-sm) { @content; }
+}
+
+@mixin for-tablet-landscape-up {
+  @media (min-width: vars.$breakpoint-md) { @content; }
+}
+
+@mixin for-desktop-up {
+  @media (min-width: vars.$breakpoint-lg) { @content; }
+}
+
+@mixin for-big-desktop-up {
+  @media (min-width: vars.$breakpoint-xl) { @content; }
+}
+
+@mixin for-ultra-wide {
+  @media (min-width: vars.$breakpoint-xxl) { @content; }
+}
+
+// Add the patriotic button mixin here as well to avoid the undefined mixin error
+@mixin patriotic-button {
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all vars.$transition-medium;
+  position: relative;
+  background-color: vars.$army-green;
+  border: 1px solid vars.$service-gold;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: color.adjust(vars.$army-green, $lightness: -5%);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Box shadow levels - duplicate from _mixins.scss to ensure availability
+@mixin box-shadow($level) {
+  @if $level == 1 {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  } @else if $level == 2 {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  } @else if $level == 3 {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  } @else {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
 }

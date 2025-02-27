@@ -5,43 +5,77 @@
 </section>
 
 <div class="section-container" 
-     [ngClass]="[getThemeClass(), getBranchClass()]" 
+     [ngClass]="[getThemeClass(), getBranchClass(), parallaxEnabled ? 'parallax-bg' : '']" 
      [@highlightBorder]="borderState"
+     [@scrollAnimation]="isVisible"
+     [ngStyle]="getParallaxStyle()"
      (mouseenter)="onMouseEnter()"
      (mouseleave)="onMouseLeave()">
-     
-  <div class="stars-bg" *ngIf="showStars"></div>
-  <div class="military-emblem" *ngIf="militaryBranch !== 'none'"></div>
   
-  <div class="ribbon" *ngIf="active">
+  <!-- Background elements with parallax - update appParallax to use proper inputs -->
+  <div class="stars-bg" *ngIf="showStars" appParallax [ratio]="0.2"></div>
+  <div class="military-emblem" *ngIf="militaryBranch !== 'none'" appParallax [ratio]="-0.1"></div>
+  
+  <!-- Tactical and radar displays -->
+  <app-tactical-display 
+    *ngIf="showTacticalDisplay"
+    [size]="displaySize"
+    [brightness]="displayBrightness"
+    [zIndex]="5"
+    [parallaxRatio]="0.2"
+    [ngStyle]="getTacticalDisplayPosition()">
+  </app-tactical-display>
+  
+  <app-radar-display 
+    *ngIf="showRadarDisplay"
+    [size]="displaySize"
+    [brightness]="displayBrightness"
+    [zIndex]="6"
+    [parallaxRatio]="-0.15"
+    [ngStyle]="getRadarDisplayPosition()">
+  </app-radar-display>
+  
+  <div class="ribbon" *ngIf="active" appParallax [ratio]="-0.05">
     <span class="ribbon-content">FEATURED</span>
   </div>
   
-  <div class="section-header">
-    <div class="section-icon" *ngIf="icon">
-      <mat-icon>{{icon}}</mat-icon>
+  <div class="parallax-content">
+    <div class="section-header animated-element" appParallax [ratio]="-0.08">
+      <div class="section-icon" *ngIf="icon">
+        <mat-icon>{{icon}}</mat-icon>
+      </div>
+      <div>
+        <h2 class="section-title">{{title}}</h2>
+        <h3 class="section-subtitle">{{subtitle}}</h3>
+      </div>
     </div>
-    <div>
-      <h2 class="section-title">{{title}}</h2>
-      <h3 class="section-subtitle">{{subtitle}}</h3>
+    
+    <div class="section-separator animated-element" appParallax [ratio]="getSeparatorParallax()"></div>
+    
+    <div class="section-content animated-element" appParallax [ratio]="getContentParallax()">
+      <p>{{content}}</p>
+    </div>
+    
+    <div class="section-image animated-element parallax-image" *ngIf="imagePath" appParallax [ratio]="-0.15">
+      <img [src]="imagePath" [alt]="title">
+    </div>
+    
+    <div class="section-footer animated-element" appParallax [ratio]="-0.12">
+      <button class="action-button">{{buttonText}}</button>
     </div>
   </div>
   
-  <div class="section-separator"></div>
+  <div class="patriotic-stripes" appParallax [ratio]="getStripeParallax()"></div>
   
-  <div class="section-content">
-    <p>{{content}}</p>
+  <div class="scroll-indicator" *ngIf="isVisible" appParallax [ratio]="-0.2">
+    <mat-icon>keyboard_arrow_down</mat-icon>
+    <p>Scroll for more</p>
   </div>
   
-  <div class="section-image" *ngIf="imagePath">
-    <img [src]="imagePath" [alt]="title">
-  </div>
-  
-  <div class="section-footer">
-    <button class="action-button">{{buttonText}}</button>
-  </div>
-  
-  <div class="patriotic-stripes"></div>
+  <!-- Depth layers for enhanced parallax effect -->
+  <div class="depth-layer depth-1" appParallax [ratio]="0.1"></div>
+  <div class="depth-layer depth-2" appParallax [ratio]="0.2"></div>
+  <div class="depth-layer depth-3" appParallax [ratio]="0.3"></div>
 </div>
 
 <ng-content></ng-content>

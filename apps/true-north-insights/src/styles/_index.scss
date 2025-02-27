@@ -1,3 +1,8 @@
 @forward './variables';
 @forward './mixins';
-// Add any other shared style files you need to forward
+@forward './common';
+@forward './layout';
+@forward './components';
+@forward './animations';
+@forward './themes';
+@forward './decorative';

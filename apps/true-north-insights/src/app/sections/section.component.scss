@@ -11,11 +11,35 @@
   overflow: hidden;
   color: white;
   transition: all 0.3s ease;
+  height: 100vh; // Full viewport height for proper parallax scrolling
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   
+  // Remove hover transform for full-page sections
   &:hover {
-    transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
   }
+  
+  // Parallax background
+  &.parallax-bg {
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; // This creates a simple parallax effect
+    background-repeat: no-repeat;
+  }
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .theme-red {
@@ -164,6 +188,16 @@
     opacity: 1;
   }
   
+  &.parallax-image {
+    overflow: hidden;
+    max-height: 300px;
+    
+    img {
+      transform: translateZ(0); // Hardware acceleration
+      will-change: transform; // Tell browser to optimize
+    }
+  }
+  
   img {
     width: 100%;
     height: auto;
@@ -310,4 +344,69 @@
     #002868 40px,
     #002868 60px
   );
+}
+
+// Add some scroll indicators to enhance UX
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+  color: white;
+  text-align: center;
+  
+  mat-icon {
+    font-size: 3rem;
+    height: auto;
+    width: auto;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+// Add animation for elements
+.animated-element {
+  transition: opacity 0.6s, transform 0.6s;
+  
+  &.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// For creating depth in parallax scenes
+.depth-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  
+  &.depth-1 { z-index: -1; }
+  &.depth-2 { z-index: -2; }
+  &.depth-3 { z-index: -3; }
 }

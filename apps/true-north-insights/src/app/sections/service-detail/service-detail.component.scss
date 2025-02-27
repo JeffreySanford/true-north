@@ -1,6 +1,6 @@
-@use 'sass:color';
 @use '../../../styles/variables' as vars;
 @use '../../../styles/common' as common;
+@use 'sass:color';
 
 .loading-container {
   display: flex;
@@ -327,6 +327,11 @@
   margin-top: 40px;
 }
 
+.flag-stripe-footer {
+  width: 100%;
+  @include common.flag-stripes(5px);
+}
+
 // Responsive adjustments
 @media (max-width: vars.$breakpoint-md) {
   .service-header {
@@ -353,4 +358,22 @@
   .action-container {
     justify-content: center;
   }
+}
+
+.service-detail {
+  padding: 20px;
+  margin: 20px 0;
+  
+  // Other styles...
+
+  .action-button {
+    @include common.patriotic-button;
+    margin-top: 15px;
+    
+    &:hover {
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  // Rest of component styles...
 }

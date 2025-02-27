@@ -1,0 +1,189 @@
+@use './variables' as vars;
+
+// Animation definitions
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flashBackground {
+  0%, 100% {
+    background-blend-mode: normal;
+  }
+  50% {
+    background-blend-mode: luminosity;
+  }
+}
+
+@keyframes enhanced-transition {
+  0% {
+    filter: saturate(100%) contrast(100%);
+  }
+  50% {
+    filter: saturate(150%) contrast(120%) brightness(110%);
+  }
+  100% {
+    filter: saturate(100%) contrast(100%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+@keyframes section-glow {
+  0% {
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+  }
+}
+
+@keyframes radar-scan {
+  0%, 100% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+}
+
+@keyframes flag-wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+@keyframes mission-transition {
+  0% {
+    clip-path: circle(0% at center);
+    filter: grayscale(100%) brightness(50%);
+  }
+  100% {
+    clip-path: circle(150% at center);
+    filter: grayscale(0%) brightness(100%);
+  }
+}
+
+@keyframes slow-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes ripple-animation {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+// Background animations for section transitions
+@keyframes bg-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes bg-pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes bg-wave {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes bg-tactical {
+  0% { 
+    filter: brightness(1) contrast(1);
+    background-position: center center;
+  }
+  50% { 
+    filter: brightness(1.2) contrast(1.1);
+    background-position: center 45%;
+  }
+  100% { 
+    filter: brightness(1) contrast(1);
+    background-position: center center;
+  }
+}
+
+@keyframes bg-zoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+// Animated elements classes
+.tactical-element {
+  animation: pulse 2s infinite;
+  animation-play-state: if(var(--animation-speed) == 1, running, paused);
+}
+
+.transition-effect {
+  animation: enhanced-transition 1s ease;
+}
+
+.active-section {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+  transform: translateY(0);
+  animation: section-glow 1.5s ease-out;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 70%);
+  transform: scale(0);
+  pointer-events: none;
+  z-index: 10;
+  animation: ripple-animation 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.active-section .content {
+  animation: mission-transition 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+// Add animation classes to be applied by the transition service
+.bg-animation-pulse {
+  animation: bg-pulse 8s ease-in-out infinite;
+}
+
+.bg-animation-pan {
+  animation: bg-pan 15s ease-in-out infinite;
+  background-size: 120% auto !important;
+}
+
+.bg-animation-wave {
+  animation: bg-wave 10s ease-in-out infinite;
+}
+
+.bg-animation-tactical {
+  animation: bg-tactical 12s ease-in-out;
+}
+
+.bg-animation-zoom {
+  animation: bg-zoom 20s ease-in-out infinite;
+}
