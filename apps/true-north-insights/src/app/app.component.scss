@@ -726,3 +726,14 @@ app-radar-display {
     padding: 10px;
   }
 }
+
+// Add these classes to handle section opacity
+.opacity-tactical {
+  opacity: 0.3;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.opacity-standard {
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+}

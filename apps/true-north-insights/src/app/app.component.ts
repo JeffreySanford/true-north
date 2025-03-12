@@ -1,6 +1,9 @@
 import { Component, OnInit, HostListener, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { trigger, state, style, animate, transition, query, stagger, group, animateChild } from '@angular/animations';
 import { TransitionService } from './common/services/transition.service';
+import { PatrioticThemeService, ThemeMode } from './services/patriotic-theme.service';
+import { OverlayService } from './services/overlay.service';
+import { CORE_SERVICES, CASE_STUDIES, ServiceOffering, CaseStudy } from './services/core-services';
 
 @Component({
   selector: 'app-root',
@@ -111,138 +114,152 @@ import { TransitionService } from './common/services/transition.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'True North Insights';
-  subtitle = 'A Veteran-Led Technology Firm';
+  subtitle = 'Creating Secure and Compliant Solutions for Enterprises and Government Agencies';
   logo = 'assets/images/true-north-logo.png';
   backgroundImageUrl = 'assets/backgrounds/globe-digital.jpg';
-  activeSection = 'Tactical'; // Set default to Tactical to display it first
+  activeSection = 'About Us';
   
   sections = [
-    { 
-      name: 'Tactical', // Add the Tactical section to the navigation
-      route: '/tactical', 
-      description: 'Command and Control Visualization',
-      content: `Real-time tactical display showing situational awareness with integrated radar system. 
-                Monitor battlefield conditions, track friendly and enemy units, and maintain command and control 
-                in a secure environment. Advanced visualization capabilities provide critical intelligence for
-                decision makers.`,
-      buttonText: 'Tactical Details',
-      icon: 'radar',
-      details: [
-        'Real-time unit tracking and monitoring',
-        'Integrated threat detection system',
-        'Secure communications interface',
-        'Multi-domain operational awareness'
+    {
+      "name": "Tactical",
+      "route": "/tactical",
+      "description": "Command and Control Visualization",
+      "content": "Real-time tactical display providing comprehensive situational awareness with integrated sensor and radar data. Monitor battlefield conditions, track friendly and enemy units, and maintain command and control in a secure, compliant environment. Advanced visualization capabilities deliver critical intelligence for decision-makers, enhancing operational efficiency.",
+      "buttonText": "Tactical Details",
+      "icon": "radar",
+      "details": [
+        "Real-time unit tracking and monitoring",
+        "Integrated threat detection system",
+        "Secure communications interface",
+        "Multi-domain operational awareness"
       ]
     },
-    { 
-      name: 'About Us', 
-      route: '/about', 
-      description: 'Veteran-Led. American-Made. North Dakota Proud.',
-      content: `True North is a veteran-led technology company based in Jamestown, North Dakota. We embody 
-                North Dakota's "Be Legendary" spirit in everything we do. Founded by veterans with a passion 
-                for technology and service, we're committed to building secure, innovative solutions while 
-                creating meaningful career opportunities for those who've served our country. Our team brings 
-                military discipline and technical excellence to every project.`,
-      buttonText: 'Our Story',
-      icon: 'military_tech',
-      details: [
-        'Founded by veterans in Jamestown, ND',
-        'Dedicated to hiring and training veteran developers',
-        'Committed to American values and excellence'
+    {
+      "name": "About Us",
+      "route": "/about",
+      "description": "Veteran-Led. American-Made. North Dakota Proud.",
+      "content": "True North is a veteran-led technology company based in Jamestown, North Dakota, embodying the state's \"Be Legendary\" spirit in everything we do. Founded by veterans with a passion for technology and service, we deliver security-first solutions that modernize government operations and improve efficiency. We're committed to building innovative systems while creating meaningful career opportunities for those who've served our country. Our team brings military discipline and technical excellence to every project.",
+      "buttonText": "Our Story",
+      "icon": "military_tech",
+      "details": [
+        "Founded by veterans in Jamestown, ND",
+        "Dedicated to hiring and training veteran developers",
+        "Committed to American values and excellence"
       ]
     },
-    { 
-      name: 'Services', 
-      route: '/services', 
-      description: 'Secure, Compliant Technology Solutions',
-      content: `We specialize in developing custom applications built on Angular, NestJS, and Material Design 
-                that meet the highest security and compliance standards. Our solutions range from cloud-based 
-                systems to secure on-premise installations. We excel in cybersecurity services aligned with NIST 
-                and DoD requirements, advanced data visualization, and blockchain implementations. Our veteran-led 
-                teams bring military precision to technology development.`,
-      buttonText: 'Our Capabilities',
-      icon: 'settings',
-      details: [
-        'Web application development with Angular & NestJS',
-        'Government-grade cybersecurity solutions',
-        'Data visualization and intelligence tools',
-        'Blockchain and secure ledger implementations'
+    {
+      "name": "Services",
+      "route": "/services",
+      "description": "Secure, Compliant Technology Solutions",
+      "content": "We specialize in developing custom applications for government agencies and businesses, leveraging a diverse technology stack and modern design principles to meet the highest security and compliance standards. Our solutions range from cloud-based systems to secure on-premise installations. We excel in cybersecurity services aligned with NIST and DoD standards (including NIST RMF), deliver advanced data visualization, and implement blockchain solutions for audit trails and data provenance. We design our systems with FedRAMP compliance in mind and provide real-time auditing capabilities. Our veteran-led teams bring military precision and a security-first mindset to every project.",
+      "buttonText": "Our Capabilities",
+      "icon": "settings",
+      "details": [
+        "Full-stack web development with modern frameworks",
+        "Government-grade cybersecurity & compliance solutions",
+        "Data visualization and intelligence tools",
+        "Blockchain and secure ledger implementations"
       ]
     },
-    { 
-      name: 'Veterans', 
-      route: '/veterans', 
-      description: 'From Service to Software: Creating Tech Careers',
-      content: `At True North, veterans aren't just our employees—they're our foundation. We actively recruit, train, 
-                and mentor veterans transitioning to civilian careers in technology. Our hiring preference for veterans
-                recognizes the unique skills, leadership, and discipline military service instills. We've developed 
-                specialized training programs to help veterans translate their military experience into successful 
-                technology careers. When you work with us, you're supporting veteran employment.`,
-      buttonText: 'Join Our Team',
-      icon: 'stars',
-      details: [
-        'Veteran hiring preference for all positions',
-        'Training and mentorship programs for transitioning service members',
-        'Remote work options for veterans nationwide',
-        'Career pathways from entry-level to leadership'
+    {
+      "name": "Join the Team",
+      "route": "/join-the-team",
+      "description": "From Service to Software: Creating Tech Careers",
+      "content": "At True North, veterans aren't just our employees\u2014they're our foundation. We actively recruit, train, and mentor veterans transitioning to civilian careers in technology. Starting lean, we've built a core team that delivers with agility and excellence, setting the stage for deliberate growth. Our hiring roadmap prioritizes veteran talent and outlines a phased expansion: after early successes, we'll scale our team strategically to take on larger federal contracts and more complex projects. This mission-driven growth ensures we maintain our security-first culture and technical excellence as we expand. When you join True North, you're not just taking a job\u2014you're becoming part of a long-term vision to modernize government technology while supporting those who served.",
+      "buttonText": "Join Our Team",
+      "icon": "stars",
+      "details": [
+        "Veteran hiring preference for all positions",
+        "Training and mentorship programs for transitioning service members",
+        "Remote work options for veterans nationwide",
+        "Career pathways from entry-level to leadership",
+        "Phased growth strategy for larger federal contracts"
       ]
     },
-    { 
-      name: 'Mission', 
-      route: '/mission', 
-      description: 'American Values, Technical Excellence, Legendary Service',
-      content: `Our mission extends beyond creating outstanding technology. We're committed to supporting American 
-                prosperity, strengthening national security through superior technology solutions, and embodying 
-                the values of honor, integrity, and excellence in everything we do. We proudly support our military, 
-                law enforcement, and first responders. As a North Dakota company, we bring Midwestern work ethic and 
-                values to the digital frontier—building legendary software with legendary service.`,
-      buttonText: 'Our Values',
-      icon: 'flag',
-      details: [
-        'Supporting American innovation and national security',
-        'Promoting veteran entrepreneurship and employment',
-        'Delivering reliable, secure, and ethical technology solutions',
-        'Strengthening our North Dakota community'
+    {
+      "name": "Mission",
+      "route": "/mission",
+      "description": "American Values, Technical Excellence, Legendary Service",
+      "content": "Our mission extends beyond creating outstanding technology. We're committed to supporting American prosperity, strengthening national security, and modernizing government operations for greater efficiency through superior technology solutions, all while embodying the values of honor, integrity, and excellence in everything we do. We proudly support our military, law enforcement, and first responders. As a North Dakota company, we bring Midwestern work ethic and values to the digital frontier\u2014building legendary software with legendary service.",
+      "buttonText": "Our Values",
+      "icon": "flag",
+      "details": [
+        "Supporting American innovation and national security",
+        "Promoting veteran entrepreneurship and employment",
+        "Delivering reliable, secure, and ethical technology solutions",
+        "Strengthening our North Dakota community"
       ]
     },
-    { 
-      name: 'Projects', 
-      route: '/projects', 
-      description: 'Excellence in Action: Our Work Speaks for Itself',
-      content: `From government agencies to private enterprises, our portfolio demonstrates our commitment to 
-                excellence. We've developed secure data systems for federal contracts, created intelligence 
-                visualization tools for law enforcement, implemented blockchain solutions for audit trails, 
-                and built scalable applications for growing businesses. Every project is delivered with 
-                military-grade attention to detail, security, and performance—on time and on budget.`,
-      buttonText: 'View Portfolio',
-      icon: 'work',
-      details: [
-        'Federal and state government contracts',
-        'Law enforcement technology solutions',
-        'Blockchain implementation case studies',
-        'Custom software for American enterprises'
+    {
+      "name": "Projects",
+      "route": "/projects",
+      "description": "Excellence in Action: Our Work Speaks for Itself",
+      "content": "From government agencies to private enterprises, our portfolio demonstrates our commitment to excellence and innovation. We've modernized legacy systems with FedRAMP-compliant cloud solutions for federal agencies, created intelligence visualization tools for law enforcement, implemented blockchain solutions for audit trails and data provenance, and built scalable applications that drive operational efficiency for growing businesses. Every project is delivered with military-grade attention to detail, security, and performance\u2014on time and on budget.",
+      "buttonText": "View Portfolio",
+      "icon": "work",
+      "details": [
+        "Federal and state government contracts",
+        "Law enforcement technology solutions",
+        "Blockchain implementation case studies",
+        "Custom software for American enterprises"
       ]
     }
   ];
   
+  // Add core services and case studies data
+  coreServices: ServiceOffering[] = CORE_SERVICES;
+  caseStudies: CaseStudy[] = CASE_STUDIES;
+  
   @ViewChild('pageContainer', { static: false }) pageContainerRef!: ElementRef;
   private sectionInitialized = false; // Flag to prevent multiple initializations
   
+  // Current theme mode and branch
+  private currentThemeMode: ThemeMode = 'light';
+  private currentBranch: string = 'none';
+  
   constructor(
-    private transitionService: TransitionService
+    private transitionService: TransitionService,
+    private themeService: PatrioticThemeService,
+    private overlayService: OverlayService
   ) {
     console.log('AppComponent is working...');
   }
 
   ngOnInit() {
-    // Add ambient background movement
-    this.initAmbientMovement();
+    // Apply theme to document
+    this.themeService.applyThemeToDocument();
     
     // Initialize tactical display elements
     this.initTacticalDisplay();
     
     // Set up parallax scroll effect
     this.initParallaxScrolling();
+    
+    // Listen for theme changes
+    this.themeService.getThemeConfig().subscribe(() => {
+      this.themeService.applyThemeToDocument();
+      this.updateSectionBackgrounds();
+    });
+    
+    // Listen for theme mode changes
+    this.themeService.getThemeMode().subscribe(mode => {
+      this.currentThemeMode = mode;
+      this.updateSectionBackgrounds();
+    });
+    
+    // Listen for overlay changes
+    this.overlayService.overlayConfig$.subscribe(config => {
+      if (config.isOpen) {
+        if (config.type === 'tactical' || config.type === 'both') {
+          this.displayTacticalOverlay();
+        }
+        if (config.type === 'radar' || config.type === 'both') {
+          this.displayRadarOverlay();
+        }
+      } else {
+        this.hideOverlays();
+      }
+    });
   }
   
   ngAfterViewInit(): void {
@@ -257,27 +274,110 @@ export class AppComponent implements OnInit, AfterViewInit {
           this.sectionInitialized = true;
           this.initializeActiveSection();
         }
+        
+        // Set initial section backgrounds
+        this.updateSectionBackgrounds();
       });
     }
   }
   
-  // Create subtle ambient movement in background
-  initAmbientMovement() {
-    document.addEventListener('mousemove', (e) => {
-      const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-      const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+  // Update section backgrounds based on current theme
+  updateSectionBackgrounds() {
+    // Get current theme config
+    this.themeService.getThemeConfig().subscribe(config => {
+      this.currentBranch = config.selectedBranch || 'none';
       
-      const compass = document.querySelector('.compass-rose') as HTMLElement;
-      if (compass) {
-        compass.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px)) rotate(${this.getCompassRotation()}deg)`;
-      }
+      this.sections.forEach((section, index) => {
+        const sectionElement = document.getElementById(section.name.toLowerCase().replace(/\s+/g, '-'));
+        if (sectionElement) {
+          // Remove all existing theme classes
+          sectionElement.classList.remove('theme-light', 'theme-dark', 'theme-tactical');
+          sectionElement.classList.remove('branch-army', 'branch-navy', 'branch-airforce', 'branch-marines', 'branch-coastguard');
+          
+          // Add current theme class
+          sectionElement.classList.add(`theme-${this.currentThemeMode}`);
+          
+          // Add branch class if applicable
+          if (this.currentBranch !== 'none') {
+            sectionElement.classList.add(`branch-${this.currentBranch}`);
+          }
+          
+          // Add section-specific background based on theme
+          let bgUrl = this.getBackgroundForSection(section.name, this.currentThemeMode, this.currentBranch);
+          sectionElement.style.backgroundImage = `url(${bgUrl})`;
+          
+          // Set opacity as a class instead of directly on style
+          sectionElement.classList.remove('opacity-tactical', 'opacity-standard');
+          if (this.currentThemeMode === 'tactical') {
+            sectionElement.classList.add('opacity-tactical');
+          } else {
+            sectionElement.classList.add('opacity-standard');
+          }
+        }
+      });
     });
   }
   
-  // Simulate compass behavior
-  getCompassRotation() {
-    const now = new Date();
-    return (now.getSeconds() + now.getMilliseconds() / 1000) * 6;
+  // Get appropriate background image based on section, theme mode, and military branch
+  getBackgroundForSection(sectionName: string, themeMode: ThemeMode, branch?: string): string {
+    const baseFolder = 'assets/backgrounds/';
+    
+    // Default backgrounds by section
+    const sectionBackgrounds: {[key: string]: {[key: string]: string}} = {
+      'Tactical': {
+        'light': `${baseFolder}tactical-light.jpg`,
+        'dark': `${baseFolder}tactical-dark.jpg`,
+        'tactical': `${baseFolder}tactical-green.jpg`
+      },
+      'About Us': {
+        'light': `${baseFolder}about-us-light.jpg`,
+        'dark': `${baseFolder}about-us-dark.jpg`,
+        'tactical': `${baseFolder}about-us-tactical.jpg`
+      },
+      'Services': {
+        'light': `${baseFolder}services-light.jpg`,
+        'dark': `${baseFolder}services-dark.jpg`,
+        'tactical': `${baseFolder}services-tactical.jpg`
+      },
+      'Veterans': {
+        'light': `${baseFolder}veterans-light.jpg`,
+        'dark': `${baseFolder}veterans-dark.jpg`,
+        'tactical': `${baseFolder}veterans-tactical.jpg`
+      },
+      'Mission': {
+        'light': `${baseFolder}mission-light.jpg`,
+        'dark': `${baseFolder}mission-dark.jpg`,
+        'tactical': `${baseFolder}mission-tactical.jpg`
+      },
+      'Projects': {
+        'light': `${baseFolder}projects-light.jpg`,
+        'dark': `${baseFolder}projects-dark.jpg`,
+        'tactical': `${baseFolder}projects-tactical.jpg`
+      }
+    };
+    
+    // Branch-specific backgrounds (if available)
+    if (branch && branch !== 'none') {
+      const branchBg = `${baseFolder}${sectionName.toLowerCase().replace(/\s+/g, '-')}-${branch}.jpg`;
+      // This would require having branch-specific images for each section
+      // For now, fall back to theme-based backgrounds
+      
+      // Return branch background if it exists, otherwise use theme background
+      return this.imageExists(branchBg) ? 
+        branchBg : 
+        sectionBackgrounds[sectionName][themeMode] || `${baseFolder}default-${themeMode}.jpg`;
+    }
+    
+    // Return theme-based background
+    return sectionBackgrounds[sectionName][themeMode] || `${baseFolder}default-${themeMode}.jpg`;
+  }
+  
+  // Check if an image exists (for branch-specific backgrounds)
+  imageExists(url: string): boolean {
+    // This is a simplified check, you might want to implement a more robust solution
+    const img = new Image();
+    img.src = url;
+    return img.complete;
   }
   
   // Initialize tactical display elements
@@ -330,6 +430,16 @@ export class AppComponent implements OnInit, AfterViewInit {
       if (content) {
         content.style.transform = `translateY(${translateY}px)`;
       }
+      
+      // If section is centered in viewport, activate tactical overlay for Tactical section
+      if (Math.abs(distanceFromCenter) < 100) {
+        const sectionId = section.id;
+        if (sectionId === 'tactical') {
+          this.overlayService.openTactical();
+        } else {
+          this.overlayService.closeOverlay();
+        }
+      }
     });
   }
   
@@ -360,6 +470,135 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (this.activeSection !== currentSection) {
       this.activeSection = currentSection;
       this.playTacticalSound();
+      
+      // Update theme based on section
+      this.updateThemeForSection(currentSection);
+    }
+  }
+  
+  // Update theme based on active section
+  updateThemeForSection(sectionName: string) {
+    // Special cases for section-specific themes
+    if (sectionName === 'Tactical') {
+      this.themeService.setThemeMode('tactical');
+      this.overlayService.openTactical();
+    } else if (sectionName === 'Veterans') {
+      // Check the current branch setting by subscribing to the theme config
+      this.themeService.getThemeConfig().subscribe(config => {
+        if (config.selectedBranch === 'none') {
+          this.themeService.setMilitaryBranch('army'); // Default to army for Veterans section
+        }
+      });
+    } else if (sectionName === 'Mission') {
+      this.themeService.setActiveColor('red'); // Use patriotic red for Mission section
+    } else {
+      // Keep current theme mode but close tactical overlays for other sections
+      this.overlayService.closeOverlay();
+    }
+  }
+
+  // Display tactical overlay elements
+  displayTacticalOverlay() {
+    const overlay = document.querySelector('.tactical-overlay') as HTMLElement;
+    if (overlay) {
+      overlay.style.display = 'block';
+      setTimeout(() => {
+        overlay.style.opacity = '1';
+      }, 10);
+    } else {
+      this.createTacticalOverlay();
+    }
+  }
+  
+  // Display radar overlay elements
+  displayRadarOverlay() {
+    const overlay = document.querySelector('.radar-overlay') as HTMLElement;
+    if (overlay) {
+      overlay.style.display = 'block';
+      setTimeout(() => {
+        overlay.style.opacity = '1';
+      }, 10);
+    } else {
+      this.createRadarOverlay();
+    }
+  }
+  
+  // Hide all overlays
+  hideOverlays() {
+    const overlays = document.querySelectorAll('.tactical-overlay, .radar-overlay');
+    overlays.forEach((overlay: Element) => {
+      const overlayEl = overlay as HTMLElement;
+      overlayEl.style.opacity = '0';
+      setTimeout(() => {
+        overlayEl.style.display = 'none';
+      }, 500);
+    });
+  }
+  
+  // Create tactical overlay elements dynamically
+  createTacticalOverlay() {
+    const overlay = document.createElement('div');
+    overlay.className = 'tactical-overlay';
+    overlay.innerHTML = `
+      <div class="tactical-grid"></div>
+      <div class="tactical-crosshair"></div>
+      <div class="tactical-scanner"></div>
+      <div class="tactical-status">STATUS: OPERATIONAL</div>
+    `;
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+      overlay.style.opacity = '1';
+    }, 10);
+  }
+  
+  // Create radar overlay elements dynamically
+  createRadarOverlay() {
+    const overlay = document.createElement('div');
+    overlay.className = 'radar-overlay';
+    overlay.innerHTML = `
+      <div class="radar-sweep"></div>
+      <div class="radar-grid"></div>
+      <div class="radar-blips"></div>
+    `;
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+      overlay.style.opacity = '1';
+      this.animateRadarBlips(overlay);
+    }, 10);
+  }
+  
+  // Animate radar blips
+  animateRadarBlips(radarOverlay: HTMLElement) {
+    const blipsContainer = radarOverlay.querySelector('.radar-blips') as HTMLElement;
+    if (!blipsContainer) return;
+    
+    // Create some random blips
+    for (let i = 0; i < 5; i++) {
+      const blip = document.createElement('div');
+      blip.className = 'radar-blip';
+      
+      // Random position within the radar
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 20 + Math.random() * 80; // Between 20-100% from center
+      
+      const x = Math.cos(angle) * distance;
+      const y = Math.sin(angle) * distance;
+      
+      blip.style.left = `calc(50% + ${x}px)`;
+      blip.style.top = `calc(50% + ${y}px)`;
+      
+      // Random size
+      const size = 4 + Math.random() * 8; // 4-12px
+      blip.style.width = `${size}px`;
+      blip.style.height = `${size}px`;
+      
+      // Random pulse rate
+      const pulseRate = 1 + Math.random() * 2; // 1-3s
+      blip.style.animation = `pulse ${pulseRate}s infinite`;
+      
+      blipsContainer.appendChild(blip);
     }
   }
 
@@ -401,6 +640,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     // Add tactical sound effect
     this.playTacticalSound();
+    
+    // Update the theme based on the newly selected section
+    this.updateThemeForSection(section.name);
   }
   
   createRippleEffect(event: any) {
