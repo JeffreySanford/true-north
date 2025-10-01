@@ -1,7 +1,7 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
-import { shareReplay, takeUntil, tap, auditTime } from 'rxjs/operators';
+import { shareReplay, takeUntil } from 'rxjs/operators';
 
 export interface ToasterMessage {
   readonly id: string;
@@ -52,19 +52,19 @@ export class ToasterService implements OnDestroy {
     tactical: 'tactical-primary'
   };
 
-  constructor(private readonly snackBar: MatSnackBar) {}
+  private readonly snackBar = inject(MatSnackBar);
 
   /**
    * Display success notification with tactical green theme
    */
-  public showSuccess(message: string, action?: string, duration: number = 4000): Observable<ToasterMessage> {
+  public showSuccess(message: string, action?: string, duration = 4000): Observable<ToasterMessage> {
     return this.show(message, 'success', { action, duration });
   }
 
   /**
    * Display error notification with tactical red theme  
    */
-  public showError(message: string, action?: string, persistent: boolean = false): Observable<ToasterMessage> {
+  public showError(message: string, action?: string, persistent = false): Observable<ToasterMessage> {
     return this.show(message, 'error', { 
       action, 
       persistent, 
@@ -75,28 +75,28 @@ export class ToasterService implements OnDestroy {
   /**
    * Display warning notification with tactical amber theme
    */
-  public showWarning(message: string, action?: string, duration: number = 6000): Observable<ToasterMessage> {
+  public showWarning(message: string, action?: string, duration = 6000): Observable<ToasterMessage> {
     return this.show(message, 'warning', { action, duration });
   }
 
   /**
    * Display info notification with tactical blue theme
    */
-  public showInfo(message: string, action?: string, duration: number = 4000): Observable<ToasterMessage> {
+  public showInfo(message: string, action?: string, duration = 4000): Observable<ToasterMessage> {
     return this.show(message, 'info', { action, duration });
   }
 
   /**
    * Display progress notification for long-running operations
    */
-  public showProgress(message: string, persistent: boolean = true): Observable<ToasterMessage> {
+  public showProgress(message: string, persistent = true): Observable<ToasterMessage> {
     return this.show(message, 'progress', { persistent, duration: 0 });
   }
 
   /**
    * Display tactical notification with special military-grade styling
    */
-  public showTactical(message: string, action?: string, duration: number = 5000): Observable<ToasterMessage> {
+  public showTactical(message: string, action?: string, duration = 5000): Observable<ToasterMessage> {
     return this.show(message, 'tactical', { action, duration });
   }
 
@@ -234,7 +234,7 @@ export class ToasterService implements OnDestroy {
     };
 
     // Display with Material 3 Expressive design
-    const snackBarRef: MatSnackBarRef<any> = this.snackBar.open(
+    const snackBarRef: MatSnackBarRef<unknown> = this.snackBar.open(
       options.showTimestamp 
         ? `[${toasterMessage.timestamp.toLocaleTimeString()}] ${message}`
         : message,

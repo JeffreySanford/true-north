@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
-import { shareReplay, takeUntil, tap, auditTime, filter, map } from 'rxjs/operators';
+import { shareReplay, takeUntil, map } from 'rxjs/operators';
 
 export type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'FATAL' | 'AUDIT';
 
@@ -98,28 +98,28 @@ export class LoggingService implements OnDestroy {
   /**
    * Debug level logging - development and troubleshooting
    */
-  public debug(message: string, category: string = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
+  public debug(message: string, category = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
     return this.logBasic('DEBUG', message, category, metadata);
   }
 
   /**
    * Info level logging - general information
    */
-  public info(message: string, category: string = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
+  public info(message: string, category = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
     return this.logBasic('INFO', message, category, metadata);
   }
 
   /**
    * Warning level logging - potential issues
    */
-  public warn(message: string, category: string = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
+  public warn(message: string, category = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
     return this.logBasic('WARN', message, category, metadata);
   }
 
   /**
    * Error level logging - errors and exceptions
    */
-  public error(message: string, category: string = 'GENERAL', error?: Error, metadata?: Record<string, unknown>): Observable<LogEntry> {
+  public error(message: string, category = 'GENERAL', error?: Error, metadata?: Record<string, unknown>): Observable<LogEntry> {
     const errorMetadata = {
       ...metadata,
       error: error?.message,
@@ -132,7 +132,7 @@ export class LoggingService implements OnDestroy {
   /**
    * Fatal level logging - critical system failures
    */
-  public fatal(message: string, category: string = 'SYSTEM', error?: Error, metadata?: Record<string, unknown>): Observable<LogEntry> {
+  public fatal(message: string, category = 'SYSTEM', error?: Error, metadata?: Record<string, unknown>): Observable<LogEntry> {
     const fatalMetadata = {
       ...metadata,
       error: error?.message,
@@ -466,7 +466,7 @@ export class LoggingService implements OnDestroy {
   public completeTrackedOperation(
     operationName: string,
     startTime: Date,
-    success: boolean = true,
+    success = true,
     actualResults?: string,
     metadata?: Record<string, unknown>
   ): Observable<LogEntry> {

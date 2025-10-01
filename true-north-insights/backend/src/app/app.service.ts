@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { map, shareReplay, auditTime } from 'rxjs/operators';
+import { shareReplay, auditTime } from 'rxjs/operators';
 
 interface ApiData {
   message: string;

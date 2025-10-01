@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -22,11 +22,9 @@ import { LoggingService } from './shared/ui-services/logging.service';
 export class App implements OnInit, OnDestroy {
   public readonly title = 'True North Insights';
   private readonly destroy$ = new Subject<void>();
-
-  constructor(
-    private readonly toaster: ToasterService,
-    private readonly logger: LoggingService
-  ) {}
+  
+  private readonly toaster = inject(ToasterService);
+  private readonly logger = inject(LoggingService);
 
   public ngOnInit(): void {
     this.logger.info('Application initialized', 'APP_STARTUP', {

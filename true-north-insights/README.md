@@ -50,7 +50,7 @@ These targets are either [inferred automatically](https://nx.dev/concepts/inferr
 
 To version and release the library use
 
-```
+``` javascript
 npx nx release
 ```
 
@@ -76,7 +76,7 @@ npx nx sync:check
 
 [Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
 
-## Set up CI!
+## Set up CI
 
 ### Step 1
 
@@ -119,6 +119,7 @@ Learn more:
 - [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
 And join the Nx community:
+
 - [Discord](https://go.nx.dev/community)
 - [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
 - [Our Youtube channel](https://www.youtube.com/@nxdevtools)
