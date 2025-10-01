@@ -1,1 +1,94 @@
-/* You can add global styles to this file, and also import other style files */
+/* TRUE NORTH INSIGHTS - GLOBAL STYLES */
+/* Material 3 Expressive Tactical Theme */
+
+/* Import tactical toaster styles */
+@import './app/shared/ui-services/tactical-toaster.scss';
+
+/* Global Material 3 Expressive variables */
+:root {
+  /* Tactical Color Palette */
+  --tactical-success: #00ff41;
+  --tactical-success-rgb: 0, 255, 65;
+  --tactical-error: #ff0040;
+  --tactical-error-rgb: 255, 0, 64;
+  --tactical-warning: #ffab00;
+  --tactical-warning-rgb: 255, 171, 0;
+  --tactical-info: #2196f3;
+  --tactical-info-rgb: 33, 150, 243;
+  --tactical-progress: #9c27b0;
+  --tactical-progress-rgb: 156, 39, 176;
+  --tactical-primary: #607d8b;
+  --tactical-primary-rgb: 96, 125, 139;
+  
+  /* Typography */
+  --tactical-font-mono: 'Roboto Mono', 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  --tactical-font-sans: 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+  
+  /* Shadows */
+  --tactical-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --tactical-shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --tactical-shadow-heavy: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+/* Base application styling */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--tactical-font-sans);
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* Material 3 Expressive customizations */
+.mat-mdc-button {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+}
+
+.mat-mdc-raised-button {
+  box-shadow: var(--tactical-shadow-light) !important;
+}
+
+.mat-mdc-raised-button:hover {
+  box-shadow: var(--tactical-shadow-medium) !important;
+  transform: translateY(-1px);
+}
+
+/* Tactical form controls */
+.mat-mdc-form-field {
+  .mat-mdc-text-field-wrapper {
+    border-radius: 8px !important;
+  }
+}
+
+/* Animation preferences */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Focus indicators */
+*:focus-visible {
+  outline: 2px solid var(--tactical-info);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

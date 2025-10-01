@@ -1,0 +1,241 @@
+/* MATERIAL 3 EXPRESSIVE TACTICAL TOASTER STYLES */
+
+/* Base tactical toaster styling */
+.tactical-toaster {
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24) !important;
+  font-family: 'Roboto Mono', monospace !important;
+  font-weight: 500 !important;
+  border-left: 4px solid var(--tactical-accent) !important;
+  backdrop-filter: blur(16px) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.tactical-toaster::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--tactical-accent) 0%, 
+    var(--tactical-primary) 50%, 
+    var(--tactical-accent) 100%);
+  animation: tactical-pulse 2s ease-in-out infinite;
+}
+
+/* Tactical Success - Green Matrix Theme */
+.tactical-success {
+  --tactical-primary: #00ff41;
+  --tactical-accent: #39ff14;
+  background: linear-gradient(135deg, 
+    rgba(0, 255, 65, 0.15) 0%,
+    rgba(57, 255, 20, 0.1) 100%) !important;
+  color: #00ff41 !important;
+  border-left-color: #00ff41 !important;
+}
+
+.tactical-success .mat-mdc-snack-bar-action {
+  color: #39ff14 !important;
+  font-weight: 600 !important;
+}
+
+/* Tactical Error - Red Alert Theme */
+.tactical-error {
+  --tactical-primary: #ff0040;
+  --tactical-accent: #ff1744;
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 64, 0.15) 0%,
+    rgba(255, 23, 68, 0.1) 100%) !important;
+  color: #ff0040 !important;
+  border-left-color: #ff0040 !important;
+}
+
+.tactical-error .mat-mdc-snack-bar-action {
+  color: #ff1744 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+}
+
+/* Tactical Warning - Amber Caution Theme */
+.tactical-warning {
+  --tactical-primary: #ffab00;
+  --tactical-accent: #ffc107;
+  background: linear-gradient(135deg, 
+    rgba(255, 171, 0, 0.15) 0%,
+    rgba(255, 193, 7, 0.1) 100%) !important;
+  color: #ffab00 !important;
+  border-left-color: #ffab00 !important;
+}
+
+.tactical-warning .mat-mdc-snack-bar-action {
+  color: #ffc107 !important;
+  font-weight: 600 !important;
+}
+
+/* Tactical Info - Blue Intelligence Theme */
+.tactical-info {
+  --tactical-primary: #2196f3;
+  --tactical-accent: #03a9f4;
+  background: linear-gradient(135deg, 
+    rgba(33, 150, 243, 0.15) 0%,
+    rgba(3, 169, 244, 0.1) 100%) !important;
+  color: #2196f3 !important;
+  border-left-color: #2196f3 !important;
+}
+
+.tactical-info .mat-mdc-snack-bar-action {
+  color: #03a9f4 !important;
+  font-weight: 600 !important;
+}
+
+/* Tactical Progress - Purple Operations Theme */
+.tactical-progress {
+  --tactical-primary: #9c27b0;
+  --tactical-accent: #e91e63;
+  background: linear-gradient(135deg, 
+    rgba(156, 39, 176, 0.15) 0%,
+    rgba(233, 30, 99, 0.1) 100%) !important;
+  color: #9c27b0 !important;
+  border-left-color: #9c27b0 !important;
+  position: relative !important;
+}
+
+.tactical-progress::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #9c27b0, #e91e63);
+  animation: tactical-progress-bar 2s ease-in-out infinite;
+}
+
+/* Tactical Primary - Elite Command Theme */
+.tactical-primary {
+  --tactical-primary: #607d8b;
+  --tactical-accent: #90a4ae;
+  background: linear-gradient(135deg, 
+    rgba(96, 125, 139, 0.15) 0%,
+    rgba(144, 164, 174, 0.1) 100%) !important;
+  color: #607d8b !important;
+  border-left-color: #607d8b !important;
+}
+
+.tactical-primary .mat-mdc-snack-bar-action {
+  color: #90a4ae !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+}
+
+/* Timestamp styling for detailed notifications */
+.with-timestamp {
+  font-family: 'Roboto Mono', monospace !important;
+  font-size: 0.9rem !important;
+}
+
+.with-timestamp::before {
+  content: '⚡';
+  margin-right: 8px;
+  opacity: 0.8;
+}
+
+/* Animations */
+@keyframes tactical-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.02);
+  }
+}
+
+@keyframes tactical-progress-bar {
+  0% {
+    width: 0%;
+    opacity: 0.8;
+  }
+  50% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 0.6;
+  }
+}
+
+/* Material 3 Expressive positioning */
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-shape: 12px !important;
+}
+
+/* Enhanced visual hierarchy */
+.tactical-toaster .mat-mdc-snack-bar-label {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  font-weight: 500 !important;
+}
+
+.tactical-toaster .mat-mdc-snack-bar-action {
+  border: 1px solid currentColor !important;
+  border-radius: 8px !important;
+  padding: 6px 16px !important;
+  margin-left: 16px !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.tactical-toaster .mat-mdc-snack-bar-action:hover {
+  background: currentColor !important;
+  color: var(--background-color) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tactical-toaster {
+    font-size: 0.9rem !important;
+    margin: 8px !important;
+  }
+  
+  .tactical-toaster .mat-mdc-snack-bar-action {
+    padding: 4px 12px !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+/* Dark theme enhancements */
+@media (prefers-color-scheme: dark) {
+  .tactical-toaster {
+    background: linear-gradient(135deg, 
+      rgba(var(--tactical-primary-rgb), 0.2) 0%,
+      rgba(var(--tactical-accent-rgb), 0.15) 100%) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  }
+}
+
+/* High contrast accessibility */
+@media (prefers-contrast: high) {
+  .tactical-toaster {
+    border-width: 2px !important;
+    font-weight: 600 !important;
+  }
+  
+  .tactical-toaster .mat-mdc-snack-bar-action {
+    border-width: 2px !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .tactical-toaster::before,
+  .tactical-progress::after {
+    animation: none !important;
+  }
+}
