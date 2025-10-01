@@ -314,6 +314,7 @@ export class ModernComponent {}
 ```
 
 **Problems with Vite:**
+
 - **Standalone-first architecture** conflicts with NgModule requirements
 - **ESM-only approach** breaks legacy module patterns
 - **Limited HMR for NgModules** - optimized for standalone
@@ -335,6 +336,7 @@ export class ComplexModule {} // ❌ ESBuild struggles with this
 ```
 
 **Problems with ESBuild:**
+
 - **Limited Angular CLI integration** - requires custom tooling
 - **No advanced optimizations** - missing bundle analysis
 - **Minimal plugin ecosystem** - fewer optimization options
@@ -353,6 +355,7 @@ export class TraditionalService {
 ```
 
 **Problems with SWC:**
+
 - **Experimental Angular support** - production risk
 - **Decorator transformation issues** - core Angular feature
 - **Limited debugging support** - harder troubleshooting

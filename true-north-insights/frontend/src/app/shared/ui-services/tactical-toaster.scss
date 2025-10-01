@@ -7,7 +7,7 @@
   font-family: 'Roboto Mono', monospace !important;
   font-weight: 500 !important;
   border-left: 4px solid var(--tactical-accent) !important;
-  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
   backdrop-filter: blur(16px) !important;
   position: relative !important;
   overflow: hidden !important;
