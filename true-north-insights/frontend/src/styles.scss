@@ -2,7 +2,7 @@
 /* Material 3 Expressive Tactical Theme */
 
 /* Import tactical toaster styles */
-@import './app/shared/ui-services/tactical-toaster.scss';
+@import './app/shared/ui-services/tactical-toaster';
 
 /* Global Material 3 Expressive variables */
 :root {
@@ -25,9 +25,9 @@
   --tactical-font-sans: 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
   
   /* Shadows */
-  --tactical-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --tactical-shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.15);
-  --tactical-shadow-heavy: 0 16px 48px rgba(0, 0, 0, 0.2);
+  --tactical-shadow-light: 0 4px 12px rgb(0 0 0 / 10%);
+  --tactical-shadow-medium: 0 8px 24px rgb(0 0 0 / 15%);
+  --tactical-shadow-heavy: 0 16px 48px rgb(0 0 0 / 20%);
 }
 
 /* Base application styling */

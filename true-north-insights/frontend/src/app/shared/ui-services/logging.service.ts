@@ -15,6 +15,13 @@ export interface LogEntry {
   readonly userId?: string;
   readonly sessionId?: string;
   readonly stackTrace?: string;
+  // Real-time ETA and completion tracking
+  readonly eta?: Date;
+  readonly completedAt?: Date;
+  readonly duration?: number; // milliseconds
+  readonly progress?: number; // 0-100 percentage
+  readonly phase?: string; // e.g., "Foundation", "Market Penetration", "Scaling"
+  readonly milestone?: string; // e.g., "Tactical Interface", "Navigation System"
 }
 
 export interface AuditEntry extends LogEntry {
@@ -92,21 +99,21 @@ export class LoggingService implements OnDestroy {
    * Debug level logging - development and troubleshooting
    */
   public debug(message: string, category: string = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
-    return this.log('DEBUG', message, category, metadata);
+    return this.logBasic('DEBUG', message, category, metadata);
   }
 
   /**
    * Info level logging - general information
    */
   public info(message: string, category: string = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
-    return this.log('INFO', message, category, metadata);
+    return this.logBasic('INFO', message, category, metadata);
   }
 
   /**
    * Warning level logging - potential issues
    */
   public warn(message: string, category: string = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
-    return this.log('WARN', message, category, metadata);
+    return this.logBasic('WARN', message, category, metadata);
   }
 
   /**
@@ -119,7 +126,7 @@ export class LoggingService implements OnDestroy {
       stack: error?.stack
     };
     
-    return this.log('ERROR', message, category, errorMetadata, undefined, error?.stack);
+    return this.logBasic('ERROR', message, category, errorMetadata, undefined, error?.stack);
   }
 
   /**
@@ -133,7 +140,7 @@ export class LoggingService implements OnDestroy {
       critical: true
     };
     
-    return this.log('FATAL', message, category, fatalMetadata, undefined, error?.stack);
+    return this.logBasic('FATAL', message, category, fatalMetadata, undefined, error?.stack);
   }
 
   /**
@@ -345,9 +352,9 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Core logging method
+   * Core logging method (basic version for backward compatibility)
    */
-  private log(
+  private logBasic(
     level: LogLevel,
     message: string,
     category: string,
@@ -355,28 +362,7 @@ export class LoggingService implements OnDestroy {
     operation?: string,
     stackTrace?: string
   ): Observable<LogEntry> {
-    const logEntry: LogEntry = {
-      id: this.generateId(),
-      timestamp: new Date(),
-      level,
-      message,
-      category,
-      metadata,
-      operation,
-      userId: this.userId,
-      sessionId: this.sessionId,
-      stackTrace
-    };
-
-    this.addToLogs(logEntry);
-
-    // Console output with color coding
-    this.outputToConsole(logEntry);
-
-    return new BehaviorSubject(logEntry).pipe(
-      shareReplay(1),
-      takeUntil(this.destroy$)
-    );
+    return this.log(level, message, category, metadata, operation, stackTrace);
   }
 
   private addToLogs(entry: LogEntry): void {
@@ -384,6 +370,9 @@ export class LoggingService implements OnDestroy {
     // Keep only last 1000 entries for performance
     const newLogs = [...currentLogs, entry].slice(-1000);
     this.logsSubject$.next(newLogs);
+    
+    // Console output with color coding
+    this.outputToConsole(entry);
   }
 
   private outputToConsole(entry: LogEntry): void {
@@ -421,6 +410,154 @@ export class LoggingService implements OnDestroy {
   private getClientIP(): string {
     // In a real application, this would be provided by the backend
     return 'unknown';
+  }
+
+  /**
+   * REAL-TIME ETA & COMPLETION TRACKING
+   * Perfect for federal contracting accountability and transparency
+   */
+
+  /**
+   * Start a tracked operation with ETA calculation
+   */
+  public startTrackedOperation(
+    operationName: string,
+    estimatedDurationMs: number,
+    phase?: string,
+    milestone?: string,
+    metadata?: Record<string, unknown>
+  ): Observable<LogEntry> {
+    const startTime = new Date();
+    const eta = new Date(startTime.getTime() + estimatedDurationMs);
+    
+    const trackingMetadata = {
+      ...metadata,
+      startTime: startTime.toISOString(),
+      estimatedDuration: estimatedDurationMs,
+      operationType: 'START_TRACKED'
+    };
+
+    return this.log('INFO', `Starting tracked operation: ${operationName}`, 'TRACKING', trackingMetadata, operationName, undefined, eta, undefined, undefined, 0, phase, milestone);
+  }
+
+  /**
+   * Update progress of a tracked operation
+   */
+  public updateProgress(
+    operationName: string,
+    progress: number,
+    message?: string,
+    metadata?: Record<string, unknown>
+  ): Observable<LogEntry> {
+    const progressMetadata = {
+      ...metadata,
+      operationType: 'PROGRESS_UPDATE',
+      progressPercentage: progress
+    };
+
+    const logMessage = message || `Progress update for ${operationName}: ${progress}%`;
+    
+    return this.log('INFO', logMessage, 'TRACKING', progressMetadata, operationName, undefined, undefined, undefined, undefined, progress);
+  }
+
+  /**
+   * Complete a tracked operation with actual completion time and duration
+   */
+  public completeTrackedOperation(
+    operationName: string,
+    startTime: Date,
+    success: boolean = true,
+    actualResults?: string,
+    metadata?: Record<string, unknown>
+  ): Observable<LogEntry> {
+    const completedAt = new Date();
+    const duration = completedAt.getTime() - startTime.getTime();
+    
+    const completionMetadata = {
+      ...metadata,
+      operationType: 'COMPLETION',
+      success,
+      actualResults,
+      plannedVsActual: {
+        duration: `${duration}ms`,
+        completedAt: completedAt.toISOString()
+      }
+    };
+
+    const logMessage = success 
+      ? `✅ Successfully completed: ${operationName} (${duration}ms)`
+      : `❌ Failed to complete: ${operationName} (${duration}ms)`;
+    
+    return this.log(success ? 'INFO' : 'ERROR', logMessage, 'TRACKING', completionMetadata, operationName, undefined, undefined, completedAt, duration, 100);
+  }
+
+  /**
+   * Log phase completion (e.g., Phase 1 Foundation Complete)
+   */
+  public logPhaseCompletion(
+    phaseName: string,
+    startDate: Date,
+    achievements: string[],
+    nextPhase?: string,
+    metadata?: Record<string, unknown>
+  ): Observable<LogEntry> {
+    const completedAt = new Date();
+    const duration = completedAt.getTime() - startDate.getTime();
+    
+    const phaseMetadata = {
+      ...metadata,
+      phaseType: 'COMPLETION',
+      achievements,
+      nextPhase,
+      phaseDuration: `${Math.round(duration / (1000 * 60 * 60 * 24))} days`,
+      completedAt: completedAt.toISOString()
+    };
+
+    return this.log('AUDIT', `🎯 PHASE COMPLETE: ${phaseName}`, 'PHASE_TRACKING', phaseMetadata, `PHASE_${phaseName.toUpperCase()}`, undefined, undefined, completedAt, duration, 100, phaseName);
+  }
+
+  /**
+   * Enhanced log method with ETA and completion tracking
+   */
+  private log(
+    level: LogLevel,
+    message: string,
+    category: string,
+    metadata?: Record<string, unknown>,
+    operation?: string,
+    stackTrace?: string,
+    eta?: Date,
+    completedAt?: Date,
+    duration?: number,
+    progress?: number,
+    phase?: string,
+    milestone?: string
+  ): Observable<LogEntry> {
+    const entry: LogEntry = {
+      id: this.generateId(),
+      timestamp: new Date(),
+      level,
+      message,
+      category,
+      metadata,
+      operation,
+      userId: this.userId,
+      sessionId: this.sessionId,
+      stackTrace,
+      eta,
+      completedAt,
+      duration,
+      progress,
+      phase,
+      milestone
+    };
+
+    this.addToLogs(entry);
+    
+    return new BehaviorSubject(entry).pipe(
+      shareReplay(1),
+      takeUntil(this.destroy$)
+    );
   }
 
   public ngOnDestroy(): void {

@@ -3,7 +3,7 @@
 /* Base tactical toaster styling */
 .tactical-toaster {
   border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24) !important;
+  box-shadow: 0 8px 32px rgb(0 0 0 / 24%) !important;
   font-family: 'Roboto Mono', monospace !important;
   font-weight: 500 !important;
   border-left: 4px solid var(--tactical-accent) !important;
@@ -30,9 +30,10 @@
 .tactical-success {
   --tactical-primary: #00ff41;
   --tactical-accent: #39ff14;
+
   background: linear-gradient(135deg, 
-    rgba(0, 255, 65, 0.15) 0%,
-    rgba(57, 255, 20, 0.1) 100%) !important;
+    rgb(0 255 65 / 15%) 0%,
+    rgb(57 255 20 / 10%) 100%) !important;
   color: #00ff41 !important;
   border-left-color: #00ff41 !important;
 }
@@ -46,9 +47,10 @@
 .tactical-error {
   --tactical-primary: #ff0040;
   --tactical-accent: #ff1744;
+
   background: linear-gradient(135deg, 
-    rgba(255, 0, 64, 0.15) 0%,
-    rgba(255, 23, 68, 0.1) 100%) !important;
+    rgb(255 0 64 / 15%) 0%,
+    rgb(255 23 68 / 10%) 100%) !important;
   color: #ff0040 !important;
   border-left-color: #ff0040 !important;
 }
@@ -63,9 +65,10 @@
 .tactical-warning {
   --tactical-primary: #ffab00;
   --tactical-accent: #ffc107;
+
   background: linear-gradient(135deg, 
-    rgba(255, 171, 0, 0.15) 0%,
-    rgba(255, 193, 7, 0.1) 100%) !important;
+    rgb(255 171 0 / 15%) 0%,
+    rgb(255 193 7 / 10%) 100%) !important;
   color: #ffab00 !important;
   border-left-color: #ffab00 !important;
 }
@@ -79,9 +82,10 @@
 .tactical-info {
   --tactical-primary: #2196f3;
   --tactical-accent: #03a9f4;
+
   background: linear-gradient(135deg, 
-    rgba(33, 150, 243, 0.15) 0%,
-    rgba(3, 169, 244, 0.1) 100%) !important;
+    rgb(33 150 243 / 15%) 0%,
+    rgb(3 169 244 / 10%) 100%) !important;
   color: #2196f3 !important;
   border-left-color: #2196f3 !important;
 }
@@ -95,9 +99,10 @@
 .tactical-progress {
   --tactical-primary: #9c27b0;
   --tactical-accent: #e91e63;
+
   background: linear-gradient(135deg, 
-    rgba(156, 39, 176, 0.15) 0%,
-    rgba(233, 30, 99, 0.1) 100%) !important;
+    rgb(156 39 176 / 15%) 0%,
+    rgb(233 30 99 / 10%) 100%) !important;
   color: #9c27b0 !important;
   border-left-color: #9c27b0 !important;
   position: relative !important;
@@ -117,9 +122,10 @@
 .tactical-primary {
   --tactical-primary: #607d8b;
   --tactical-accent: #90a4ae;
+
   background: linear-gradient(135deg, 
-    rgba(96, 125, 139, 0.15) 0%,
-    rgba(144, 164, 174, 0.1) 100%) !important;
+    rgb(96 125 139 / 15%) 0%,
+    rgb(144 164 174 / 10%) 100%) !important;
   color: #607d8b !important;
   border-left-color: #607d8b !important;
 }
@@ -148,6 +154,7 @@
     opacity: 0.6;
     transform: scaleX(1);
   }
+
   50% {
     opacity: 1;
     transform: scaleX(1.02);
@@ -159,10 +166,12 @@
     width: 0%;
     opacity: 0.8;
   }
+
   50% {
     width: 100%;
     opacity: 1;
   }
+
   100% {
     width: 100%;
     opacity: 0.6;
@@ -182,7 +191,7 @@
 }
 
 .tactical-toaster .mat-mdc-snack-bar-action {
-  border: 1px solid currentColor !important;
+  border: 1px solid currentcolor !important;
   border-radius: 8px !important;
   padding: 6px 16px !important;
   margin-left: 16px !important;
@@ -190,14 +199,14 @@
 }
 
 .tactical-toaster .mat-mdc-snack-bar-action:hover {
-  background: currentColor !important;
+  background: currentcolor !important;
   color: var(--background-color) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 20%) !important;
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .tactical-toaster {
     font-size: 0.9rem !important;
     margin: 8px !important;
@@ -213,9 +222,9 @@
 @media (prefers-color-scheme: dark) {
   .tactical-toaster {
     background: linear-gradient(135deg, 
-      rgba(var(--tactical-primary-rgb), 0.2) 0%,
-      rgba(var(--tactical-accent-rgb), 0.15) 100%) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+      rgb(var(--tactical-primary-rgb), 0.2) 0%,
+      rgb(var(--tactical-accent-rgb), 0.15) 100%) !important;
+    box-shadow: 0 8px 32px rgb(0 0 0 / 40%) !important;
   }
 }
 
