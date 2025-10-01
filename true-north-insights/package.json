@@ -6,7 +6,15 @@
     "lint:scss": "stylelint \"**/*.scss\" --fix",
     "lint:scss:check": "stylelint \"**/*.scss\"",
     "lint:all": "nx run-many --target=lint --all && npm run lint:scss:check",
-    "lint:fix": "nx run-many --target=lint --all --fix && npm run lint:scss"
+    "lint:fix": "nx run-many --target=lint --all --fix && npm run lint:scss",
+    "test": "nx run-many --target=test --all",
+    "test:unit": "nx run-many --target=test --all",
+    "test:e2e": "nx run-many --target=e2e --all",
+    "test:frontend": "nx test frontend",
+    "test:backend": "nx test backend",
+    "test:e2e:frontend": "nx e2e frontend-e2e",
+    "test:e2e:backend": "nx e2e backend-e2e",
+    "test:all": "npm run test:unit && npm run test:e2e"
   },
   "private": true,
   "devDependencies": {

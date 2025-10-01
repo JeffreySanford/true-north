@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
-import { shareReplay, takeUntil } from 'rxjs/operators';
+import { shareReplay, takeUntil, tap } from 'rxjs/operators';
 
 export interface ToasterMessage {
   readonly id: string;
