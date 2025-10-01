@@ -1,0 +1,12 @@
+{
+  "extends": ["../eslint.config.mjs"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "@angular-eslint/prefer-standalone": "off",
+        "@angular-eslint/prefer-standalone-component": "off"
+      }
+    }
+  ]
+}
