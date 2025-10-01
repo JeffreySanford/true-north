@@ -1,0 +1,32 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+  "rushVersion": "5.118.0",
+  "pnpmVersion": "8.15.0",
+  "nodeSupportedVersionRange": ">=20.19.0 <21.0.0",
+  
+  "projectFolders": [
+    {
+      "projectFolder": "true-north-insights",
+      "packageName": "@true-north/insights"
+    }
+  ],
+
+  "projects": [
+    {
+      "packageName": "@true-north/insights",
+      "projectFolder": "true-north-insights",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    }
+  ],
+
+  "gitPolicy": {
+    "versionBumpCommitMessage": "Bump versions [skip ci]",
+    "changeLogUpdateCommitMessage": "Update changelogs [skip ci]"
+  },
+
+  "repository": {
+    "url": "https://github.com/true-north/true-north-holdings",
+    "defaultBranch": "main"
+  }
+}

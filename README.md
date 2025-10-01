@@ -1,82 +1,131 @@
-# TrueNorth
+# True North Holdings — Multi-Company Portfolio
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+**Legendary. Professional. Auditable. Testable. Documented.**  
+*Parent repository for True North's diverse business portfolio — Making America Build Again 🇺🇸*
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## 🏢 **Company Portfolio**
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+This repository serves as the parent coordination hub for multiple True North companies:
 
-## Finish your CI setup
+### 📊 **True North Insights** 
+**Software & Analytics Company**
+- **Location:** [`./true-north-insights/`](./true-north-insights/)
+- **Tech Stack:** Nx Monorepo with Angular 20 + NestJS 11
+- **Focus:** Government data solutions, compliance, modernization
+- **Status:** 🚧 Active Development
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/soAphlWoGV)
+### 👕 **True North Apparel** *(Planned)*
+**Patriotic Clothing & Merchandise**
+- **Location:** `./true-north-apparel/` *(Future)*
+- **Tech Stack:** Next.js + Shopify Plus
+- **Focus:** Veteran-inspired apparel and accessories
+- **Status:** 📋 Planning Phase
 
+### 🍵 **True North Tea** *(Planned)*
+**Premium Tea & Beverage Company**
+- **Location:** `./true-north-tea/` *(Future)*
+- **Tech Stack:** Astro + Headless CMS
+- **Focus:** Artisanal teas with American heritage
+- **Status:** 💡 Concept Stage
 
-## Run tasks
+## 🛠️ **Multi-Company Management**
 
-To run the dev server for your app, use:
+This parent repository uses **Rush.js** for coordinated multi-project management:
 
-```sh
-npx nx serve true-north-insights
+### Quick Start Commands
+```bash
+# Bootstrap all companies
+npm run bootstrap
+
+# Build all projects
+npm run build:all
+
+# Development servers
+npm run insights:dev     # Start True North Insights
+npm run apparel:dev      # Start True North Apparel (future)
+npm run tea:dev          # Start True North Tea (future)
 ```
 
-To create a production bundle:
-
-```sh
-npx nx build true-north-insights
+### Architecture Overview
+```text
+true-north/                          # Parent coordination repo
+├── apps/
+│   ├── true-north-insights/        # Nx monorepo (Angular + NestJS)
+│   ├── true-north-apparel/         # E-commerce (Next.js + Shopify)
+│   └── true-north-tea/             # Static site (Astro + CMS)
+├── packages/
+│   ├── shared-ui/                  # Cross-company design system
+│   ├── shared-utils/               # Common utilities
+│   └── shared-configs/             # Shared tooling configs
+├── common/
+│   ├── config/                     # Rush + tooling configuration
+│   └── scripts/                    # Cross-company automation
+└── docs/
+    ├── PARENT_STRATEGY.md          # Multi-company architecture
+    └── contributing.md             # Contribution guidelines
 ```
 
-To see all available targets to run for a project, run:
+## 📈 **Current Focus: True North Insights**
 
-```sh
-npx nx show project true-north-insights
-```
+The primary active project is **True North Insights**, a comprehensive software and analytics platform:
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+- **🎯 MVP Goal:** Government-ready compliance and data modernization platform
+- **🏗️ Architecture:** Dual persistence (MongoDB + PostgreSQL) with strongly-typed APIs
+- **🔒 Security:** JWT + MFA, RBAC, immutable audit trails
+- **📊 Features:** Real-time dashboards, PDF generation, data provenance tracking
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+See [`./true-north-insights/README.md`](./true-north-insights/README.md) for detailed information.
 
-## Add new projects
+## 🚀 **Getting Started**
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+### Prerequisites
+- Node.js 20.19+ (required for Angular 20)
+- Rush.js (for multi-company coordination)
+- Git (for version control)
 
-Use the plugin's generator to create new projects.
+### Setup Instructions
 
-To generate a new application, use:
+1. **Clone and Bootstrap**
+   ```bash
+   git clone <repo-url>
+   cd true-north
+   npm install -g @microsoft/rush
+   rush install
+   ```
 
-```sh
-npx nx g @nx/angular:app demo
-```
+2. **Start Development**
+   ```bash
+   # For True North Insights development
+   cd true-north-insights
+   npm run serve
+   ```
 
-To generate a new library, use:
+3. **Cross-Company Operations**
+   ```bash
+   # From parent directory
+   rush build     # Build all projects
+   rush test      # Test all projects
+   rush lint      # Lint all projects
+   ```
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+## 🤝 **Contributing**
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+Each company maintains its own development practices:
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- **True North Insights:** See [`./true-north-insights/CONTRIBUTING.md`](./true-north-insights/CONTRIBUTING.md)
+- **True North Apparel:** *(Future development guidelines)*
+- **True North Tea:** *(Future development guidelines)*
 
+## 📚 **Documentation**
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- **[Parent Strategy](./PARENT_STRATEGY.md)** - Multi-company architecture and tooling
+- **[True North Insights](./true-north-insights/README.md)** - Software platform documentation
+- **[Rush Configuration](./rush.json)** - Multi-project build coordination
 
-## Install Nx Console
+## 🇺🇸 **Mission**
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+True North Holdings brings military discipline and precision to diverse business challenges, delivering legendary solutions across software, retail, and lifestyle brands. We're committed to supporting veterans, building American businesses, and creating products that embody our nation's values.
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+*Making America Build Again — One Company at a Time* 🇺🇸
