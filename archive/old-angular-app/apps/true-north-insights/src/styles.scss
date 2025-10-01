@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+@use './styles/variables' as vars;
+@use './styles/mixins';
+@use './styles/layout';
+@use './styles/components';
+@use './styles/animations';
+@use './styles/themes';
+@use './styles/common';
+
+@include mat.core();
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}

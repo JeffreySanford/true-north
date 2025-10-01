@@ -1,0 +1,337 @@
+/* filepath: /C:/repos/true-north/apps/true-north-insights/src/app/components/tactical-view/tactical-view.component.scss */
+$blue-primary: #003087;
+$blue-glow: #0055BB;
+$red-alert: #BB0000;
+$amber: #FFBF00;
+$text-color: #FFFFFF;
+$panel-bg: rgba(0, 16, 41, 0.85);
+$panel-border: rgba(0, 84, 187, 0.7);
+$teal-border: #00d8d8;
+
+.tactical-view-container {
+  display: flex;
+  width: 100%;
+  height: 600px;
+  gap: 20px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 3px solid #00d8d8;
+  border-radius: 8px;
+  position: relative;
+  z-index: 900;
+  box-shadow: 0 0 30px rgba(0, 216, 216, 0.5);
+  margin: 40px auto;
+}
+
+.tactical-display-section {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.radar-section {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+/* Ensure displays render on top of other elements */
+app-tactical-display,
+app-radar-display {
+  display: block;
+  height: 100%;
+  z-index: 1000;
+  position: relative;
+}
+
+// Optimize container sizing
+.tactical-display {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #000814;
+  color: $text-color;
+  font-family: 'Roboto Mono', monospace;
+  border: 1px solid $teal-border; // Reduced border size
+  border-radius: 3px; // Reduced border radius
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 216, 216, 0.4);
+  position: relative;
+  z-index: 1000;
+}
+
+// Reduce header size
+.tactical-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px; // Reduced padding
+  background-color: $panel-bg;
+  border-bottom: 1px solid $teal-border;
+  height: 26px; // Reduced height
+  
+  .title {
+    font-size: 12px; // Reduced font size
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba($blue-glow, 0.8);
+  }
+  
+  .status {
+    padding: 2px 6px; // Reduced padding
+    border-radius: 2px; // Reduced border radius
+    font-size: 10px; // Reduced font size
+    font-weight: bold;
+    
+    &.low {
+      background-color: rgba(0, 128, 0, 0.3);
+      border: 1px solid rgba(0, 128, 0, 0.8);
+    }
+    
+    &.medium {
+      background-color: rgba(255, 191, 0, 0.3);
+      border: 1px solid rgba(255, 191, 0, 0.8);
+    }
+    
+    &.high {
+      background-color: rgba(187, 0, 0, 0.3);
+      border: 1px solid rgba(187, 0, 0, 0.8);
+      animation: pulse 1s infinite;
+    }
+  }
+}
+
+// Ensure content fills available space
+.tactical-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.tactical-display-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tactical-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+// Ensure overlay elements position correctly
+.overlay-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+// Add legend styling
+.compact-legend {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba($teal-border, 0.5);
+  border-radius: 2px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px; // Reduce gap between items
+  font-size: 7px; // Even smaller font
+  max-width: 55px;
+  line-height: 1.0; // Reduce line height
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 0;
+}
+
+.legend-symbol {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  
+  &.friendly {
+    background-color: #0055BB;
+  }
+  
+  &.enemy {
+    background-color: #BB0000;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  }
+  
+  &.neutral {
+    background-color: #BBBB00;
+    border-radius: 50%;
+  }
+}
+
+.legend-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+// Optimize footer
+.tactical-footer {
+  height: 20px; // Reduced height
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  background-color: $panel-bg;
+  border-top: 1px solid $teal-border;
+  font-size: 9px; // Smaller font
+}
+
+.timestamp {
+  color: $teal-border;
+  font-weight: normal;
+}
+
+.coords {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 8px;
+}
+
+// Crosshair and corner elements
+.crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba($teal-border, 0.5);
+  border-radius: 50%;
+  
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    background-color: rgba($teal-border, 0.5);
+  }
+  
+  &::before {
+    top: 50%;
+    left: -5px;
+    right: -5px;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+  
+  &::after {
+    left: 50%;
+    top: -5px;
+    bottom: -5px;
+    width: 1px;
+    transform: translateX(-50%);
+  }
+}
+
+.corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: $teal-border;
+  border-style: solid;
+  border-width: 0;
+  
+  &.top-left {
+    top: 5px;
+    left: 5px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+  }
+  
+  &.top-right {
+    top: 5px;
+    right: 5px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+  }
+  
+  &.bottom-left {
+    bottom: 5px;
+    left: 5px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+  }
+  
+  &.bottom-right {
+    bottom: 5px;
+    right: 5px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+  }
+}
+
+// Scan line effect
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba($teal-border, 0.7);
+  box-shadow: 0 0 8px rgba($teal-border, 0.7);
+  transform: translateY(-100%);
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+// Expanded view styling (keep most of existing styles)
+.tactical-expanded-backdrop {
+  // ...existing code...
+}
+
+.tactical-expanded-content {
+  // ...existing code...
+}
+
+// Add styles for compass canvas
+.compass-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.6;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .tactical-view-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 800px;
+  }
+  
+  .tactical-display-section,
+  .radar-section {
+    height: 400px;
+  }
+
+  .compact-legend {
+    display: none; // Hide legend on very small displays
+  }
+}

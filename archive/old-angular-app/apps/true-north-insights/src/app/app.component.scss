@@ -1,0 +1,739 @@
+@use 'sass:color';
+@use '../styles' as styles;
+@use '../styles/variables' as vars;
+@use '../styles/common' as common;
+@use '../styles/mixins' as mixins;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.app-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  
+  @media (max-width: vars.$breakpoint-sm) {
+    padding: 10px;
+  }
+}
+
+.toolbar {
+  background: linear-gradient(90deg, vars.$patriotic-red, vars.$patriotic-blue);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: vars.$z-index-header;
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+    img {
+      height: 40px;
+      margin-right: 10px;
+    }
+  }
+  
+  .nav-links {
+    display: flex;
+    margin-left: 20px;
+    
+    a {
+      padding: 0 15px;
+      color: white;
+      text-decoration: none;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background-color: vars.$service-gold;
+        transition: width 0.3s ease;
+      }
+      
+      &:hover, &.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        
+        &::after {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+.spacer {
+  flex: 1;
+}
+
+.footer {
+  background-color: vars.$patriotic-blue-dark;
+  color: white;
+  padding: 40px 20px;
+  
+  .footer-content {
+    max-width: vars.$content-max-width;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    
+    .footer-section {
+      h3 {
+        color: vars.$service-gold;
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        font-weight: 600;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          width: 40px;
+          height: 3px;
+          background-color: vars.$service-gold;
+        }
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
+          margin-bottom: 10px;
+          
+          a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            
+            mat-icon {
+              font-size: 16px;
+              height: 16px;
+              width: 16px;
+              margin-right: 8px;
+              color: vars.$service-gold;
+            }
+            
+            &:hover {
+              color: vars.$service-gold;
+            }
+          }
+        }
+      }
+      
+      p {
+        line-height: 1.6;
+      }
+    }
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .social-links {
+      margin-bottom: 15px;
+      
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        margin: 0 5px;
+        color: white;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background-color: vars.$service-gold;
+          color: vars.$patriotic-blue-dark;
+          transform: translateY(-3px);
+        }
+      }
+    }
+    
+    .copyright {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+.stars-bg {
+  @include mixins.stars-background(0.3);
+  padding: 40px 0;
+  color: white;
+  text-align: center;
+}
+
+/* ===== Global Styles ===== */
+html,
+body {
+  height: 100%;
+  color: white;
+  text-align: center;
+  background-image: url('/assets/backgrounds/us-flag.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Header Styles ===== */
+header {
+  position: relative;
+  z-index: 1000;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  @include mixins.box-shadow(1);
+  background: linear-gradient(to right, vars.$patriotic-blue, vars.$patriotic-blue-dark);
+  
+  .mat-icon {
+    margin-right: 5px;
+  }
+}
+
+.logo {
+  width: 3em;
+  height: 3em;
+  margin: 0 auto;
+  margin-right: 10px;
+  display: block;
+  position: relative;
+  background-color: red;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: sparkle 2s infinite;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      box-shadow: 0 0 5px 5px white;
+    }
+    50% {
+      box-shadow: 0 0 20px 20px white;
+    }
+  }
+}
+
+.company-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  
+  .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    @include mixins.text-shadow(1);
+  }
+  
+  .subtitle {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  
+  a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* ===== Tactical Container ===== */
+.tactical-container {
+  position: fixed;
+  width: 100%;
+  z-index: 900;
+  top: vars.$header-height + 10px;
+  pointer-events: none;
+}
+
+.tactical-display-section, 
+.radar-section {
+  width: 15%;
+  height: 25vh;
+  position: absolute;
+  pointer-events: auto;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  
+  &:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.tactical-display-section {
+  left: 10px;
+}
+
+.radar-section {
+  right: 10px;
+}
+
+app-tactical-display,
+app-radar-display {
+  display: block;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  position: relative;
+  cursor: pointer;
+}
+
+/* ===== Main Content ===== */
+.page-container {
+  min-height: calc(100vh - #{vars.$header-height} - #{vars.$footer-height});
+  position: relative;
+  overflow: hidden;
+  padding-bottom: vars.$footer-height;
+}
+
+.parallax-container {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+.tactical-hud {
+  position: fixed;
+  top: vars.$header-height;
+  right: 0;
+  width: 200px;
+  height: 100px;
+  background-image: url('/assets/images/tactical-hud.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bottom-elements {
+  position: fixed;
+  bottom: vars.$footer-height;
+  width: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.compass-rose {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 100px;
+  height: 100px;
+  background-image: url('/assets/images/compass.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+}
+
+.eagle-silhouette {
+  position: absolute;
+  bottom: 20px;
+  right: -30px;
+  width: 200px;
+  height: 150px;
+  background-image: url('/assets/images/eagle.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+
+/* ===== Section Styles ===== */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-banner {
+  text-align: center;
+  padding: 60px 20px;
+  position: relative;
+  width: 100%;
+  @include mixins.stars-background(0.3);
+  
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: vars.$patriotic-white;
+    margin-bottom: 15px;
+    @include mixins.text-shadow(3);
+    
+    @media (max-width: vars.$breakpoint-md) {
+      font-size: 2.5rem;
+    }
+  }
+  
+  .hero-tag {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: vars.$patriotic-white;
+    margin-bottom: 10px;
+    @include mixins.text-shadow(2);
+  }
+  
+  .hero-location {
+    font-size: 1.2rem;
+    color: vars.$patriotic-white;
+    @include mixins.text-shadow(1);
+  }
+  
+  .patriotic-flag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    @include mixins.flag-stripes(5px);
+  }
+}
+
+.section {
+  position: relative;
+  padding: 20px;
+  max-width: vars.$content-max-width;
+  margin: 20px auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &.active-section {
+    .content {
+      @include mixins.box-shadow(3);
+      transform: translateY(-5px);
+    }
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  .patriotic-overlay {
+    background: linear-gradient(135deg, 
+      rgba(vars.$patriotic-red, 0.05) 0%, 
+      rgba(vars.$patriotic-white, 0.05) 50%, 
+      rgba(vars.$patriotic-blue, 0.05) 100%
+    );
+  }
+  
+  .content {
+    position: relative;
+    background-color: white;
+    border-radius: 8px;
+    padding: vars.$section-padding;
+    @include mixins.box-shadow(2);
+    transition: all vars.$transition-medium;
+    overflow: hidden;
+    width: 100%;
+    
+    &:hover {
+      @include mixins.box-shadow(3);
+      transform: translateY(-5px);
+    }
+  }
+  
+  .rank-decoration {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    background-image: url('/assets/images/rank.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+  }
+  
+  .military-pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    @include mixins.military-texture;
+    opacity: 0.05;
+    z-index: -1;
+  }
+  
+  .section-icon {
+    display: inline-block;
+    background-color: vars.$patriotic-blue;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    @include mixins.box-shadow(1);
+    
+    .mat-icon {
+      font-size: 2rem;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+  
+  .section-title {
+    font-family: vars.$font-family-headers;
+    font-size: 2.2rem;
+    color: vars.$patriotic-blue;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-subtitle {
+    font-size: 1.2rem;
+    color: vars.$patriotic-red;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  .separator {
+    height: 3px;
+    width: 100px;
+    background: linear-gradient(to right, vars.$patriotic-red, vars.$patriotic-blue);
+    margin-bottom: 20px;
+  }
+  
+  .section-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: vars.$text;
+    margin-bottom: 30px;
+  }
+  
+  .section-details {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      
+      .detail-icon {
+        color: vars.$patriotic-blue;
+        margin-right: 10px;
+      }
+    }
+  }
+  
+  .action-button {
+    @include mixins.patriotic-button;
+    background-color: vars.$patriotic-blue;
+    
+    &:hover {
+      background-color: vars.$patriotic-red;
+    }
+  }
+  
+  .veteran-badge {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 60px;
+    height: 60px;
+    background-image: url('/assets/images/veteran-badge.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+  }
+  
+  .patriotic-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    @include mixins.flag-stripes(4px);
+  }
+}
+
+.motto-section {
+  padding: 40px 0;
+}
+
+.motto-banner {
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(vars.$patriotic-blue, 0.8);
+  position: relative;
+  
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    left: 0;
+  }
+  
+  &::before {
+    top: 0;
+    background-color: vars.$patriotic-red;
+  }
+  
+  &::after {
+    bottom: 0;
+    background-color: vars.$patriotic-red;
+  }
+  
+  .motto-text {
+    font-family: vars.$font-family-alt;
+    font-size: 2rem;
+    color: vars.$patriotic-white;
+    font-style: italic;
+    letter-spacing: 1px;
+    @include mixins.text-shadow(2);
+  }
+}
+
+/* ===== Footer Styles ===== */
+.site-footer {
+  background: linear-gradient(to bottom, vars.$patriotic-blue, vars.$patriotic-blue-dark);
+  color: white;
+  text-align: center;
+  position: relative;
+  z-index: 900;
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: vars.$content-max-width;
+    margin: 0 auto;
+    padding: 20px;
+    
+    @media (max-width: vars.$breakpoint-md) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  
+  .footer-section {
+    h4 {
+      color: vars.$patriotic-white;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+    }
+    
+    p {
+      color: rgba(vars.$patriotic-white, 0.8);
+      margin: 5px 0;
+    }
+  }
+  
+  .copyright {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    color: rgba(vars.$patriotic-white, 0.6);
+    border-top: 1px solid rgba(vars.$patriotic-white, 0.2);
+    margin-top: 10px;
+    font-size: 0.9rem;
+    
+    .mat-icon {
+      font-size: 16px;
+      height: 16px;
+      width: 16px;
+      vertical-align: middle;
+      color: vars.$patriotic-red;
+    }
+  }
+}
+
+/* ===== Media Queries ===== */
+@media (max-width: 768px) {
+  .tactical-display-section,
+  .radar-section {
+    width: 20%;
+    height: 8vh;
+    opacity: 0.5;
+  }
+  
+  .tactical-display-section {
+    left: 5px;
+  }
+  
+  .radar-section {
+    right: 5px;
+  }
+  
+  .section {
+    padding: 10px;
+  }
+}
+
+// Add these classes to handle section opacity
+.opacity-tactical {
+  opacity: 0.3;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.opacity-standard {
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+}

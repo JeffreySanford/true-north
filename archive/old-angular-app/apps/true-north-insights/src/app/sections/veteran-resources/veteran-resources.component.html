@@ -1,0 +1,41 @@
+<div class="veteran-resources-container">
+  <div class="section-header">
+    <h1>Veteran Resources</h1>
+    <h3>Supporting your transition from military service to technology careers</h3>
+    <div class="separator"></div>
+  </div>
+  
+  <div class="resources-grid">
+    <div class="resource-card mat-elevation-z4" *ngFor="let resource of resources">
+      <div class="resource-header">
+        <h3>{{resource.title}}</h3>
+        <p>{{resource.description}}</p>
+      </div>
+      <div class="resource-content">
+        <ul class="resource-links">
+          <li *ngFor="let link of resource.links">
+            <mat-icon>link</mat-icon>
+            <a [href]="link.url">{{link.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="testimonials-section">
+    <h2>Veteran Success Stories</h2>
+    <div class="testimonials-container">
+      <div class="testimonial mat-elevation-z2" *ngFor="let testimonial of testimonials">
+        <p class="quote">"{{testimonial.quote}}"</p>
+        <p class="author">{{testimonial.name}}, {{testimonial.rank}}</p>
+        <p class="position">{{testimonial.position}} at True North</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="application-section">
+    <h2>Ready to Join Our Team?</h2>
+    <p>We're always looking for talented veterans to join our mission. Submit your information below to get started.</p>
+    <button mat-raised-button color="accent" class="action-button" (click)="applyNow()">Apply Now</button>
+  </div>
+</div>

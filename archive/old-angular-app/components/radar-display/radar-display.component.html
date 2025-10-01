@@ -1,0 +1,46 @@
+<div class="radar-display" (click)="openDetailedView()" *ngIf="!isExpanded">
+  <div class="radar-header">
+    <div class="title">RADAR</div>
+    <div class="status">{{radarStatus.mode}}</div>
+  </div>
+  
+  <div class="radar-content">
+    <!-- Change to use the combined directive with mouse mode -->
+    <div class="radar-display-container" appParallax [ratio]="parallaxRatio" mode="mouse" [reverse]="true">
+      <canvas #radarCanvas class="radar-canvas"></canvas>
+      <div class="overlay-elements">
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+        
+        <!-- Compact legend in lower right corner -->
+        <div class="compact-legend">
+          <div class="legend-item">
+            <span class="legend-symbol friendly"></span>
+            <span class="legend-label">Allied</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-symbol hostile"></span>
+            <span class="legend-label">Hostile</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-symbol unknown"></span>
+            <span class="legend-label">Unknown</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="radar-footer">
+    <div class="scan-line"></div>
+    <div class="timestamp">{{radarStatus.range}}km</div>
+    <div class="contacts">{{radarStatus.contacts}} contacts</div>
+  </div>
+</div>
+
+<!-- Expanded view overlay (will be implemented in future) -->
+<div class="radar-expanded-backdrop" *ngIf="isExpanded" (click)="closeExpandedView($event)">
+  <!-- Expanded content will go here -->
+</div>

@@ -1,0 +1,74 @@
+@use 'sass:color';
+
+// Colors
+$primary-blue: #002868;
+$primary-red: #BF0A30;
+$primary-white: #FFFFFF;
+$primary-off-white: #F8F8F8;
+$primary-dark: #333333;
+$primary-gold: #FFD700;
+
+// Military/Veteran-inspired colors
+$navy-blue: #003087;
+$army-green: #4b5320;
+$service-gold: #ffd700;
+$veteran-silver: #c0c0c0;
+$honor-red: #BF0A30;
+
+// American flag colors
+$patriotic-red: #BF0A30;
+$patriotic-white: #FFFFFF;
+$patriotic-blue: #002868;
+$patriotic-blue-dark: color.adjust($patriotic-blue, $lightness: -10%);
+
+// Text colors
+$text: #333333;
+
+// Dimensions - Updated
+$header-height: 64px;
+$footer-height: 120px;
+$section-padding: 30px;
+$content-max-width: 2900px;
+$content-max-height: 1800px;
+
+// Breakpoints - Updated
+$breakpoint-xs: 480px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1600px;
+$breakpoint-xxl: 2400px;
+
+// Mobile-specific dimensions
+$mobile-header-height: 56px;
+$mobile-footer-height: 100px;
+$mobile-section-padding: 20px;
+$mobile-content-width: 100%;
+
+// Typography
+$font-family-main: 'Roboto', sans-serif;
+$font-family-headers: 'Montserrat', sans-serif;
+$font-family-alt: 'Roboto Condensed', sans-serif;
+
+// Font sizes
+$font-size-base: 16px;
+$font-size-small: 14px;
+$font-size-large: 18px;
+$font-size-xlarge: 24px;
+$font-size-xxlarge: 32px;
+
+// Mobile font sizes
+$mobile-font-size-base: 14px;
+$mobile-font-size-large: 16px;
+$mobile-font-size-xlarge: 20px;
+
+// Animation
+$transition-fast: 0.2s ease;
+$transition-medium: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Z-index levels
+$z-index-base: 1;
+$z-index-header: 100;
+$z-index-modal: 1000;
+$z-index-tooltip: 1500;

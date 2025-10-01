@@ -1,0 +1,122 @@
+<div *ngIf="isLoading" class="loading-container">
+  <div class="patriotic-spinner"></div>
+  <p>Loading mission details...</p>
+</div>
+
+<div *ngIf="notFound && !isLoading" class="not-found-container">
+  <mat-icon>error_outline</mat-icon>
+  <h2>Service Not Found</h2>
+  <p>The service you're looking for doesn't exist or has been moved.</p>
+  <button mat-raised-button color="primary" (click)="backToServices()">
+    <mat-icon>arrow_back</mat-icon> Back to Services
+  </button>
+</div>
+
+<div class="service-detail-container" *ngIf="service && !isLoading && !notFound" [@fadeIn]>
+  <button mat-button class="back-button" (click)="backToServices()">
+    <mat-icon>arrow_back</mat-icon> Back to All Services
+  </button>
+">
+  <div class="service-header">
+    <div class="service-icon">
+      <mat-icon>{{service.iconName}}</mat-icon>
+    </div>
+    <div class="service-title-container">
+      <h1 class="service-title">{{service.title}}</h1>
+      <p class="service-subtitle">{{service.shortDescription}}</p>
+    </div>
+  </div>
+
+  <div class="service-content">
+    <div class="service-image" *ngIf="service.featuredImage">
+      <img [src]="service.featuredImage" [alt]="service.title">
+    </div>
+    
+    <div class="service-description">
+      <p>{{service.longDescription}}</p>
+    </div>
+    
+    <div class="service-section">
+      <h2 class="section-title">Key Benefits</h2>
+      <div class="section-separator"></div>
+      <ul class="benefits-list">
+        <li *ngFor="let benefit of service.benefits">
+          <mat-icon>check_circle</mat-icon>
+          <span>{{benefit}}</span>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="service-section">
+      <h2 class="section-title">Technologies & Approaches</h2>
+      <div class="section-separator"></div>
+      <div class="tags-container">
+        <span class="tag" *ngFor="let tag of service.tags">
+          {{tag}}
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Related Case Studies -->
+  <div class="service-section case-studies" *ngIf="relatedCaseStudies.length > 0">
+    <h2 class="section-title">Success Stories</h2>
+    <div class="section-separator"></div>
+    
+    <div class="case-studies-container">
+      <mat-card class="case-study-card" *ngFor="let caseStudy of relatedCaseStudies">
+        <mat-card-header>
+          <div mat-card-avatar class="industry-icon">
+            <mat-icon>business</mat-icon>
+          </div>
+          <mat-card-title>{{caseStudy.title}}</mat-card-title>
+          <mat-card-subtitle>{{caseStudy.client}} | {{caseStudy.industry}}</mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <p><strong>Challenge:</strong> {{caseStudy.challenge}}</p>
+          <p><strong>Solution:</strong> {{caseStudy.solution}}</p>
+          <p><strong>Results:</strong> {{caseStudy.results}}</p>
+          
+          <blockquote *ngIf="caseStudy.testimonial" class="testimonial">
+            <p>"{{caseStudy.testimonial.quote}}"</p>
+            <cite>
+              {{caseStudy.testimonial.author}}<br>
+              <span>{{caseStudy.testimonial.position}}</span>
+            </cite>
+          </blockquote>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  
+  <!-- Related Services -->
+  <div class="service-section related-services" *ngIf="relatedServices.length > 0">
+    <h2 class="section-title">Related Services</h2>
+    <div class="section-separator"></div>
+    
+    <div class="related-services-container">
+      <a [routerLink]="['/services', service.id]" class="related-service-card" *ngFor="let relatedService of relatedServices">
+        <div class="related-service-icon">
+          <mat-icon>{{relatedService.iconName}}</mat-icon>
+        </div>
+        <h3>{{relatedService.title}}</h3>
+        <p>{{relatedService.shortDescription}}</p>
+      </a>
+    </div>
+  </div>
+  
+  <div class="action-container">
+    <button mat-raised-button color="primary" class="action-button" (click)="requestConsultation()">
+      <mat-icon>send</mat-icon>
+      Request Consultation
+    </button>
+    
+    <button mat-raised-button class="secondary-action-button" (click)="downloadInfoSheet()">
+      <mat-icon>description</mat-icon>
+      Download Info Sheet
+    </button>
+  </div>
+  
+  <div class="patriotic-flag-accent"></div>
+</div>
