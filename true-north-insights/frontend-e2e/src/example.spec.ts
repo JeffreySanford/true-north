@@ -43,5 +43,5 @@ test('should display tactical footer with system information', async ({ page }) 
   
   // Check that footer contains system information
   const footerText = await page.locator('.tactical-footer').innerText();
-  expect(footerText).toContain('Tactical Interface');
+  expect(footerText).toContain('Traditional Angular Architecture');
 });
