@@ -1,0 +1,1237 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@true-north-insights-workspace/source documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">@true-north-insights-workspace/source documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  AuditEntry</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>frontend/src/app/shared/ui-services/logging.service.ts</code>
+        </p>
+
+
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                            <code><a href="../interfaces/LogEntry.html" target="_self" >LogEntry</a></code>
+            </p>
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#action" 
+>
+                                            action
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#ipAddress" 
+>
+                                            ipAddress
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#newValue" 
+>
+                                            newValue
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#previousValue" 
+>
+                                            previousValue
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#resource" 
+>
+                                            resource
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#userAgent" 
+>
+                                            userAgent
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="action"></a>
+                                        <span class="name "><b>action</b>
+                                            <a href="#action">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>action:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ipAddress"></a>
+                                        <span class="name "><b>ipAddress</b>
+                                            <a href="#ipAddress">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ipAddress:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="newValue"></a>
+                                        <span class="name "><b>newValue</b>
+                                            <a href="#newValue">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>newValue:     <code></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="previousValue"></a>
+                                        <span class="name "><b>previousValue</b>
+                                            <a href="#previousValue">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>previousValue:     <code></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="resource"></a>
+                                        <span class="name "><b>resource</b>
+                                            <a href="#resource">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>resource:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="userAgent"></a>
+                                        <span class="name "><b>userAgent</b>
+                                            <a href="#userAgent">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>userAgent:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, OnDestroy } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Subject, Observable } from &#x27;rxjs&#x27;;
+import { shareReplay, takeUntil, map } from &#x27;rxjs/operators&#x27;;
+
+export type LogLevel &#x3D; &#x27;DEBUG&#x27; | &#x27;INFO&#x27; | &#x27;WARN&#x27; | &#x27;ERROR&#x27; | &#x27;FATAL&#x27; | &#x27;AUDIT&#x27;;
+
+export interface LogEntry {
+  readonly id: string;
+  readonly timestamp: Date;
+  readonly level: LogLevel;
+  readonly message: string;
+  readonly category: string;
+  readonly metadata?: Record&lt;string, unknown&gt;;
+  readonly operation?: string;
+  readonly userId?: string;
+  readonly sessionId?: string;
+  readonly stackTrace?: string;
+  // Real-time ETA and completion tracking
+  readonly eta?: Date;
+  readonly completedAt?: Date;
+  readonly duration?: number; // milliseconds
+  readonly progress?: number; // 0-100 percentage
+  readonly phase?: string; // e.g., &quot;Foundation&quot;, &quot;Market Penetration&quot;, &quot;Scaling&quot;
+  readonly milestone?: string; // e.g., &quot;Tactical Interface&quot;, &quot;Navigation System&quot;
+}
+
+export interface AuditEntry extends LogEntry {
+  readonly action: string;
+  readonly resource: string;
+  readonly previousValue?: unknown;
+  readonly newValue?: unknown;
+  readonly ipAddress?: string;
+  readonly userAgent?: string;
+}
+
+/**
+ * @description Traditional Angular logging service with comprehensive audit trails and performance monitoring for federal compliance
+ * @author Development Team
+ * @since 2025-10-02
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class LoggingService implements OnDestroy {
+  private readonly destroy$ &#x3D; new Subject&lt;void&gt;();
+  private readonly logsSubject$ &#x3D; new BehaviorSubject&lt;LogEntry[]&gt;([]);
+  private readonly auditSubject$ &#x3D; new BehaviorSubject&lt;AuditEntry[]&gt;([]);
+  
+  // Hot observables for real-time log monitoring
+  public readonly logs$ &#x3D; this.logsSubject$.pipe(
+    shareReplay(1),
+    takeUntil(this.destroy$)
+  );
+  
+  public readonly auditLogs$ &#x3D; this.auditSubject$.pipe(
+    shareReplay(1),
+    takeUntil(this.destroy$)
+  );
+  
+  // Session and user context
+  private sessionId: string &#x3D; this.generateSessionId();
+  private userId?: string;
+  
+  // Performance monitoring
+  private readonly performanceSubject$ &#x3D; new BehaviorSubject&lt;Map&lt;string, number&gt;&gt;(new Map());
+  public readonly performance$ &#x3D; this.performanceSubject$.pipe(
+    shareReplay(1),
+    takeUntil(this.destroy$)
+  );
+
+  /**
+   * @description Constructor for LoggingService - initializes logging with session tracking
+   * @param None - No parameters required
+   * @returns {void} No return value  
+   * @author Development Team
+   * @since 2025-10-02
+   */
+  constructor() {
+    this.info(&#x27;LoggingService initialized&#x27;, &#x27;SYSTEM&#x27;, {
+      sessionId: this.sessionId,
+      timestamp: new Date(),
+      userAgent: navigator.userAgent
+    });
+  }
+
+  /**
+   * @description Set user context for all future logs
+   * @param {string} userId - The unique identifier for the authenticated user
+   * @returns {void} No return value
+   */
+  public setUserContext(userId: string): void {
+    this.userId &#x3D; userId;
+    this.info(&#x27;User context set&#x27;, &#x27;AUTH&#x27;, { userId });
+  }
+
+  /**
+   * @description Clear user context (logout) and remove user tracking from future logs
+   * @returns {void} No return value
+   */
+  public clearUserContext(): void {
+    const previousUserId &#x3D; this.userId;
+    this.userId &#x3D; undefined;
+    this.info(&#x27;User context cleared&#x27;, &#x27;AUTH&#x27;, { previousUserId });
+  }
+
+  /**
+   * @description Debug level logging for development and troubleshooting
+   * @param {string} message - The debug message to log
+   * @param {string} category - Log category for filtering (defaults to &#x27;GENERAL&#x27;)
+   * @param {Record&lt;string, unknown&gt;} metadata - Additional metadata for the log entry
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the created log entry
+   */
+  public debug(message: string, category &#x3D; &#x27;GENERAL&#x27;, metadata?: Record&lt;string, unknown&gt;): Observable&lt;LogEntry&gt; {
+    return this.logBasic(&#x27;DEBUG&#x27;, message, category, metadata);
+  }
+
+  /**
+   * @description Info level logging - general information
+   * @param {string} message - The info message to log
+   * @param {string} [category] - Log category for filtering (defaults to &#x27;GENERAL&#x27;)
+   * @param {Record&lt;string, unknown&gt;} [metadata] - Additional metadata for the log entry
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the created log entry
+   */
+  public info(message: string, category &#x3D; &#x27;GENERAL&#x27;, metadata?: Record&lt;string, unknown&gt;): Observable&lt;LogEntry&gt; {
+    return this.logBasic(&#x27;INFO&#x27;, message, category, metadata);
+  }
+
+  /**
+   * @description Warning level logging - potential issues
+   * @param {string} message - The warning message to log
+   * @param {string} [category] - Log category for filtering (defaults to &#x27;GENERAL&#x27;)
+   * @param {Record&lt;string, unknown&gt;} [metadata] - Additional metadata for the log entry
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the created log entry
+   */
+  public warn(message: string, category &#x3D; &#x27;GENERAL&#x27;, metadata?: Record&lt;string, unknown&gt;): Observable&lt;LogEntry&gt; {
+    return this.logBasic(&#x27;WARN&#x27;, message, category, metadata);
+  }
+
+  /**
+   * @description Error level logging - errors and exceptions
+   * @param {string} message - The error message to log
+   * @param {string} [category] - Log category for filtering (defaults to &#x27;GENERAL&#x27;)
+   * @param {Error} [error] - Optional Error object for additional details
+   * @param {Record&lt;string, unknown&gt;} [metadata] - Additional metadata for the log entry
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the created log entry
+   */
+  public error(message: string, category &#x3D; &#x27;GENERAL&#x27;, error?: Error, metadata?: Record&lt;string, unknown&gt;): Observable&lt;LogEntry&gt; {
+    const errorMetadata &#x3D; {
+      ...metadata,
+      error: error ? error.message : undefined,
+      stack: error ? error.stack : undefined
+    };
+    
+    return this.logBasic(&#x27;ERROR&#x27;, message, category, errorMetadata, undefined, error ? error.stack : undefined);
+  }
+
+  /**
+   * @description Fatal level logging - critical system failures
+   * @param {string} message - The fatal error message to log
+   * @param {string} [category] - Log category for filtering (defaults to &#x27;SYSTEM&#x27;)
+   * @param {Error} [error] - Optional Error object for additional details
+   * @param {Record&lt;string, unknown&gt;} [metadata] - Additional metadata for the log entry
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the created log entry
+   */
+  public fatal(message: string, category &#x3D; &#x27;SYSTEM&#x27;, error?: Error, metadata?: Record&lt;string, unknown&gt;): Observable&lt;LogEntry&gt; {
+    const fatalMetadata &#x3D; {
+      ...metadata,
+      error: error ? error.message : undefined,
+      stack: error ? error.stack : undefined,
+      critical: true
+    };
+    
+    return this.logBasic(&#x27;FATAL&#x27;, message, category, fatalMetadata, undefined, error ? error.stack : undefined);
+  }
+
+  /**
+   * @description Step-by-step operation logging for tracking multi-step processes
+   * @param {string} operationName - The name of the operation being tracked
+   * @param {number} stepNumber - The current step number
+   * @param {number} totalSteps - The total number of steps in the operation
+   * @param {string} stepDescription - Description of the current step
+   * @param {Record&lt;string, unknown&gt;} [metadata] - Additional metadata for the log entry
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the created log entry
+   */
+  public logStep(
+    operationName: string,
+    stepNumber: number,
+    totalSteps: number,
+    stepDescription: string,
+    metadata?: Record&lt;string, unknown&gt;
+  ): Observable&lt;LogEntry&gt; {
+    const stepMetadata &#x3D; {
+      ...metadata,
+      operation: operationName,
+      step: stepNumber,
+      totalSteps,
+      stepDescription,
+      progress: Math.round((stepNumber / totalSteps) * 100)
+    };
+
+    return this.info(
+      &#x60;Operation: ${operationName} - Step ${stepNumber}/${totalSteps}: ${stepDescription}&#x60;,
+      &#x27;OPERATION&#x27;,
+      stepMetadata
+    );
+  }
+
+  /**
+   * @description Database operation logging for CRUD operations with audit trail
+   * @param {string} operation - The database operation type (CREATE, READ, UPDATE, DELETE)
+   * @param {string} entity - The database entity or table being operated on
+   * @param {string} status - The operation status (START, SUCCESS, ERROR)
+   * @param {Record&lt;string, unknown&gt;} [metadata] - Additional metadata for the database operation
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the created log entry
+   * @since October 2, 2025
+   * @lastModified October 2, 2025
+   */
+  public logDatabaseOperation(
+    operation: &#x27;CREATE&#x27; | &#x27;READ&#x27; | &#x27;UPDATE&#x27; | &#x27;DELETE&#x27;,
+    entity: string,
+    status: &#x27;START&#x27; | &#x27;SUCCESS&#x27; | &#x27;ERROR&#x27;,
+    metadata?: Record&lt;string, unknown&gt;
+  ): Observable&lt;LogEntry&gt; {
+    const dbMetadata &#x3D; {
+      ...metadata,
+      dbOperation: operation,
+      entity,
+      status
+    };
+
+    const message &#x3D; &#x60;Database ${operation} on ${entity}: ${status}&#x60;;
+    
+    switch (status) {
+      case &#x27;START&#x27;:
+        return this.info(message, &#x27;DATABASE&#x27;, dbMetadata);
+      case &#x27;SUCCESS&#x27;:
+        return this.info(message, &#x27;DATABASE&#x27;, dbMetadata);
+      case &#x27;ERROR&#x27;:
+        return this.error(message, &#x27;DATABASE&#x27;, undefined, dbMetadata);
+      default:
+        return this.info(message, &#x27;DATABASE&#x27;, dbMetadata);
+    }
+  }
+
+  /**
+   * @description Authentication flow logging for security audit trail
+   * @param {string} action - The authentication action (LOGIN, LOGOUT, MFA, REFRESH)
+   * @param {string} status - The operation status (START, SUCCESS, FAILURE)
+   * @param {Record&lt;string, unknown&gt;} [metadata] - Additional security-related metadata
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the created log entry
+   * @since October 2, 2025
+   * @lastModified October 2, 2025
+   * @federalCompliance Required for security audit trails
+   */
+  public logAuthFlow(
+    action: &#x27;LOGIN&#x27; | &#x27;LOGOUT&#x27; | &#x27;MFA&#x27; | &#x27;REFRESH&#x27;,
+    status: &#x27;START&#x27; | &#x27;SUCCESS&#x27; | &#x27;FAILURE&#x27;,
+    metadata?: Record&lt;string, unknown&gt;
+  ): Observable&lt;LogEntry&gt; {
+    const authMetadata &#x3D; {
+      ...metadata,
+      authAction: action,
+      status,
+      sessionId: this.sessionId
+    };
+
+    const message &#x3D; &#x60;Authentication ${action}: ${status}&#x60;;
+    
+    switch (status) {
+      case &#x27;START&#x27;:
+        return this.info(message, &#x27;AUTH&#x27;, authMetadata);
+      case &#x27;SUCCESS&#x27;:
+        return this.info(message, &#x27;AUTH&#x27;, authMetadata);
+      case &#x27;FAILURE&#x27;:
+        return this.warn(message, &#x27;AUTH&#x27;, authMetadata);
+      default:
+        return this.info(message, &#x27;AUTH&#x27;, authMetadata);
+    }
+  }
+
+  /**
+   * @description Audit logging for compliance and security with comprehensive tracking of resource changes
+   * @param {string} action - The action being performed (CREATE, UPDATE, DELETE, ACCESS, etc.)
+   * @param {string} resource - The resource being acted upon (user, document, configuration, etc.)
+   * @param {unknown} previousValue - Optional previous value before the change
+   * @param {unknown} newValue - Optional new value after the change
+   * @param {Record&lt;string, unknown&gt;} metadata - Optional additional metadata for the audit entry
+   * @returns {Observable&lt;AuditEntry&gt;} Observable containing the created audit entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for audit trail documentation
+   */
+  public audit(
+    action: string,
+    resource: string,
+    previousValue?: unknown,
+    newValue?: unknown,
+    metadata?: Record&lt;string, unknown&gt;
+  ): Observable&lt;AuditEntry&gt; {
+    const auditEntry: AuditEntry &#x3D; {
+      id: this.generateId(),
+      timestamp: new Date(),
+      level: &#x27;AUDIT&#x27;,
+      message: &#x60;AUDIT: ${action} on ${resource}&#x60;,
+      category: &#x27;AUDIT&#x27;,
+      operation: action,
+      userId: this.userId,
+      sessionId: this.sessionId,
+      action,
+      resource,
+      previousValue,
+      newValue,
+      ipAddress: this.getClientIP(),
+      userAgent: navigator.userAgent,
+      metadata
+    };
+
+    // Add to audit log
+    const currentAuditLogs &#x3D; this.auditSubject$.value;
+    this.auditSubject$.next([...currentAuditLogs, auditEntry]);
+
+    // Also add to regular logs
+    this.addToLogs(auditEntry);
+
+    console.log(&#x27;AUDIT:&#x27;, auditEntry);
+
+    return new BehaviorSubject(auditEntry).pipe(
+      shareReplay(1),
+      takeUntil(this.destroy$)
+    );
+  }
+
+  /**
+   * @description Performance timing - start tracking an operation for performance monitoring
+   * @param {string} operationName - The unique name of the operation being timed
+   * @returns {void} No return value
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for performance monitoring documentation
+   */
+  public startTiming(operationName: string): void {
+    const currentPerf &#x3D; this.performanceSubject$.value;
+    currentPerf.set(&#x60;${operationName}_start&#x60;, Date.now());
+    this.performanceSubject$.next(new Map(currentPerf));
+    
+    this.debug(&#x60;Started timing: ${operationName}&#x60;, &#x27;PERFORMANCE&#x27;);
+  }
+
+  /**
+   * @description Performance timing - end tracking and log duration for comprehensive performance analysis
+   * @param {string} operationName - The unique name of the operation being timed (must match startTiming call)
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the performance log entry with duration metrics
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for performance monitoring documentation
+   */
+  public endTiming(operationName: string): Observable&lt;LogEntry&gt; {
+    const currentPerf &#x3D; this.performanceSubject$.value;
+    const startTime &#x3D; currentPerf.get(&#x60;${operationName}_start&#x60;);
+    
+    if (startTime) {
+      const duration &#x3D; Date.now() - startTime;
+      currentPerf.delete(&#x60;${operationName}_start&#x60;);
+      this.performanceSubject$.next(new Map(currentPerf));
+      
+      return this.info(
+        &#x60;Operation completed: ${operationName}&#x60;,
+        &#x27;PERFORMANCE&#x27;,
+        { duration, operationName }
+      );
+    }
+    
+    return this.warn(
+      &#x60;Timing not found for operation: ${operationName}&#x60;,
+      &#x27;PERFORMANCE&#x27;
+    );
+  }
+
+  /**
+   * @description Get logs filtered by specific severity level for targeted log analysis
+   * @param {LogLevel} level - The log level to filter by (DEBUG, INFO, WARN, ERROR, FATAL)
+   * @returns {Observable&lt;LogEntry[]&gt;} Observable array of log entries matching the specified level
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for log filtering documentation
+   */
+  public getLogsByLevel(level: LogLevel): Observable&lt;LogEntry[]&gt; {
+    return this.logs$.pipe(
+      map((logs: LogEntry[]) &#x3D;&gt; logs.filter(log &#x3D;&gt; log.level &#x3D;&#x3D;&#x3D; level))
+    );
+  }
+
+  /**
+   * @description Get logs filtered by specific category for targeted operational analysis
+   * @param {string} category - The log category to filter by (GENERAL, AUTH, PERFORMANCE, SYSTEM, etc.)
+   * @returns {Observable&lt;LogEntry[]&gt;} Observable array of log entries matching the specified category
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for log categorization documentation
+   */
+  public getLogsByCategory(category: string): Observable&lt;LogEntry[]&gt; {
+    return this.logs$.pipe(
+      map((logs: LogEntry[]) &#x3D;&gt; logs.filter(log &#x3D;&gt; log.category &#x3D;&#x3D;&#x3D; category))
+    );
+  }
+
+  /**
+   * @description Export logs for external analysis and compliance reporting with optional date range filtering
+   * @param {Date} startDate - Optional start date for log filtering (inclusive)
+   * @param {Date} endDate - Optional end date for log filtering (inclusive)
+   * @returns {Observable&lt;LogEntry[]&gt;} Observable array of log entries within the specified date range
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for log export and audit documentation
+   */
+  public exportLogs(startDate?: Date, endDate?: Date): Observable&lt;LogEntry[]&gt; {
+    return this.logs$.pipe(
+      map((logs: LogEntry[]) &#x3D;&gt; {
+        if (!startDate &amp;&amp; !endDate) return logs;
+        
+        return logs.filter(log &#x3D;&gt; {
+          const logTime &#x3D; log.timestamp.getTime();
+          const afterStart &#x3D; !startDate || logTime &gt;&#x3D; startDate.getTime();
+          const beforeEnd &#x3D; !endDate || logTime &lt;&#x3D; endDate.getTime();
+          return afterStart &amp;&amp; beforeEnd;
+        });
+      })
+    );
+  }
+
+  /**
+   * @description Clear logs for maintenance purposes while retaining audit logs for compliance
+   * @returns {void} No return value
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for log maintenance documentation
+   */
+  public clearLogs(): void {
+    this.logsSubject$.next([]);
+    this.info(&#x27;Logs cleared&#x27;, &#x27;SYSTEM&#x27;);
+  }
+
+  /**
+   * Core logging method (basic version for backward compatibility)
+   */
+  private logBasic(
+    level: LogLevel,
+    message: string,
+    category: string,
+    metadata?: Record&lt;string, unknown&gt;,
+    operation?: string,
+    stackTrace?: string
+  ): Observable&lt;LogEntry&gt; {
+    return this.log(level, message, category, metadata, operation, stackTrace);
+  }
+
+  private addToLogs(entry: LogEntry): void {
+    const currentLogs &#x3D; this.logsSubject$.value;
+    // Keep only last 1000 entries for performance
+    const newLogs &#x3D; [...currentLogs, entry].slice(-1000);
+    this.logsSubject$.next(newLogs);
+    
+    // Console output with color coding
+    this.outputToConsole(entry);
+  }
+
+  private outputToConsole(entry: LogEntry): void {
+    const timestamp &#x3D; entry.timestamp.toISOString();
+    const prefix &#x3D; &#x60;[${timestamp}] [${entry.level}] [${entry.category}]&#x60;;
+    
+    switch (entry.level) {
+      case &#x27;DEBUG&#x27;:
+        console.debug(prefix, entry.message, entry.metadata);
+        break;
+      case &#x27;INFO&#x27;:
+        console.info(prefix, entry.message, entry.metadata);
+        break;
+      case &#x27;WARN&#x27;:
+        console.warn(prefix, entry.message, entry.metadata);
+        break;
+      case &#x27;ERROR&#x27;:
+      case &#x27;FATAL&#x27;:
+        console.error(prefix, entry.message, entry.metadata, entry.stackTrace);
+        break;
+      case &#x27;AUDIT&#x27;:
+        console.log(&#x27;%c&#x27; + prefix, &#x27;color: purple; font-weight: bold;&#x27;, entry.message, entry.metadata);
+        break;
+    }
+  }
+
+  private generateId(): string {
+    return &#x60;log_${Date.now()}_${Math.random().toString(36).substr(2, 9)}&#x60;;
+  }
+
+  private generateSessionId(): string {
+    return &#x60;session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}&#x60;;
+  }
+
+  private getClientIP(): string {
+    // In a real application, this would be provided by the backend
+    return &#x27;unknown&#x27;;
+  }
+
+  /**
+   * REAL-TIME ETA &amp; COMPLETION TRACKING
+   * Perfect for federal contracting accountability and transparency
+   */
+
+  /**
+   * @description Start a tracked operation with ETA calculation and comprehensive performance monitoring
+   * @param {string} operationName - The unique name of the operation being tracked
+   * @param {number} estimatedDurationMs - Expected duration in milliseconds for completion time estimation
+   * @param {string} phase - Optional phase identifier for multi-phase operations
+   * @param {string} milestone - Optional milestone marker for progress tracking
+   * @param {Record&lt;string, unknown&gt;} metadata - Optional additional metadata for the tracked operation
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the operation start log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for operation tracking documentation
+   */
+  public startTrackedOperation(
+    operationName: string,
+    estimatedDurationMs: number,
+    phase?: string,
+    milestone?: string,
+    metadata?: Record&lt;string, unknown&gt;
+  ): Observable&lt;LogEntry&gt; {
+    const startTime &#x3D; new Date();
+    const estimatedCompletionTime &#x3D; new Date(startTime.getTime() + estimatedDurationMs);
+    
+    const trackingMetadata &#x3D; {
+      ...metadata,
+      startTime: startTime.toISOString(),
+      estimatedDuration: estimatedDurationMs,
+      operationType: &#x27;START_TRACKED&#x27;
+    };
+
+    return this.log(&#x27;INFO&#x27;, &#x60;Starting tracked operation: ${operationName}&#x60;, &#x27;TRACKING&#x27;, trackingMetadata, operationName, undefined, estimatedCompletionTime, undefined, undefined, 0, phase, milestone);
+  }
+
+  /**
+   * @description Update progress of a tracked operation with percentage completion and status messaging
+   * @param {string} operationName - The unique name of the operation being tracked
+   * @param {number} progress - Progress percentage (0-100) indicating completion status
+   * @param {string} message - Optional progress message for detailed status reporting
+   * @param {Record&lt;string, unknown&gt;} metadata - Optional additional metadata for the progress update
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the progress update log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for progress tracking documentation
+   */
+  public updateProgress(
+    operationName: string,
+    progress: number,
+    message?: string,
+    metadata?: Record&lt;string, unknown&gt;
+  ): Observable&lt;LogEntry&gt; {
+    const progressMetadata &#x3D; {
+      ...metadata,
+      operationType: &#x27;PROGRESS_UPDATE&#x27;,
+      progressPercentage: progress
+    };
+
+    const logMessage &#x3D; message || &#x60;Progress update for ${operationName}: ${progress}%&#x60;;
+    
+    return this.log(&#x27;INFO&#x27;, logMessage, &#x27;TRACKING&#x27;, progressMetadata, operationName, undefined, undefined, undefined, undefined, progress);
+  }
+
+  /**
+   * @description Complete a tracked operation with actual completion time and duration analysis for performance metrics
+   * @param {string} operationName - The unique name of the operation being completed
+   * @param {Date} startTime - The original start time of the operation for duration calculation
+   * @param {boolean} success - Whether the operation completed successfully (default: true)
+   * @param {string} actualResults - Optional description of the actual operation results
+   * @param {Record&lt;string, unknown&gt;} metadata - Optional additional metadata for the completion record
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the operation completion log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for operation completion documentation
+   */
+  public completeTrackedOperation(
+    operationName: string,
+    startTime: Date,
+    success &#x3D; true,
+    actualResults?: string,
+    metadata?: Record&lt;string, unknown&gt;
+  ): Observable&lt;LogEntry&gt; {
+    const completedAt &#x3D; new Date();
+    const duration &#x3D; completedAt.getTime() - startTime.getTime();
+    
+    const completionMetadata &#x3D; {
+      ...metadata,
+      operationType: &#x27;COMPLETION&#x27;,
+      success,
+      actualResults,
+      plannedVsActual: {
+        duration: &#x60;${duration}ms&#x60;,
+        completedAt: completedAt.toISOString()
+      }
+    };
+
+    const logMessage &#x3D; success 
+      ? &#x60;✅ Successfully completed: ${operationName} (${duration}ms)&#x60;
+      : &#x60;❌ Failed to complete: ${operationName} (${duration}ms)&#x60;;
+    
+    return this.log(success ? &#x27;INFO&#x27; : &#x27;ERROR&#x27;, logMessage, &#x27;TRACKING&#x27;, completionMetadata, operationName, undefined, undefined, completedAt, duration, 100);
+  }
+
+  /**
+   * @description Log phase completion with achievements tracking and next phase preparation for project milestone documentation
+   * @param {string} phaseName - The name of the completed phase (e.g., &quot;Phase 1 Foundation&quot;)
+   * @param {Date} startDate - The original start date of the phase for duration calculation
+   * @param {string[]} achievements - Array of key achievements accomplished in this phase
+   * @param {string} nextPhase - Optional name of the next phase to be started
+   * @param {Record&lt;string, unknown&gt;} metadata - Optional additional metadata for the phase completion
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the phase completion log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for phase milestone documentation
+   */
+  public logPhaseCompletion(
+    phaseName: string,
+    startDate: Date,
+    achievements: string[],
+    nextPhase?: string,
+    metadata?: Record&lt;string, unknown&gt;
+  ): Observable&lt;LogEntry&gt; {
+    const completedAt &#x3D; new Date();
+    const duration &#x3D; completedAt.getTime() - startDate.getTime();
+    
+    const phaseMetadata &#x3D; {
+      ...metadata,
+      phaseType: &#x27;COMPLETION&#x27;,
+      achievements,
+      nextPhase,
+      phaseDuration: &#x60;${Math.round(duration / (1000 * 60 * 60 * 24))} days&#x60;,
+      completedAt: completedAt.toISOString()
+    };
+
+    return this.log(&#x27;AUDIT&#x27;, &#x60;🎯 PHASE COMPLETE: ${phaseName}&#x60;, &#x27;PHASE_TRACKING&#x27;, phaseMetadata, &#x60;PHASE_${phaseName.toUpperCase()}&#x60;, undefined, undefined, completedAt, duration, 100, phaseName);
+  }
+
+  /**
+   * @description Enhanced log method with ETA and completion tracking for comprehensive audit trail creation
+   * @param {LogLevel} level - The severity level of the log entry (DEBUG, INFO, WARN, ERROR, FATAL)
+   * @param {string} message - The log message content
+   * @param {string} category - The category classification for the log entry
+   * @param {Record&lt;string, unknown&gt;} metadata - Optional additional metadata for the log entry
+   * @param {string} operation - Optional operation identifier for tracking
+   * @param {string} stackTrace - Optional stack trace for error logging
+   * @param {Date} eta - Optional estimated time of arrival for completion
+   * @param {Date} completedAt - Optional completion timestamp for finished operations
+   * @param {number} duration - Optional operation duration in milliseconds
+   * @param {number} progress - Optional progress percentage (0-100)
+   * @param {string} phase - Optional phase identifier for multi-phase operations
+   * @param {string} milestone - Optional milestone marker for progress tracking
+   * @returns {Observable&lt;LogEntry&gt;} Observable containing the created log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for comprehensive logging documentation
+   */
+  public log(
+    level: LogLevel,
+    message: string,
+    category: string,
+    metadata?: Record&lt;string, unknown&gt;,
+    operation?: string,
+    stackTrace?: string,
+    eta?: Date,
+    completedAt?: Date,
+    duration?: number,
+    progress?: number,
+    phase?: string,
+    milestone?: string
+  ): Observable&lt;LogEntry&gt; {
+    const entry: LogEntry &#x3D; {
+      id: this.generateId(),
+      timestamp: new Date(),
+      level,
+      message,
+      category,
+      metadata,
+      operation,
+      userId: this.userId,
+      sessionId: this.sessionId,
+      stackTrace,
+      eta,
+      completedAt,
+      duration,
+      progress,
+      phase,
+      milestone
+    };
+
+    this.addToLogs(entry);
+    
+    return new BehaviorSubject(entry).pipe(
+      shareReplay(1),
+      takeUntil(this.destroy$)
+    );
+  }
+
+  /**
+   * @description Angular lifecycle hook for component destruction - performs cleanup and resource deallocation
+   * @returns {void} No return value
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for lifecycle management documentation
+   */
+  public ngOnDestroy(): void {
+    this.info(&#x27;LoggingService shutting down&#x27;, &#x27;SYSTEM&#x27;);
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+}</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuditEntry.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<mat-toolbar color="primary" class="tactical-header">
+  <div class="logo">
+    <a routerLink="/home">
+      <img src="assets/logo.png" alt="True North Insights Logo" />
+      <span>True North Insights</span>
+    </a>
+  </div>
+
+  <div class="navigation-links">
+    <a mat-button routerLink="/home" routerLinkActive="active-link">Home</a>
+    <a mat-button routerLink="/about" routerLinkActive="active-link">About</a>
+    <a mat-button routerLink="/services" routerLinkActive="active-link">Services</a>
+    <a mat-button routerLink="/blog" routerLinkActive="active-link">Blog</a>
+    <a mat-button routerLink="/contact" routerLinkActive="active-link">Contact</a>
+    <a mat-button routerLink="/development" routerLinkActive="active-link">Development</a>
+    <button mat-button [matMenuTriggerFor]="docsMenu">
+      <mat-icon>description</mat-icon>
+      <span>Docs</span>
+    </button>
+    <mat-menu #docsMenu="matMenu">
+      <a mat-menu-item routerLink="/swagger">
+        <mat-icon>api</mat-icon>
+        <span>Backend API</span>
+      </a>
+      <a mat-menu-item href="http://localhost:4201" target="_blank" rel="noopener noreferrer">
+        <mat-icon>code</mat-icon>
+        <span>Frontend Code</span>
+      </a>
+    </mat-menu>
+  </div>
+
+  <div class="header-actions">
+    <button mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+

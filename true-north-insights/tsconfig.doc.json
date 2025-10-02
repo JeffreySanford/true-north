@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["frontend/src/**/*.ts"],
+  "exclude": ["frontend/src/**/*.spec.ts"],
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": []
+  },
+  "compodocOptions": {
+    "output": "dist/compodoc/frontend",
+    "theme": "bootstrap",
+    "serve": true,
+    "port": 4201,
+    "open": true,
+    "watch": true,
+    "name": "True North Insights - Frontend Documentation",
+    "documentationMainName": "Frontend Documentation",
+    "hideGenerator": true,
+    "disableCoverage": false,
+    "coverageTest": 70,
+    "coverageTestPerFile": true
+  }
+}

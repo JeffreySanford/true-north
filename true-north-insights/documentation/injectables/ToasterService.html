@@ -1,0 +1,2293 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@true-north-insights-workspace/source documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">@true-north-insights-workspace/source documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >ToasterService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>frontend/src/app/shared/ui-services/toaster.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#messages$" >messages$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#messagesSubject$" >messagesSubject$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#tacticalColors" >tacticalColors</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#clearAll" >clearAll</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#generateId" >generateId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getHistory" >getHistory</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onModuleDestroy" >onModuleDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#show" >show</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showAuthFlow" >showAuthFlow</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showDatabaseOperation" >showDatabaseOperation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showError" >showError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showInfo" >showInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showProgress" >showProgress</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showStepProgress" >showStepProgress</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showSuccess" >showSuccess</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showTactical" >showTactical</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showWarning" >showWarning</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(snackBar: MatSnackBar)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:51</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The injected Material snack bar service for displaying notifications</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearAll"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>clearAll</b></span>
+                        <a href="#clearAll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>clearAll()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>No return value</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generateId"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>generateId</b></span>
+                        <a href="#generateId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>generateId()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="315"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:315</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Unique string identifier with timestamp and random suffix</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getHistory"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getHistory</b></span>
+                        <a href="#getHistory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getHistory()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="240"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:240</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing array of all toaster messages</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="333"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:333</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>No return value</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onModuleDestroy"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>onModuleDestroy</b></span>
+                        <a href="#onModuleDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onModuleDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="323"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:323</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>No return value</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="show"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>show</b></span>
+                        <a href="#show"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>show(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, type: <a href="../undefineds/ToasterType.html" target="_self">ToasterType</a>, options: <a href="../interfaces/ToasterConfig.html" target="_self">Partial&lt;ToasterConfig&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="251"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:251</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The message text to display in the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ToasterType" target="_self" >ToasterType</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The type of notification (success, error, warning, info, progress, tactical)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>options</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ToasterConfig.html" target="_self" >Partial&lt;ToasterConfig&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>{}</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Optional configuration options for the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showAuthFlow"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showAuthFlow</b></span>
+                        <a href="#showAuthFlow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showAuthFlow(step: "LOGIN" | "MFA" | "REFRESH" | "LOGOUT", status: "START" | "SUCCESS" | "ERROR", details?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="200"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:200</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>step</td>
+                                            <td>
+                                                        <code>&quot;LOGIN&quot; | &quot;MFA&quot; | &quot;REFRESH&quot; | &quot;LOGOUT&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The authentication step being performed (LOGIN, MFA, REFRESH, LOGOUT)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                        <code>&quot;START&quot; | &quot;SUCCESS&quot; | &quot;ERROR&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The current status of the authentication step (START, SUCCESS, ERROR)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>details</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Optional additional details about the authentication operation</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showDatabaseOperation"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showDatabaseOperation</b></span>
+                        <a href="#showDatabaseOperation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showDatabaseOperation(operation: "CREATE" | "READ" | "UPDATE" | "DELETE", entity: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, status: "START" | "SUCCESS" | "ERROR", details?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>operation</td>
+                                            <td>
+                                                        <code>&quot;CREATE&quot; | &quot;READ&quot; | &quot;UPDATE&quot; | &quot;DELETE&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The database operation type (CREATE, READ, UPDATE, DELETE)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>entity</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The name of the entity being operated on</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                        <code>&quot;START&quot; | &quot;SUCCESS&quot; | &quot;ERROR&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The current status of the operation (START, SUCCESS, ERROR)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>details</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Optional additional details about the operation</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showError"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showError</b></span>
+                        <a href="#showError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showError(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, action?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, persistent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The error message to display in the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>action</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Optional action button text for the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>persistent</td>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>false</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Whether the notification should persist until manually dismissed (default: false)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showInfo</b></span>
+                        <a href="#showInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showInfo(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, action?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, duration: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The informational message to display in the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>action</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Optional action button text for the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>duration</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>4000</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Duration in milliseconds before auto-dismiss (default: 4000)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showProgress"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showProgress</b></span>
+                        <a href="#showProgress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showProgress(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, persistent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The progress message to display in the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>persistent</td>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>true</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Whether the notification should persist until manually dismissed (default: true)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showStepProgress"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showStepProgress</b></span>
+                        <a href="#showStepProgress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showStepProgress(operationName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, currentStep: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, totalSteps: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, stepDescription: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>operationName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The name of the operation being tracked</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>currentStep</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The current step number in the operation</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>totalSteps</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The total number of steps in the operation</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>stepDescription</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Description of the current step being performed</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showSuccess"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showSuccess</b></span>
+                        <a href="#showSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showSuccess(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, action?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, duration: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The message to display in the success notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>action</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Optional action button text for the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>duration</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>4000</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Duration in milliseconds before auto-dismiss (default: 4000)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showTactical"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showTactical</b></span>
+                        <a href="#showTactical"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showTactical(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, action?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, duration: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:126</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The tactical message to display in the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>action</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Optional action button text for the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>duration</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>5000</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Duration in milliseconds before auto-dismiss (default: 5000)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showWarning"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showWarning</b></span>
+                        <a href="#showWarning"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showWarning(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, action?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, duration: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The warning message to display in the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>action</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Optional action button text for the notification</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>duration</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>6000</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Duration in milliseconds before auto-dismiss (default: 6000)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ToasterMessage.html" target="_self" >Observable&lt;ToasterMessage&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable containing the created toaster message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messages$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>messages$</b></span>
+                        <a href="#messages$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.messagesSubject$.pipe(
+    shareReplay(1),
+    takeUntil(this.destroy$)
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messagesSubject$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>messagesSubject$</b></span>
+                        <a href="#messagesSubject$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;ToasterMessage[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tacticalColors"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>tacticalColors</b></span>
+                        <a href="#tacticalColors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    success: &#x27;tactical-success&#x27;,
+    error: &#x27;tactical-error&#x27;, 
+    warning: &#x27;tactical-warning&#x27;,
+    info: &#x27;tactical-info&#x27;,
+    progress: &#x27;tactical-progress&#x27;,
+    tactical: &#x27;tactical-primary&#x27;
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">frontend/src/app/shared/ui-services/toaster.service.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, OnDestroy } from &#x27;@angular/core&#x27;;
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from &#x27;@angular/material/snack-bar&#x27;;
+import { BehaviorSubject, Subject, Observable } from &#x27;rxjs&#x27;;
+import { shareReplay, takeUntil, tap } from &#x27;rxjs/operators&#x27;;
+
+export interface ToasterMessage {
+  readonly id: string;
+  readonly message: string;
+  readonly type: ToasterType;
+  readonly timestamp: Date;
+  readonly duration?: number;
+  readonly action?: string;
+  readonly persistent?: boolean;
+}
+
+export type ToasterType &#x3D; &#x27;success&#x27; | &#x27;error&#x27; | &#x27;warning&#x27; | &#x27;info&#x27; | &#x27;progress&#x27; | &#x27;tactical&#x27;;
+
+export interface ToasterConfig extends MatSnackBarConfig {
+  readonly type?: ToasterType;
+  readonly persistent?: boolean;
+  readonly showTimestamp?: boolean;
+  readonly action?: string;
+}
+
+/**
+ * @description Traditional Angular toaster service with Material 3 Expressive design and tactical color schemes for federal compliance notifications
+ * @author Development Team
+ * @since 2025-10-02
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class ToasterService implements OnDestroy {
+  private readonly destroy$ &#x3D; new Subject&lt;void&gt;();
+  private readonly messagesSubject$ &#x3D; new BehaviorSubject&lt;ToasterMessage[]&gt;([]);
+  
+  // Hot observable for message history
+  public readonly messages$ &#x3D; this.messagesSubject$.pipe(
+    shareReplay(1),
+    takeUntil(this.destroy$)
+  );
+  
+  // Tactical color scheme for Material 3 Expressive
+  private readonly tacticalColors &#x3D; {
+    success: &#x27;tactical-success&#x27;,
+    error: &#x27;tactical-error&#x27;, 
+    warning: &#x27;tactical-warning&#x27;,
+    info: &#x27;tactical-info&#x27;,
+    progress: &#x27;tactical-progress&#x27;,
+    tactical: &#x27;tactical-primary&#x27;
+  };
+
+  /**
+   * @description Constructor for ToasterService - initializes the service with required dependencies
+   * @param {MatSnackBar} snackBar - The injected Material snack bar service for displaying notifications
+   * @author True North Development Team
+   * @since October 2, 2025
+   */
+  constructor(private readonly snackBar: MatSnackBar) {}
+
+  /**
+   * @description Display success notification with tactical green theme
+   * @param {string} message - The message to display in the success notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 4000)
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  public showSuccess(message: string, action?: string, duration &#x3D; 4000): Observable&lt;ToasterMessage&gt; {
+    return this.show(message, &#x27;success&#x27;, { action, duration });
+  }
+
+  /**
+   * @description Display error notification with tactical red theme
+   * @param {string} message - The error message to display in the notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {boolean} [persistent] - Whether the notification should persist until manually dismissed (default: false)
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  public showError(message: string, action?: string, persistent &#x3D; false): Observable&lt;ToasterMessage&gt; {
+    return this.show(message, &#x27;error&#x27;, { 
+      action, 
+      persistent, 
+      duration: persistent ? 0 : 8000 
+    });
+  }
+
+  /**
+   * @description Display warning notification with tactical amber theme
+   * @param {string} message - The warning message to display in the notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 6000)
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  public showWarning(message: string, action?: string, duration &#x3D; 6000): Observable&lt;ToasterMessage&gt; {
+    return this.show(message, &#x27;warning&#x27;, { action, duration });
+  }
+
+  /**
+   * @description Display info notification with tactical blue theme
+   * @param {string} message - The informational message to display in the notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 4000)
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  public showInfo(message: string, action?: string, duration &#x3D; 4000): Observable&lt;ToasterMessage&gt; {
+    return this.show(message, &#x27;info&#x27;, { action, duration });
+  }
+
+  /**
+   * @description Display progress notification for long-running operations
+   * @param {string} message - The progress message to display in the notification
+   * @param {boolean} [persistent] - Whether the notification should persist until manually dismissed (default: true)
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  public showProgress(message: string, persistent &#x3D; true): Observable&lt;ToasterMessage&gt; {
+    return this.show(message, &#x27;progress&#x27;, { persistent, duration: 0 });
+  }
+
+  /**
+   * @description Display tactical notification with special military-grade styling
+   * @param {string} message - The tactical message to display in the notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 5000)
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  public showTactical(message: string, action?: string, duration &#x3D; 5000): Observable&lt;ToasterMessage&gt; {
+    return this.show(message, &#x27;tactical&#x27;, { action, duration });
+  }
+
+  /**
+   * @description Step-by-step operation notifications with audit logging
+   * @param {string} operationName - The name of the operation being tracked
+   * @param {number} currentStep - The current step number in the operation
+   * @param {number} totalSteps - The total number of steps in the operation
+   * @param {string} stepDescription - Description of the current step being performed
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  public showStepProgress(
+    operationName: string, 
+    currentStep: number, 
+    totalSteps: number, 
+    stepDescription: string
+  ): Observable&lt;ToasterMessage&gt; {
+    const progressMessage &#x3D; &#x60;${operationName}: Step ${currentStep}/${totalSteps} - ${stepDescription}&#x60;;
+    
+    return this.show(progressMessage, &#x27;progress&#x27;, {
+      persistent: currentStep &lt; totalSteps,
+      duration: currentStep &#x3D;&#x3D;&#x3D; totalSteps ? 3000 : 0,
+      showTimestamp: true
+    }).pipe(
+      tap((message: ToasterMessage) &#x3D;&gt; {
+        // Audit logging integration point
+        console.log(&#x27;STEP_PROGRESS:&#x27;, {
+          operation: operationName,
+          step: currentStep,
+          total: totalSteps,
+          description: stepDescription,
+          messageId: message.id,
+          timestamp: message.timestamp
+        });
+      })
+    );
+  }
+
+  /**
+   * @description Database operation notifications for CRUD operations
+   * @param {string} operation - The database operation type (CREATE, READ, UPDATE, DELETE)
+   * @param {string} entity - The name of the entity being operated on
+   * @param {string} status - The current status of the operation (START, SUCCESS, ERROR)
+   * @param {string} [details] - Optional additional details about the operation
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  public showDatabaseOperation(
+    operation: &#x27;CREATE&#x27; | &#x27;READ&#x27; | &#x27;UPDATE&#x27; | &#x27;DELETE&#x27;,
+    entity: string,
+    status: &#x27;START&#x27; | &#x27;SUCCESS&#x27; | &#x27;ERROR&#x27;,
+    details?: string
+  ): Observable&lt;ToasterMessage&gt; {
+    const message &#x3D; &#x60;${operation} ${entity}: ${status}${details ? &#x60; - ${details}&#x60; : &#x27;&#x27;}&#x60;;
+    
+    switch (status) {
+      case &#x27;START&#x27;:
+        return this.showProgress(&#x60;Starting ${operation.toLowerCase()} operation on ${entity}...&#x60;);
+      case &#x27;SUCCESS&#x27;:
+        return this.showSuccess(&#x60;${operation} ${entity} completed successfully&#x60;);
+      case &#x27;ERROR&#x27;:
+        return this.showError(&#x60;${operation} ${entity} failed${details ? &#x60;: ${details}&#x60; : &#x27;&#x27;}&#x60;, &#x27;RETRY&#x27;, true);
+      default:
+        return this.showInfo(message);
+    }
+  }
+
+  /**
+   * @description Authentication flow notifications for login, MFA, refresh, and logout operations
+   * @param {string} step - The authentication step being performed (LOGIN, MFA, REFRESH, LOGOUT)
+   * @param {string} status - The current status of the authentication step (START, SUCCESS, ERROR)
+   * @param {string} [details] - Optional additional details about the authentication operation
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  public showAuthFlow(
+    step: &#x27;LOGIN&#x27; | &#x27;MFA&#x27; | &#x27;REFRESH&#x27; | &#x27;LOGOUT&#x27;,
+    status: &#x27;START&#x27; | &#x27;SUCCESS&#x27; | &#x27;ERROR&#x27;,
+    details?: string
+  ): Observable&lt;ToasterMessage&gt; {
+    const stepNames &#x3D; {
+      &#x27;LOGIN&#x27;: &#x27;Login&#x27;,
+      &#x27;MFA&#x27;: &#x27;Multi-Factor Authentication&#x27;,
+      &#x27;REFRESH&#x27;: &#x27;Token Refresh&#x27;, 
+      &#x27;LOGOUT&#x27;: &#x27;Logout&#x27;
+    };
+    
+    const stepName &#x3D; stepNames[step];
+    const message &#x3D; &#x60;${stepName}: ${status}${details ? &#x60; - ${details}&#x60; : &#x27;&#x27;}&#x60;;
+    
+    switch (status) {
+      case &#x27;START&#x27;:
+        return this.showProgress(&#x60;${stepName} in progress...&#x60;);
+      case &#x27;SUCCESS&#x27;:
+        return this.showTactical(&#x60;${stepName} successful&#x60;, &#x27;CONTINUE&#x27;);
+      case &#x27;ERROR&#x27;:
+        return this.showError(&#x60;${stepName} failed${details ? &#x60;: ${details}&#x60; : &#x27;&#x27;}&#x60;, &#x27;RETRY&#x27;, true);
+      default:
+        return this.showInfo(message);
+    }
+  }
+
+  /**
+   * @description Clear all notifications and dismiss any active snackbar
+   * @returns {void} No return value
+   */
+  public clearAll(): void {
+    this.snackBar.dismiss();
+    this.messagesSubject$.next([]);
+  }
+
+  /**
+   * @description Get notification history as an observable stream
+   * @returns {Observable&lt;ToasterMessage[]&gt;} Observable containing array of all toaster messages
+   */
+  public getHistory(): Observable&lt;ToasterMessage[]&gt; {
+    return this.messages$;
+  }
+
+  /**
+   * @description Core notification display method with Material 3 Expressive styling
+   * @param {string} message - The message text to display in the notification
+   * @param {ToasterType} type - The type of notification (success, error, warning, info, progress, tactical)
+   * @param {Partial&lt;ToasterConfig&gt;} [options] - Optional configuration options for the notification
+   * @returns {Observable&lt;ToasterMessage&gt;} Observable containing the created toaster message
+   */
+  private show(
+    message: string, 
+    type: ToasterType, 
+    options: Partial&lt;ToasterConfig&gt; &#x3D; {}
+  ): Observable&lt;ToasterMessage&gt; {
+    const toasterMessage: ToasterMessage &#x3D; {
+      id: this.generateId(),
+      message,
+      type,
+      timestamp: new Date(),
+      duration: options.duration,
+      action: options.action,
+      persistent: options.persistent
+    };
+
+    // Add to message history
+    const currentMessages &#x3D; this.messagesSubject$.value;
+    this.messagesSubject$.next([...currentMessages, toasterMessage]);
+
+    // Configure Material 3 Expressive styling
+    const config: MatSnackBarConfig &#x3D; {
+      duration: options.persistent ? 0 : (options.duration || 4000),
+      panelClass: [
+        &#x27;tactical-toaster&#x27;,
+        this.tacticalColors[type],
+        options.showTimestamp ? &#x27;with-timestamp&#x27; : &#x27;&#x27;
+      ].filter(Boolean),
+      verticalPosition: &#x27;top&#x27;,
+      horizontalPosition: &#x27;right&#x27;,
+      ...options
+    };
+
+    // Display with Material 3 Expressive design
+    const snackBarRef: MatSnackBarRef&lt;unknown&gt; &#x3D; this.snackBar.open(
+      options.showTimestamp 
+        ? &#x60;[${toasterMessage.timestamp.toLocaleTimeString()}] ${message}&#x60;
+        : message,
+      options.action,
+      config
+    );
+
+    // Handle action clicks
+    if (options.action) {
+      snackBarRef.onAction().pipe(
+        takeUntil(this.destroy$)
+      ).subscribe(() &#x3D;&gt; {
+        console.log(&#x27;TOASTER_ACTION:&#x27;, {
+          messageId: toasterMessage.id,
+          action: options.action,
+          timestamp: new Date()
+        });
+      });
+    }
+
+    return new BehaviorSubject(toasterMessage).pipe(
+      shareReplay(1),
+      takeUntil(this.destroy$)
+    );
+  }
+
+  /**
+   * @description Generate unique identifier for toaster messages
+   * @returns {string} Unique string identifier with timestamp and random suffix
+   */
+  private generateId(): string {
+    return &#x60;toaster_${Date.now()}_${Math.random().toString(36).substr(2, 9)}&#x60;;
+  }
+
+  /**
+   * @description Module destroy lifecycle hook - cleanup resources and dismiss notifications
+   * @returns {void} No return value
+   */
+  public onModuleDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.snackBar.dismiss();
+  }
+
+  /**
+   * @description Angular OnDestroy lifecycle hook - delegates to onModuleDestroy
+   * @returns {void} No return value
+   */
+  public ngOnDestroy(): void {
+    this.onModuleDestroy();
+  }
+}</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ToasterService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

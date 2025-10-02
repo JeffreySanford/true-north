@@ -1,0 +1,72 @@
+.tactical-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background-color: #1a237e;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 12px;
+}
+
+.logo span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navigation-links {
+  display: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.header-actions .mat-icon-button {
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .navigation-links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .navigation-links .mat-button {
+    color: #ffffff;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .navigation-links .mat-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .navigation-links .active-link {
+    border-bottom: 2px solid #ffffff;
+    border-radius: 0;
+  }
+}
