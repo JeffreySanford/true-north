@@ -2,32 +2,27 @@
   "name": "@true-north/holdings",
   "version": "1.0.0",
   "private": true,
-  "description": "Parent repository for True North Holdings multi-company portfolio",
+  "description": "Parent repository for True North Holdings software platform",
   "scripts": {
-    "bootstrap": "rush install && rush build",
-    "build:all": "rush rebuild",
-    "test:all": "rush test",
-    "lint:all": "rush lint",
-    "insights:dev": "cd true-north-insights && npm run serve",
-    "insights:build": "cd true-north-insights && npm run build",
-    "insights:test": "cd true-north-insights && npm run test",
-    "apparel:dev": "cd true-north-apparel && npm run dev",
-    "apparel:build": "cd true-north-apparel && npm run build",
-    "tea:dev": "cd true-north-tea && npm run dev",
-    "tea:build": "cd true-north-tea && npm run build"
+    "install:all": "cd true-north-insights && npm install",
+    "dev": "cd true-north-insights && npm run start:dev",
+    "serve": "cd true-north-insights && npm run serve",
+    "build": "cd true-north-insights && npm run build:prod",
+    "test": "cd true-north-insights && npm run test:all",
+    "lint": "cd true-north-insights && npm run lint:all",
+    "validate": "cd true-north-insights && npm run validate:draconian"
   },
   "devDependencies": {
-    "@microsoft/rush": "^5.118.0",
     "concurrently": "^8.2.2"
   },
   "engines": {
     "node": ">=20.19.0"
   },
   "keywords": [
-    "monorepo",
-    "rush",
-    "multi-company",
+    "nx",
+    "angular",
+    "nestjs",
     "true-north",
-    "holdings"
+    "insights"
   ]
 }

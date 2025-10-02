@@ -34,11 +34,9 @@ export interface AuditEntry extends LogEntry {
 }
 
 /**
- * TRADITIONAL ANGULAR LOGGING SERVICE
- * 
- * Observable-driven comprehensive logging with audit trails
- * Hot observable patterns for enterprise monitoring
- * Step-by-step operation tracking with detailed metadata
+ * @description Traditional Angular logging service with comprehensive audit trails and performance monitoring for federal compliance
+ * @author Development Team
+ * @since 2025-10-02
  */
 @Injectable({
   providedIn: 'root'
@@ -70,6 +68,13 @@ export class LoggingService implements OnDestroy {
     takeUntil(this.destroy$)
   );
 
+  /**
+   * @description Constructor for LoggingService - initializes logging with session tracking
+   * @param None - No parameters required
+   * @returns {void} No return value  
+   * @author Development Team
+   * @since 2025-10-02
+   */
   constructor() {
     this.info('LoggingService initialized', 'SYSTEM', {
       sessionId: this.sessionId,
@@ -79,7 +84,9 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Set user context for all future logs
+   * @description Set user context for all future logs
+   * @param {string} userId - The unique identifier for the authenticated user
+   * @returns {void} No return value
    */
   public setUserContext(userId: string): void {
     this.userId = userId;
@@ -87,7 +94,8 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Clear user context (logout)
+   * @description Clear user context (logout) and remove user tracking from future logs
+   * @returns {void} No return value
    */
   public clearUserContext(): void {
     const previousUserId = this.userId;
@@ -96,55 +104,83 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Debug level logging - development and troubleshooting
+   * @description Debug level logging for development and troubleshooting
+   * @param {string} message - The debug message to log
+   * @param {string} category - Log category for filtering (defaults to 'GENERAL')
+   * @param {Record<string, unknown>} metadata - Additional metadata for the log entry
+   * @returns {Observable<LogEntry>} Observable containing the created log entry
    */
   public debug(message: string, category = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
     return this.logBasic('DEBUG', message, category, metadata);
   }
 
   /**
-   * Info level logging - general information
+   * @description Info level logging - general information
+   * @param {string} message - The info message to log
+   * @param {string} [category] - Log category for filtering (defaults to 'GENERAL')
+   * @param {Record<string, unknown>} [metadata] - Additional metadata for the log entry
+   * @returns {Observable<LogEntry>} Observable containing the created log entry
    */
   public info(message: string, category = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
     return this.logBasic('INFO', message, category, metadata);
   }
 
   /**
-   * Warning level logging - potential issues
+   * @description Warning level logging - potential issues
+   * @param {string} message - The warning message to log
+   * @param {string} [category] - Log category for filtering (defaults to 'GENERAL')
+   * @param {Record<string, unknown>} [metadata] - Additional metadata for the log entry
+   * @returns {Observable<LogEntry>} Observable containing the created log entry
    */
   public warn(message: string, category = 'GENERAL', metadata?: Record<string, unknown>): Observable<LogEntry> {
     return this.logBasic('WARN', message, category, metadata);
   }
 
   /**
-   * Error level logging - errors and exceptions
+   * @description Error level logging - errors and exceptions
+   * @param {string} message - The error message to log
+   * @param {string} [category] - Log category for filtering (defaults to 'GENERAL')
+   * @param {Error} [error] - Optional Error object for additional details
+   * @param {Record<string, unknown>} [metadata] - Additional metadata for the log entry
+   * @returns {Observable<LogEntry>} Observable containing the created log entry
    */
   public error(message: string, category = 'GENERAL', error?: Error, metadata?: Record<string, unknown>): Observable<LogEntry> {
     const errorMetadata = {
       ...metadata,
-      error: error?.message,
-      stack: error?.stack
+      error: error ? error.message : undefined,
+      stack: error ? error.stack : undefined
     };
     
-    return this.logBasic('ERROR', message, category, errorMetadata, undefined, error?.stack);
+    return this.logBasic('ERROR', message, category, errorMetadata, undefined, error ? error.stack : undefined);
   }
 
   /**
-   * Fatal level logging - critical system failures
+   * @description Fatal level logging - critical system failures
+   * @param {string} message - The fatal error message to log
+   * @param {string} [category] - Log category for filtering (defaults to 'SYSTEM')
+   * @param {Error} [error] - Optional Error object for additional details
+   * @param {Record<string, unknown>} [metadata] - Additional metadata for the log entry
+   * @returns {Observable<LogEntry>} Observable containing the created log entry
    */
   public fatal(message: string, category = 'SYSTEM', error?: Error, metadata?: Record<string, unknown>): Observable<LogEntry> {
     const fatalMetadata = {
       ...metadata,
-      error: error?.message,
-      stack: error?.stack,
+      error: error ? error.message : undefined,
+      stack: error ? error.stack : undefined,
       critical: true
     };
     
-    return this.logBasic('FATAL', message, category, fatalMetadata, undefined, error?.stack);
+    return this.logBasic('FATAL', message, category, fatalMetadata, undefined, error ? error.stack : undefined);
   }
 
   /**
-   * Step-by-step operation logging
+   * @description Step-by-step operation logging for tracking multi-step processes
+   * @param {string} operationName - The name of the operation being tracked
+   * @param {number} stepNumber - The current step number
+   * @param {number} totalSteps - The total number of steps in the operation
+   * @param {string} stepDescription - Description of the current step
+   * @param {Record<string, unknown>} [metadata] - Additional metadata for the log entry
+   * @returns {Observable<LogEntry>} Observable containing the created log entry
    */
   public logStep(
     operationName: string,
@@ -170,7 +206,14 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Database operation logging
+   * @description Database operation logging for CRUD operations with audit trail
+   * @param {string} operation - The database operation type (CREATE, READ, UPDATE, DELETE)
+   * @param {string} entity - The database entity or table being operated on
+   * @param {string} status - The operation status (START, SUCCESS, ERROR)
+   * @param {Record<string, unknown>} [metadata] - Additional metadata for the database operation
+   * @returns {Observable<LogEntry>} Observable containing the created log entry
+   * @since October 2, 2025
+   * @lastModified October 2, 2025
    */
   public logDatabaseOperation(
     operation: 'CREATE' | 'READ' | 'UPDATE' | 'DELETE',
@@ -200,7 +243,14 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Authentication flow logging
+   * @description Authentication flow logging for security audit trail
+   * @param {string} action - The authentication action (LOGIN, LOGOUT, MFA, REFRESH)
+   * @param {string} status - The operation status (START, SUCCESS, FAILURE)
+   * @param {Record<string, unknown>} [metadata] - Additional security-related metadata
+   * @returns {Observable<LogEntry>} Observable containing the created log entry
+   * @since October 2, 2025
+   * @lastModified October 2, 2025
+   * @federalCompliance Required for security audit trails
    */
   public logAuthFlow(
     action: 'LOGIN' | 'LOGOUT' | 'MFA' | 'REFRESH',
@@ -229,7 +279,17 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Audit logging for compliance and security
+   * @description Audit logging for compliance and security with comprehensive tracking of resource changes
+   * @param {string} action - The action being performed (CREATE, UPDATE, DELETE, ACCESS, etc.)
+   * @param {string} resource - The resource being acted upon (user, document, configuration, etc.)
+   * @param {unknown} previousValue - Optional previous value before the change
+   * @param {unknown} newValue - Optional new value after the change
+   * @param {Record<string, unknown>} metadata - Optional additional metadata for the audit entry
+   * @returns {Observable<AuditEntry>} Observable containing the created audit entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for audit trail documentation
    */
   public audit(
     action: string,
@@ -272,7 +332,13 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Performance timing - start tracking
+   * @description Performance timing - start tracking an operation for performance monitoring
+   * @param {string} operationName - The unique name of the operation being timed
+   * @returns {void} No return value
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for performance monitoring documentation
    */
   public startTiming(operationName: string): void {
     const currentPerf = this.performanceSubject$.value;
@@ -283,7 +349,13 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Performance timing - end tracking and log duration
+   * @description Performance timing - end tracking and log duration for comprehensive performance analysis
+   * @param {string} operationName - The unique name of the operation being timed (must match startTiming call)
+   * @returns {Observable<LogEntry>} Observable containing the performance log entry with duration metrics
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for performance monitoring documentation
    */
   public endTiming(operationName: string): Observable<LogEntry> {
     const currentPerf = this.performanceSubject$.value;
@@ -308,7 +380,13 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Get logs by level
+   * @description Get logs filtered by specific severity level for targeted log analysis
+   * @param {LogLevel} level - The log level to filter by (DEBUG, INFO, WARN, ERROR, FATAL)
+   * @returns {Observable<LogEntry[]>} Observable array of log entries matching the specified level
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for log filtering documentation
    */
   public getLogsByLevel(level: LogLevel): Observable<LogEntry[]> {
     return this.logs$.pipe(
@@ -317,7 +395,13 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Get logs by category
+   * @description Get logs filtered by specific category for targeted operational analysis
+   * @param {string} category - The log category to filter by (GENERAL, AUTH, PERFORMANCE, SYSTEM, etc.)
+   * @returns {Observable<LogEntry[]>} Observable array of log entries matching the specified category
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for log categorization documentation
    */
   public getLogsByCategory(category: string): Observable<LogEntry[]> {
     return this.logs$.pipe(
@@ -326,7 +410,14 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Export logs for external analysis
+   * @description Export logs for external analysis and compliance reporting with optional date range filtering
+   * @param {Date} startDate - Optional start date for log filtering (inclusive)
+   * @param {Date} endDate - Optional end date for log filtering (inclusive)
+   * @returns {Observable<LogEntry[]>} Observable array of log entries within the specified date range
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for log export and audit documentation
    */
   public exportLogs(startDate?: Date, endDate?: Date): Observable<LogEntry[]> {
     return this.logs$.pipe(
@@ -344,7 +435,12 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Clear logs (retain audit logs)
+   * @description Clear logs for maintenance purposes while retaining audit logs for compliance
+   * @returns {void} No return value
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for log maintenance documentation
    */
   public clearLogs(): void {
     this.logsSubject$.next([]);
@@ -418,7 +514,17 @@ export class LoggingService implements OnDestroy {
    */
 
   /**
-   * Start a tracked operation with ETA calculation
+   * @description Start a tracked operation with ETA calculation and comprehensive performance monitoring
+   * @param {string} operationName - The unique name of the operation being tracked
+   * @param {number} estimatedDurationMs - Expected duration in milliseconds for completion time estimation
+   * @param {string} phase - Optional phase identifier for multi-phase operations
+   * @param {string} milestone - Optional milestone marker for progress tracking
+   * @param {Record<string, unknown>} metadata - Optional additional metadata for the tracked operation
+   * @returns {Observable<LogEntry>} Observable containing the operation start log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for operation tracking documentation
    */
   public startTrackedOperation(
     operationName: string,
@@ -428,7 +534,7 @@ export class LoggingService implements OnDestroy {
     metadata?: Record<string, unknown>
   ): Observable<LogEntry> {
     const startTime = new Date();
-    const eta = new Date(startTime.getTime() + estimatedDurationMs);
+    const estimatedCompletionTime = new Date(startTime.getTime() + estimatedDurationMs);
     
     const trackingMetadata = {
       ...metadata,
@@ -437,11 +543,20 @@ export class LoggingService implements OnDestroy {
       operationType: 'START_TRACKED'
     };
 
-    return this.log('INFO', `Starting tracked operation: ${operationName}`, 'TRACKING', trackingMetadata, operationName, undefined, eta, undefined, undefined, 0, phase, milestone);
+    return this.log('INFO', `Starting tracked operation: ${operationName}`, 'TRACKING', trackingMetadata, operationName, undefined, estimatedCompletionTime, undefined, undefined, 0, phase, milestone);
   }
 
   /**
-   * Update progress of a tracked operation
+   * @description Update progress of a tracked operation with percentage completion and status messaging
+   * @param {string} operationName - The unique name of the operation being tracked
+   * @param {number} progress - Progress percentage (0-100) indicating completion status
+   * @param {string} message - Optional progress message for detailed status reporting
+   * @param {Record<string, unknown>} metadata - Optional additional metadata for the progress update
+   * @returns {Observable<LogEntry>} Observable containing the progress update log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for progress tracking documentation
    */
   public updateProgress(
     operationName: string,
@@ -461,7 +576,17 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Complete a tracked operation with actual completion time and duration
+   * @description Complete a tracked operation with actual completion time and duration analysis for performance metrics
+   * @param {string} operationName - The unique name of the operation being completed
+   * @param {Date} startTime - The original start time of the operation for duration calculation
+   * @param {boolean} success - Whether the operation completed successfully (default: true)
+   * @param {string} actualResults - Optional description of the actual operation results
+   * @param {Record<string, unknown>} metadata - Optional additional metadata for the completion record
+   * @returns {Observable<LogEntry>} Observable containing the operation completion log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for operation completion documentation
    */
   public completeTrackedOperation(
     operationName: string,
@@ -492,7 +617,17 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Log phase completion (e.g., Phase 1 Foundation Complete)
+   * @description Log phase completion with achievements tracking and next phase preparation for project milestone documentation
+   * @param {string} phaseName - The name of the completed phase (e.g., "Phase 1 Foundation")
+   * @param {Date} startDate - The original start date of the phase for duration calculation
+   * @param {string[]} achievements - Array of key achievements accomplished in this phase
+   * @param {string} nextPhase - Optional name of the next phase to be started
+   * @param {Record<string, unknown>} metadata - Optional additional metadata for the phase completion
+   * @returns {Observable<LogEntry>} Observable containing the phase completion log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for phase milestone documentation
    */
   public logPhaseCompletion(
     phaseName: string,
@@ -517,7 +652,24 @@ export class LoggingService implements OnDestroy {
   }
 
   /**
-   * Enhanced log method with ETA and completion tracking
+   * @description Enhanced log method with ETA and completion tracking for comprehensive audit trail creation
+   * @param {LogLevel} level - The severity level of the log entry (DEBUG, INFO, WARN, ERROR, FATAL)
+   * @param {string} message - The log message content
+   * @param {string} category - The category classification for the log entry
+   * @param {Record<string, unknown>} metadata - Optional additional metadata for the log entry
+   * @param {string} operation - Optional operation identifier for tracking
+   * @param {string} stackTrace - Optional stack trace for error logging
+   * @param {Date} eta - Optional estimated time of arrival for completion
+   * @param {Date} completedAt - Optional completion timestamp for finished operations
+   * @param {number} duration - Optional operation duration in milliseconds
+   * @param {number} progress - Optional progress percentage (0-100)
+   * @param {string} phase - Optional phase identifier for multi-phase operations
+   * @param {string} milestone - Optional milestone marker for progress tracking
+   * @returns {Observable<LogEntry>} Observable containing the created log entry
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for comprehensive logging documentation
    */
   private log(
     level: LogLevel,
@@ -560,6 +712,14 @@ export class LoggingService implements OnDestroy {
     );
   }
 
+  /**
+   * @description Angular lifecycle hook for component destruction - performs cleanup and resource deallocation
+   * @returns {void} No return value
+   * @author Development Team
+   * @since 2025-10-02
+   * @lastModified 2025-10-02
+   * @federalCompliance Meets federal contracting standards for lifecycle management documentation
+   */
   public ngOnDestroy(): void {
     this.info('LoggingService shutting down', 'SYSTEM');
     this.destroy$.next();

@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, inject } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { shareReplay, takeUntil, tap } from 'rxjs/operators';
@@ -23,11 +23,9 @@ export interface ToasterConfig extends MatSnackBarConfig {
 }
 
 /**
- * TRADITIONAL ANGULAR TOASTER SERVICE
- * 
- * Material 3 Expressive design with tactical color schemes
- * Observable-driven notifications for enterprise UX
- * Hot observable patterns with auditTime for performance
+ * @description Traditional Angular toaster service with Material 3 Expressive design and tactical color schemes for federal compliance notifications
+ * @author Development Team
+ * @since 2025-10-02
  */
 @Injectable({
   providedIn: 'root'
@@ -52,17 +50,31 @@ export class ToasterService implements OnDestroy {
     tactical: 'tactical-primary'
   };
 
-  private readonly snackBar = inject(MatSnackBar);
+  /**
+   * @description Constructor for ToasterService - initializes the service with required dependencies
+   * @param {MatSnackBar} snackBar - The injected Material snack bar service for displaying notifications
+   * @author True North Development Team
+   * @since October 2, 2025
+   */
+  constructor(private readonly snackBar: MatSnackBar) {}
 
   /**
-   * Display success notification with tactical green theme
+   * @description Display success notification with tactical green theme
+   * @param {string} message - The message to display in the success notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 4000)
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showSuccess(message: string, action?: string, duration = 4000): Observable<ToasterMessage> {
     return this.show(message, 'success', { action, duration });
   }
 
   /**
-   * Display error notification with tactical red theme  
+   * @description Display error notification with tactical red theme
+   * @param {string} message - The error message to display in the notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {boolean} [persistent] - Whether the notification should persist until manually dismissed (default: false)
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showError(message: string, action?: string, persistent = false): Observable<ToasterMessage> {
     return this.show(message, 'error', { 
@@ -73,35 +85,55 @@ export class ToasterService implements OnDestroy {
   }
 
   /**
-   * Display warning notification with tactical amber theme
+   * @description Display warning notification with tactical amber theme
+   * @param {string} message - The warning message to display in the notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 6000)
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showWarning(message: string, action?: string, duration = 6000): Observable<ToasterMessage> {
     return this.show(message, 'warning', { action, duration });
   }
 
   /**
-   * Display info notification with tactical blue theme
+   * @description Display info notification with tactical blue theme
+   * @param {string} message - The informational message to display in the notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 4000)
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showInfo(message: string, action?: string, duration = 4000): Observable<ToasterMessage> {
     return this.show(message, 'info', { action, duration });
   }
 
   /**
-   * Display progress notification for long-running operations
+   * @description Display progress notification for long-running operations
+   * @param {string} message - The progress message to display in the notification
+   * @param {boolean} [persistent] - Whether the notification should persist until manually dismissed (default: true)
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showProgress(message: string, persistent = true): Observable<ToasterMessage> {
     return this.show(message, 'progress', { persistent, duration: 0 });
   }
 
   /**
-   * Display tactical notification with special military-grade styling
+   * @description Display tactical notification with special military-grade styling
+   * @param {string} message - The tactical message to display in the notification
+   * @param {string} [action] - Optional action button text for the notification
+   * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 5000)
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showTactical(message: string, action?: string, duration = 5000): Observable<ToasterMessage> {
     return this.show(message, 'tactical', { action, duration });
   }
 
   /**
-   * Step-by-step operation notifications with audit logging
+   * @description Step-by-step operation notifications with audit logging
+   * @param {string} operationName - The name of the operation being tracked
+   * @param {number} currentStep - The current step number in the operation
+   * @param {number} totalSteps - The total number of steps in the operation
+   * @param {string} stepDescription - Description of the current step being performed
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showStepProgress(
     operationName: string, 
@@ -131,7 +163,12 @@ export class ToasterService implements OnDestroy {
   }
 
   /**
-   * Database operation notifications
+   * @description Database operation notifications for CRUD operations
+   * @param {string} operation - The database operation type (CREATE, READ, UPDATE, DELETE)
+   * @param {string} entity - The name of the entity being operated on
+   * @param {string} status - The current status of the operation (START, SUCCESS, ERROR)
+   * @param {string} [details] - Optional additional details about the operation
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showDatabaseOperation(
     operation: 'CREATE' | 'READ' | 'UPDATE' | 'DELETE',
@@ -154,7 +191,11 @@ export class ToasterService implements OnDestroy {
   }
 
   /**
-   * Authentication flow notifications
+   * @description Authentication flow notifications for login, MFA, refresh, and logout operations
+   * @param {string} step - The authentication step being performed (LOGIN, MFA, REFRESH, LOGOUT)
+   * @param {string} status - The current status of the authentication step (START, SUCCESS, ERROR)
+   * @param {string} [details] - Optional additional details about the authentication operation
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showAuthFlow(
     step: 'LOGIN' | 'MFA' | 'REFRESH' | 'LOGOUT',
@@ -184,7 +225,8 @@ export class ToasterService implements OnDestroy {
   }
 
   /**
-   * Clear all notifications
+   * @description Clear all notifications and dismiss any active snackbar
+   * @returns {void} No return value
    */
   public clearAll(): void {
     this.snackBar.dismiss();
@@ -192,14 +234,19 @@ export class ToasterService implements OnDestroy {
   }
 
   /**
-   * Get notification history
+   * @description Get notification history as an observable stream
+   * @returns {Observable<ToasterMessage[]>} Observable containing array of all toaster messages
    */
   public getHistory(): Observable<ToasterMessage[]> {
     return this.messages$;
   }
 
   /**
-   * Core notification display method with Material 3 Expressive styling
+   * @description Core notification display method with Material 3 Expressive styling
+   * @param {string} message - The message text to display in the notification
+   * @param {ToasterType} type - The type of notification (success, error, warning, info, progress, tactical)
+   * @param {Partial<ToasterConfig>} [options] - Optional configuration options for the notification
+   * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   private show(
     message: string, 
@@ -261,16 +308,28 @@ export class ToasterService implements OnDestroy {
     );
   }
 
+  /**
+   * @description Generate unique identifier for toaster messages
+   * @returns {string} Unique string identifier with timestamp and random suffix
+   */
   private generateId(): string {
     return `toaster_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
+  /**
+   * @description Module destroy lifecycle hook - cleanup resources and dismiss notifications
+   * @returns {void} No return value
+   */
   public onModuleDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
     this.snackBar.dismiss();
   }
 
+  /**
+   * @description Angular OnDestroy lifecycle hook - delegates to onModuleDestroy
+   * @returns {void} No return value
+   */
   public ngOnDestroy(): void {
     this.onModuleDestroy();
   }

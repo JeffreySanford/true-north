@@ -6,28 +6,34 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { App } from './app';
 import { appRoutes } from './app.routes';
-import { NxWelcome } from './nx-welcome';
-import { UiServicesModule } from './shared/ui-services/ui-services-module';
+import { UIServicesModuleService } from './shared/ui-services/ui-services-module';
 
 /**
- * TRADITIONAL ANGULAR APP MODULE
+ * @description Traditional Angular root module with Material 3 Expressive UI services
+ * @author True North Development Team
+ * @since October 2, 2025
  * 
  * Root NgModule with Material 3 Expressive UI services
  * Observable-driven architecture with enterprise logging
  * Tactical notification system integrated
  */
 @NgModule({
-  declarations: [App, NxWelcome],
+  declarations: [App],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    UiServicesModule
+    UIServicesModuleService
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
   ],
   bootstrap: [App],
 })
+/**
+ * @description Root application module that bootstraps the Angular application with essential configurations and providers
+ * @author Development Team
+ * @since 2025-10-02
+ */
 export class AppModule {}

@@ -6,11 +6,11 @@ describe('AppService', () => {
   let service: AppService;
 
   beforeAll(async () => {
-    const app = await Test.createTestingModule({
+    const testingModule = await Test.createTestingModule({
       providers: [AppService],
     }).compile();
 
-    service = app.get<AppService>(AppService);
+    service = testingModule.get<AppService>(AppService);
   });
 
   describe('getData', () => {

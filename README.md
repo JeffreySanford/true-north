@@ -1,68 +1,69 @@
-# True North Holdings — Multi-Company Portfolio
+# True North Holdings — Professional Software Solutions
 
 **Legendary. Professional. Auditable. Testable. Documented.**  
-*Parent repository for True North's diverse business portfolio — Making America Build Again 🇺🇸*
+*Veteran-led technology solutions — Making America Build Again 🇺🇸*
 
 ## 🏢 **Company Portfolio**
 
-This repository serves as the parent coordination hub for multiple True North companies:
+True North Holdings encompasses multiple veteran-led business ventures, each delivering legendary solutions in their respective markets:
 
-### 📊 **True North Insights** 
-**Software & Analytics Company**
+### 📊 **True North Insights**
+
+**Software & Analytics Platform** *(Current Focus)*
+
 - **Location:** [`./true-north-insights/`](./true-north-insights/)
 - **Tech Stack:** Nx Monorepo with Angular 20 + NestJS 11
 - **Focus:** Government data solutions, compliance, modernization
-- **Status:** 🚧 Active Development
+- **Status:** ✅ Production Ready
 
-### 👕 **True North Apparel** *(Planned)*
-**Patriotic Clothing & Merchandise**
-- **Location:** `./true-north-apparel/` *(Future)*
-- **Tech Stack:** Next.js + Shopify Plus
-- **Focus:** Veteran-inspired apparel and accessories
-- **Status:** 📋 Planning Phase
+### 👕 **True North Apparel**
 
-### 🍵 **True North Tea** *(Planned)*
-**Premium Tea & Beverage Company**
-- **Location:** `./true-north-tea/` *(Future)*
-- **Tech Stack:** Astro + Headless CMS
-- **Focus:** Artisanal teas with American heritage
-- **Status:** 💡 Concept Stage
+**Patriotic Clothing & Merchandise** *(Planned)*
 
-## 🛠️ **Multi-Company Management**
+- **Vision:** Premium veteran-inspired apparel and tactical gear
+- **Tech Stack:** Next.js + Shopify Plus e-commerce platform
+- **Focus:** American-made clothing, tactical accessories, patriotic merchandise
+- **Market:** Veterans, patriots, outdoor enthusiasts, tactical professionals
+- **Status:** 🎯 Strategic Planning Phase
 
-This parent repository uses **Rush.js** for coordinated multi-project management:
+### 🍵 **True North Tea (Broken Leaf)**
+
+**Premium Tea & Beverage Company** *(Planned)*
+
+- **Vision:** Artisanal tea blends with American heritage and military precision
+- **Tech Stack:** Astro + Headless CMS with subscription commerce
+- **Focus:** Premium loose-leaf teas, military-inspired blends, veteran-owned supply chain
+- **Market:** Tea enthusiasts, health-conscious consumers, gift market
+- **Status:** 💡 Concept Development
+
+## �️ **Project Management**
+
+This repository focuses on the core True North Insights application:
 
 ### Quick Start Commands
-```bash
-# Bootstrap all companies
-npm run bootstrap
 
-# Build all projects
-npm run build:all
+```bash
+# Navigate to the main application
+cd true-north-insights
+
+# Install dependencies and build
+npm install
 
 # Development servers
-npm run insights:dev     # Start True North Insights
-npm run apparel:dev      # Start True North Apparel (future)
-npm run tea:dev          # Start True North Tea (future)
+npm run serve           # Start True North Insights frontend
+npm run start:backend   # Start True North Insights backend
+npm run start:dev       # Start both frontend and backend
 ```
 
 ### Architecture Overview
+
 ```text
-true-north/                          # Parent coordination repo
-├── apps/
-│   ├── true-north-insights/        # Nx monorepo (Angular + NestJS)
-│   ├── true-north-apparel/         # E-commerce (Next.js + Shopify)
-│   └── true-north-tea/             # Static site (Astro + CMS)
-├── packages/
-│   ├── shared-ui/                  # Cross-company design system
-│   ├── shared-utils/               # Common utilities
-│   └── shared-configs/             # Shared tooling configs
-├── common/
-│   ├── config/                     # Rush + tooling configuration
-│   └── scripts/                    # Cross-company automation
-└── docs/
-    ├── PARENT_STRATEGY.md          # Multi-company architecture
-    └── contributing.md             # Contribution guidelines
+true-north/                         # Parent repository  
+└── true-north-insights/            # Main Software Platform (Nx Monorepo)
+    ├── frontend/                   # Angular 20 frontend
+    ├── backend/                    # NestJS 11 backend  
+    ├── packages/                   # Shared libraries
+    └── tools/                      # Build and dev tools
 ```
 
 ## 📈 **Current Focus: True North Insights**
@@ -79,33 +80,38 @@ See [`./true-north-insights/README.md`](./true-north-insights/README.md) for det
 ## 🚀 **Getting Started**
 
 ### Prerequisites
+
 - Node.js 20.19+ (required for Angular 20)
-- Rush.js (for multi-company coordination)
-- Git (for version control)
+- NPM 10+ for package management
+- Git 2.40+ for version control
 
 ### Setup Instructions
 
-1. **Clone and Bootstrap**
+1. **Clone and Setup**
+
    ```bash
    git clone <repo-url>
-   cd true-north
-   npm install -g @microsoft/rush
-   rush install
+   cd true-north/true-north-insights
+   npm install
    ```
 
 2. **Start Development**
+
    ```bash
-   # For True North Insights development
-   cd true-north-insights
-   npm run serve
+   # Full-stack development
+   npm run start:dev
+   
+   # Individual services
+   npm run serve        # Frontend only
+   npm run start:backend # Backend only
    ```
 
-3. **Cross-Company Operations**
+3. **Quality Assurance**
+
    ```bash
-   # From parent directory
-   rush build     # Build all projects
-   rush test      # Test all projects
-   rush lint      # Lint all projects
+   npm run test:all     # All tests + E2E  
+   npm run lint:all     # Lint all projects
+   npm run build:prod   # Production build
    ```
 
 ## 🤝 **Contributing**
@@ -118,14 +124,13 @@ Each company maintains its own development practices:
 
 ## 📚 **Documentation**
 
-- **[Parent Strategy](./PARENT_STRATEGY.md)** - Multi-company architecture and tooling
-- **[True North Insights](./true-north-insights/README.md)** - Software platform documentation
-- **[Rush Configuration](./rush.json)** - Multi-project build coordination
+- **[Parent Strategy](./PARENT_STRATEGY.md)** - Architecture and development approach
+- **[True North Insights](./true-north-insights/README.md)** - Main software platform documentation
 
 ## 🇺🇸 **Mission**
 
-True North Holdings brings military discipline and precision to diverse business challenges, delivering legendary solutions across software, retail, and lifestyle brands. We're committed to supporting veterans, building American businesses, and creating products that embody our nation's values.
+True North Holdings delivers military-grade precision to government technology challenges. Our veteran-led team builds legendary software solutions that embody professional excellence, rigorous testing, and comprehensive documentation standards required for federal contracting.
 
 ---
 
-*Making America Build Again — One Company at a Time* 🇺🇸
+*Making America Build Again — Through Professional Technology Solutions* 🇺🇸

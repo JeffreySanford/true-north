@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
-import { NxWelcome } from './nx-welcome';
 import { RouterModule } from '@angular/router';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterModule.forRoot([])],
-      declarations: [App, NxWelcome],
+      declarations: [App],
     }).compileComponents();
   });
 
@@ -15,7 +14,8 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
+    const headerElement = compiled.querySelector('h1');
+    expect(headerElement && headerElement.textContent).toContain(
       'True North Insights'
     );
   });

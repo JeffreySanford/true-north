@@ -4,16 +4,16 @@ import { AppService } from './app.service';
 import { firstValueFrom } from 'rxjs';
 
 describe('AppController', () => {
-  let app: TestingModule;
+  let testingModule: TestingModule;
   let appController: AppController;
 
   beforeAll(async () => {
-    app = await Test.createTestingModule({
+    testingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [AppService],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appController = testingModule.get<AppController>(AppController);
   });
 
   describe('getData', () => {

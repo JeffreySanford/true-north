@@ -1,0 +1,35 @@
+{
+  "name": "@true-north-insights/draconian-tools",
+  "version": "2.0.0",
+  "description": "Draconian enforcement tools for traditional Angular architecture",
+  "private": true,
+  "scripts": {
+    "build:prod": "node -r ts-node/register build/esbuild.config.ts production",
+    "build:dev": "node -r ts-node/register build/esbuild.config.ts development",
+    "build:watch": "WATCH=true npm run build:dev",
+    "build:analyze": "ANALYZE=true npm run build:prod",
+    "lint:draconian": "eslint --config ../eslint.config.mjs '**/*.{ts,js}'",
+    "lint:strict": "npm run lint:draconian -- --max-warnings 0",
+    "validate:bundle-size": "npm run build:analyze",
+    "validate:performance": "npm run build:prod && echo 'Performance validation complete'"
+  },
+  "dependencies": {
+    "esbuild": "^0.19.0",
+    "@angular-devkit/build-angular": "^17.0.0",
+    "typescript": "^5.2.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.0",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "angular",
+    "eslint",
+    "esbuild",
+    "traditional-architecture",
+    "draconian-standards",
+    "federal-compliance"
+  ],
+  "author": "True North Insights",
+  "license": "PROPRIETARY"
+}

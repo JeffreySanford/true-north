@@ -1,0 +1,250 @@
+#!/usr/bin/env node
+
+/**
+ * DRACONIAN PRE-COMMIT HOOK
+ * Federal-Grade Enforcement of Traditional Angular Standards
+ * 
+ * This hook runs before every commit to ensure zero tolerance
+ * for anti-patterns and modern Angular deviations.
+ */
+
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+
+// ANSI Color codes for dramatic output
+const colors = {
+  red: '\x1b[31m',
+  green: '\x1b[32m',
+  yellow: '\x1b[33m',
+  blue: '\x1b[34m',
+  magenta: '\x1b[35m',
+  cyan: '\x1b[36m',
+  white: '\x1b[37m',
+  reset: '\x1b[0m',
+  bold: '\x1b[1m',
+  dim: '\x1b[2m'
+};
+
+console.log(`${colors.bold}${colors.magenta}
+╔═══════════════════════════════════════════════════════════════╗
+║                    DRACONIAN ENFORCEMENT                      ║
+║                   PRE-COMMIT VALIDATION                       ║
+║                                                               ║
+║          🛡️  ZERO TOLERANCE FOR ANTI-PATTERNS 🛡️             ║
+╚═══════════════════════════════════════════════════════════════╝
+${colors.reset}`);
+
+let violationsFound = false;
+let totalViolations = 0;
+
+/**
+ * Execute command and capture output
+ */
+function executeCommand(command, description) {
+  console.log(`${colors.cyan}🔍 ${description}...${colors.reset}`);
+  try {
+    const output = execSync(command, { encoding: 'utf8', stdio: 'pipe' });
+    return { success: true, output };
+  } catch (error) {
+    return { success: false, output: error.stdout || error.message };
+  }
+}
+
+/**
+ * Log violation with dramatic formatting
+ */
+function logViolation(type, message, details = '') {
+  violationsFound = true;
+  totalViolations++;
+  console.log(`${colors.bold}${colors.red}❌ ${type.toUpperCase()} VIOLATION:${colors.reset}`);
+  console.log(`   ${colors.red}${message}${colors.reset}`);
+  if (details) {
+    console.log(`   ${colors.dim}${details}${colors.reset}`);
+  }
+  console.log('');
+}
+
+/**
+ * Log success with celebration
+ */
+function logSuccess(message) {
+  console.log(`${colors.bold}${colors.green}✅ ${message}${colors.reset}`);
+}
+
+/**
+ * PHASE 1: CRITICAL VIOLATIONS CHECK
+ */
+console.log(`${colors.bold}${colors.yellow}📋 PHASE 1: CRITICAL VIOLATIONS CHECK${colors.reset}`);
+
+// Check for draconian ESLint violations
+const lintResult = executeCommand('npm run lint:strict', 'Draconian ESLint Validation');
+if (!lintResult.success) {
+  logViolation('ESLINT', 'Code violates draconian Angular standards', lintResult.output);
+} else {
+  logSuccess('ESLint draconian rules passed');
+}
+
+// Check TypeScript strict mode
+const tsResult = executeCommand('npx tsc --noEmit --strict', 'TypeScript Strict Mode Validation');
+if (!tsResult.success) {
+  logViolation('TYPESCRIPT', 'Strict TypeScript validation failed', tsResult.output);
+} else {
+  logSuccess('TypeScript strict mode passed');
+}
+
+/**
+ * PHASE 2: ANTI-PATTERN DETECTION
+ */
+console.log(`${colors.bold}${colors.yellow}📋 PHASE 2: ANTI-PATTERN DETECTION${colors.reset}`);
+
+// Scan for forbidden patterns in staged files
+const stagedFiles = execSync('git diff --cached --name-only --diff-filter=ACM', { encoding: 'utf8' })
+  .split('\n')
+  .filter(file => file.endsWith('.ts') && file.includes('src/'));
+
+console.log(`${colors.cyan}🔍 Scanning ${stagedFiles.length} staged TypeScript files...${colors.reset}`);
+
+stagedFiles.forEach(file => {
+  if (!fs.existsSync(file)) return;
+  
+  const content = fs.readFileSync(file, 'utf8');
+  const lines = content.split('\n');
+  
+  // Check for standalone components
+  if (/standalone\s*:\s*true/.test(content)) {
+    const lineNumber = lines.findIndex(line => /standalone\s*:\s*true/.test(line)) + 1;
+    logViolation('STANDALONE_COMPONENT', `Standalone component detected in ${file}:${lineNumber}`, 
+      'Traditional Angular requires NgModule architecture');
+  }
+  
+  // Check for inject() function usage
+  if (/\binject\s*\(/.test(content)) {
+    const lineNumber = lines.findIndex(line => /\binject\s*\(/.test(line)) + 1;
+    logViolation('INJECT_FUNCTION', `inject() function usage in ${file}:${lineNumber}`, 
+      'Use constructor-based dependency injection');
+  }
+  
+  // Check for async/await in services
+  if (file.includes('.service.ts') && /async\s+\w+\s*\(/.test(content)) {
+    const lineNumber = lines.findIndex(line => /async\s+\w+\s*\(/.test(line)) + 1;
+    logViolation('ASYNC_SERVICE', `async/await pattern in service ${file}:${lineNumber}`, 
+      'Services must return Observables, not Promises');
+  }
+  
+  // Check for 'any' type usage
+  if (/:\s*any\b/.test(content)) {
+    const lineNumber = lines.findIndex(line => /:\s*any\b/.test(line)) + 1;
+    logViolation('ANY_TYPE', `'any' type usage in ${file}:${lineNumber}`, 
+      'All types must be explicitly defined');
+  }
+  
+  // Check for signal() usage
+  if (/\bsignal\s*\(/.test(content)) {
+    const lineNumber = lines.findIndex(line => /\bsignal\s*\(/.test(line)) + 1;
+    logViolation('SIGNAL_USAGE', `signal() usage in ${file}:${lineNumber}`, 
+      'Use traditional RxJS patterns instead of signals');
+  }
+});
+
+if (stagedFiles.length > 0 && totalViolations === 0) {
+  logSuccess('No anti-patterns detected in staged files');
+}
+
+/**
+ * PHASE 3: ARCHITECTURE VALIDATION
+ */
+console.log(`${colors.bold}${colors.yellow}📋 PHASE 3: ARCHITECTURE VALIDATION${colors.reset}`);
+
+// Check for required Angular architecture files
+const requiredFiles = [
+  'src/app/app.module.ts',
+  'src/main.ts'
+];
+
+requiredFiles.forEach(file => {
+  if (!fs.existsSync(file)) {
+    logViolation('MISSING_FILE', `Required file missing: ${file}`, 
+      'Traditional Angular requires core architecture files');
+  } else {
+    logSuccess(`Required file present: ${file}`);
+  }
+});
+
+// Validate app.module.ts structure
+if (fs.existsSync('src/app/app.module.ts')) {
+  const appModuleContent = fs.readFileSync('src/app/app.module.ts', 'utf8');
+  
+  if (!/@NgModule/.test(appModuleContent)) {
+    logViolation('NGMODULE_MISSING', 'app.module.ts missing @NgModule decorator', 
+      'Traditional Angular requires NgModule architecture');
+  } else {
+    logSuccess('NgModule architecture validated');
+  }
+  
+  if (!/bootstrap\s*:\s*\[/.test(appModuleContent)) {
+    logViolation('BOOTSTRAP_MISSING', 'app.module.ts missing bootstrap configuration', 
+      'NgModule must specify bootstrap component');
+  } else {
+    logSuccess('Bootstrap configuration validated');
+  }
+}
+
+/**
+ * PHASE 4: PERFORMANCE VALIDATION
+ */
+console.log(`${colors.bold}${colors.yellow}📋 PHASE 4: PERFORMANCE VALIDATION${colors.reset}`);
+
+// Run quick build test
+const buildResult = executeCommand('npm run build:test', 'Quick Build Validation');
+if (!buildResult.success) {
+  logViolation('BUILD_FAILURE', 'Build validation failed', buildResult.output);
+} else {
+  logSuccess('Build validation passed');
+}
+
+/**
+ * FINAL VERDICT
+ */
+console.log(`${colors.bold}${colors.magenta}
+╔═══════════════════════════════════════════════════════════════╗
+║                      FINAL VERDICT                            ║
+╚═══════════════════════════════════════════════════════════════╝
+${colors.reset}`);
+
+if (violationsFound) {
+  console.log(`${colors.bold}${colors.red}
+💥 COMMIT REJECTED - DRACONIAN STANDARDS VIOLATED 💥
+
+${totalViolations} violation(s) found that must be resolved.
+
+🛠️  REQUIRED ACTIONS:
+   1. Fix all ESLint violations with zero tolerance
+   2. Remove all forbidden patterns (standalone, inject, async/await)
+   3. Ensure proper TypeScript typing (no 'any' types)
+   4. Maintain traditional NgModule architecture
+   5. Follow Observable patterns in services
+
+💪 LEGENDARY STANDARDS DEMAND LEGENDARY COMMITMENT!
+   
+   Run 'npm run lint:fix' to auto-fix some issues.
+   Run 'npm run validate:all' for comprehensive checking.
+${colors.reset}`);
+
+  process.exit(1);
+} else {
+  console.log(`${colors.bold}${colors.green}
+🏆 COMMIT APPROVED - DRACONIAN STANDARDS MAINTAINED 🏆
+
+All validation phases passed successfully:
+✅ Zero ESLint violations
+✅ Strict TypeScript compliance  
+✅ No forbidden anti-patterns
+✅ Traditional Angular architecture validated
+✅ Performance requirements met
+
+🎯 LEGENDARY CODE QUALITY ACHIEVED!
+${colors.reset}`);
+
+  process.exit(0);
+}

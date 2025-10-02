@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -12,6 +12,11 @@ import { LoggingService } from './shared/ui-services/logging.service';
  * Observable-driven logging and step-by-step user feedback
  * Legendary tactical UI/UX patterns
  */
+/**
+ * @description Main application component with tactical UI and enterprise logging
+ * @author True North Development Team
+ * @since October 2, 2025
+ */
 @Component({
   selector: 'app-root',
   standalone: false,
@@ -19,13 +24,31 @@ import { LoggingService } from './shared/ui-services/logging.service';
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+/**
+ * @description Root application component providing tactical dashboard framework with enterprise logging and notification systems
+ * @author Development Team
+ * @since 2025-10-02
+ */
 export class App implements OnInit, OnDestroy {
   public readonly title = 'True North Insights';
   private readonly destroy$ = new Subject<void>();
-  
-  private readonly toaster = inject(ToasterService);
-  private readonly logger = inject(LoggingService);
 
+  /**
+   * @description Constructor for App component - initializes services for tactical notifications and logging
+   * @param {ToasterService} toaster - Injected toaster service for displaying notifications
+   * @param {LoggingService} logger - Injected logging service for application audit trails
+   * @author True North Development Team
+   * @since October 2, 2025
+   */
+  constructor(
+    private readonly toaster: ToasterService,
+    private readonly logger: LoggingService
+  ) {}
+
+  /**
+   * @description Initialize application and demonstrate tactical notifications
+   * @returns {void}
+   */
   public ngOnInit(): void {
     this.logger.info('Application initialized', 'APP_STARTUP', {
       title: this.title,
@@ -89,6 +112,10 @@ export class App implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * @description Manually trigger toaster notification demonstrations
+   * @returns {void}
+   */
   public onDemonstrateToaster(): void {
     this.logger.info('Manual toaster demonstration triggered', 'USER_ACTION');
 
@@ -116,6 +143,10 @@ export class App implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * @description Test database operations with logging and notifications
+   * @returns {void}
+   */
   public onTestDatabaseOperations(): void {
     this.logger.logStep('Database Testing', 1, 3, 'Starting MongoDB connection test');
     
@@ -138,6 +169,10 @@ export class App implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * @description Test authentication flow with comprehensive logging
+   * @returns {void}
+   */
   public onTestAuthenticationFlow(): void {
     this.logger.logAuthFlow('LOGIN', 'START', { component: 'AppComponent' });
     
@@ -160,6 +195,10 @@ export class App implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * @description Clean up subscriptions and log application shutdown
+   * @returns {void}
+   */
   public ngOnDestroy(): void {
     this.logger.info('Application shutting down', 'APP_SHUTDOWN');
     this.destroy$.next();

@@ -8,11 +8,9 @@ import { ToasterService } from './toaster.service';
 import { LoggingService } from './logging.service';
 
 /**
- * TRADITIONAL ANGULAR UI SERVICES MODULE
- * 
- * Provides enterprise-grade notification and logging services
- * Material 3 Expressive design with tactical color schemes
- * Observable-driven patterns throughout
+ * @description Traditional Angular UI services module providing enterprise-grade notification and logging services with Material 3 Expressive design and tactical color schemes using observable-driven patterns throughout
+ * @author True North Development Team
+ * @since October 2, 2025
  */
 @NgModule({
   imports: [
@@ -31,4 +29,9 @@ import { LoggingService } from './logging.service';
     MatIconModule
   ]
 })
-export class UiServicesModule { }
+/**
+ * @description UI services module providing shared Material Design components and notification services for federal applications
+ * @author Development Team
+ * @since 2025-10-02
+ */
+export class UIServicesModuleService { }
