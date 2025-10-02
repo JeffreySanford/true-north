@@ -2,14 +2,17 @@
  * @fileoverview Entry point for the local ESLint plugin.
  * @author Jeffrey Sanford
  */
-'use strict';
 
-module.exports = {
+import noDirectAssignment from './rules/no-direct-assignment.js';
+import noBarrelFiles from './rules/no-barrel-files.js';
+import noDeeplyNestedRelativeImports from './rules/no-deeply-nested-relative-imports.js';
+import noUnnecessaryPublicModifier from './rules/no-unnecessary-public-modifier.js';
+
+export default {
   rules: {
-    'no-direct-assignment': require('./rules/no-direct-assignment'),
-    'no-barrel-files': require('./rules/no-barrel-files'),
-    'no-deeply-nested-relative-imports': require('./rules/no-deeply-nested-relative-imports'),
-    'no-unnecessary-public-modifier': require('./rules/no-unnecessary-public-modifier'),
-    'prefer-standalone-components': require('./rules/prefer-standalone-components'),
+    'no-direct-assignment': noDirectAssignment,
+    'no-barrel-files': noBarrelFiles,
+    'no-deeply-nested-relative-imports': noDeeplyNestedRelativeImports,
+    'no-unnecessary-public-modifier': noUnnecessaryPublicModifier,
   },
 };

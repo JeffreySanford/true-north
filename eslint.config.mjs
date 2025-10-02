@@ -1,6 +1,6 @@
-const draconian = require('./tools/eslint');
+import draconian from './tools/eslint/index.js';
 
-module.exports = [
+export default [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     plugins: {
@@ -14,7 +14,6 @@ module.exports = [
         { maxDepth: 2 },
       ],
       'draconian-angular/no-unnecessary-public-modifier': 'warn',
-      'draconian-angular/prefer-standalone-components': 'warn',
     },
   },
   {

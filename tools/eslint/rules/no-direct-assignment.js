@@ -2,16 +2,15 @@
  * @fileoverview Rule to enforce immutable update patterns by disallowing direct property assignment.
  * @author Jeffrey Sanford
  */
-'use strict';
 
-const {
+import {
   AST_NODE_TYPES
-} = require('@typescript-eslint/utils');
+} from '@typescript-eslint/utils';
 
 /**
  * @type {import('eslint').Rule.RuleModule}
  */
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {

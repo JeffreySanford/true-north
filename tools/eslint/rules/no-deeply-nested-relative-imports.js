@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-"use strict";
-
-module.exports = {
+export default {
   meta: {
     type: "problem",
     docs: {
