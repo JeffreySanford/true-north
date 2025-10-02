@@ -10,7 +10,8 @@
     "build": "cd true-north-insights && npm run build:prod",
     "test": "cd true-north-insights && npm run test:all",
     "lint": "cd true-north-insights && npm run lint:all",
-    "validate": "cd true-north-insights && npm run validate:draconian"
+    "validate": "cd true-north-insights && npm run validate:draconian",
+    "validate:draconian": "cd true-north-insights && npm run validate:draconian"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

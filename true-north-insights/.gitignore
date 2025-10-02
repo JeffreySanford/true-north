@@ -1,46 +1,93 @@
-# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# ================================================================= #
+#                      True North Insights                      #
+#                  NX MONOREPO .GITIGNORE                         #
+# ================================================================= #
+# For more information on .gitignore patterns, see the official documentation:
+# https://git-scm.com/docs/gitignore
 
-# compiled output
-dist
-tmp
-out-tsc
+# -----------------------------------------------------------------
+# GENERAL
+# -----------------------------------------------------------------
+# Dependencies and lock files
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
-# dependencies
-node_modules
+# Build artifacts and compiled output
+/dist/
+/tmp/
+/out-tsc/
+/coverage/
 
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# IDE - VSCode
+# Environment variables - IMPORTANT
+# Ignore all .env files to prevent secrets from being committed.
+# Use .env.example or a similar template for guidance.
+.env
+.env.*
+!.env.example
+!.env.ci
+
+# -----------------------------------------------------------------
+# NX - MONOREPO TOOLING
+# -----------------------------------------------------------------
+# Nx cache and local data
+.nx/cache
+.nx/workspace-data
+
+# Nx Cloud artifacts (if not using Nx Cloud, this is still good practice)
+.nx/workflows
+
+# -----------------------------------------------------------------
+# IDE & EDITOR CONFIGURATION
+# -----------------------------------------------------------------
+# Visual Studio Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/project-snippets.code-snippets
 
-# misc
-/.sass-cache
+# JetBrains IDEs (WebStorm, IntelliJ)
+.idea/
+
+# Other editors
+*.sublime-workspace
+*.swp
+
+# -----------------------------------------------------------------
+# FRAMEWORK-SPECIFIC (ANGULAR, NESTJS)
+# -----------------------------------------------------------------
+# Angular cache
+.angular/
+
+# NestJS cache
+.nest/
+
+# -----------------------------------------------------------------
+# OPERATING SYSTEM & MISCELLANEOUS
+# -----------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Other
 /connect.lock
-/coverage
 /libpeerconnection.log
-npm-debug.log
-yarn-error.log
 testem.log
 /typings
-
-# System Files
-.DS_Store
-Thumbs.db
-
-.nx/cache
-.nx/workspace-data
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
-
-.angular

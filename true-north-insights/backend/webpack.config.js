@@ -1,16 +1,9 @@
 const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const { join } = require('path');
 
-/**
- * @description Immutable configuration object creation for webpack build
- * @returns {object} Webpack configuration object
- */
-const createWebpackConfig = () => ({
+module.exports = {
   output: {
     path: join(__dirname, '../dist/backend'),
-    ...(process.env.NODE_ENV !== 'production' && {
-      devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-    }),
   },
   plugins: [
     new NxAppWebpackPlugin({
@@ -19,18 +12,10 @@ const createWebpackConfig = () => ({
       main: './src/main.ts',
       tsConfig: './tsconfig.app.json',
       assets: ['./src/assets'],
-      optimization: false,
+      optimization: process.env.NODE_ENV === 'production',
       outputHashing: 'none',
       generatePackageJson: true,
-      sourceMaps: true,
+      sourceMap: true,
     }),
   ],
-});
-
-// Export immutable configuration using Object.freeze
-Object.defineProperty(module, 'exports', {
-  value: Object.freeze(createWebpackConfig()),
-  writable: false,
-  enumerable: true,
-  configurable: false
-});
+};
