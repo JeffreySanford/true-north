@@ -14,8 +14,8 @@
     "validate:performance": "npm run build:prod && echo 'Performance validation complete'"
   },
   "dependencies": {
-    "esbuild": "^0.19.0",
-    "@angular-devkit/build-angular": "^17.0.0",
+    "esbuild": "^0.25.10",
+    "@angular-devkit/build-angular": "^20.3.3",
     "typescript": "^5.2.0"
   },
   "devDependencies": {
