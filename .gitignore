@@ -56,3 +56,10 @@ Thumbs.db
 .env.*.production.local
 .env.production.local
 
+# Generated documentation (Compodoc) - ignore HTML/CSS/JS assets to reduce churn
+true-north-insights/documentation/**/*.html
+true-north-insights/documentation/**/*.css
+true-north-insights/documentation/**/*.js
+# Keep markdown docs versioned
+!true-north-insights/documentation/**/*.md
+

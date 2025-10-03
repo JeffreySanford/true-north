@@ -1,0 +1,2 @@
+# Exclude generated Compodoc documentation from webhint / Edge Tools scans
+true-north-insights/documentation/

@@ -1,3 +1,10 @@
 {
-    "nxConsole.generateAiAgentRules": true
+    "nxConsole.generateAiAgentRules": true,
+    // Exclude generated documentation from search and watch to cut noise
+    "files.watcherExclude": {
+        "**/true-north-insights/documentation/**": true
+    },
+    "search.exclude": {
+        "true-north-insights/documentation": true
+    }
 }
