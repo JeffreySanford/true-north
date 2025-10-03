@@ -44,7 +44,9 @@
     "api-contract:emit": "tsx scripts/generate-openapi.ts",
     "api-contract:types": "openapi-typescript contracts/api/generated/openapi.json -o contracts/api/generated/types.ts",
     "api-contract:regen": "run-s api-contract:emit api-contract:types",
-    "typecheck:backend": "tsc --project backend/tsconfig.app.json --noEmit"
+    "typecheck:backend": "tsc --project backend/tsconfig.app.json --noEmit",
+    "quality:report": "tsx scripts/quality-report.ts",
+    "quality:full": "nx run workspace-quality:mdlint && nx run-many -t lint,test,build,e2e --parallel=3 && npm run quality:report"
   },
   "private": true,
   "devDependencies": {
@@ -93,6 +95,7 @@
     "jest-environment-node": "^29.7.0",
     "jest-preset-angular": "~14.6.1",
     "jest-util": "^29.7.0",
+    "fast-glob": "^3.3.2",
     "markdownlint-cli": "^0.45.0",
     "npm-run-all": "^4.1.5",
     "nx": "21.6.2",

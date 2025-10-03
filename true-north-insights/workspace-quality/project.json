@@ -1,0 +1,13 @@
+{
+  "name": "workspace-quality",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "targets": {
+    "mdlint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx markdownlint-cli \"README.md\" \"documentation/**/*.md\""
+      }
+    }
+  }
+}
