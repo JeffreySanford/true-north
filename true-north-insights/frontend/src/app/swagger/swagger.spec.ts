@@ -1,16 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SwaggerComponent } from './swagger';
+import { SwaggerComponent } from './swagger.component';
 
 describe('SwaggerComponent', () => {
   let component: SwaggerComponent;
   let fixture: ComponentFixture<SwaggerComponent>;
 
   beforeEach(async () => {
+    (window as unknown as { SwaggerUIBundle: jest.Mock<unknown, unknown[]> }).SwaggerUIBundle = Object.assign(jest.fn(), {
+      presets: {
+        apis: jest.fn(),
+      },
+      SwaggerUIStandalonePreset: jest.fn(),
+    });
+
     await TestBed.configureTestingModule({
-      imports: [SwaggerComponent]
-    })
-    .compileComponents();
+      declarations: [SwaggerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SwaggerComponent);
     component = fixture.componentInstance;

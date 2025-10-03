@@ -1,0 +1,15 @@
+{
+  "files.associations": {
+    "*.ts": "typescript"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.defaultLanguage": "typescript",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.inlayHints.parameterNames.enabled": "literals",
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
+}

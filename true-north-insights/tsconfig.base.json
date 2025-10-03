@@ -4,13 +4,20 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    // Use modern bundler-style resolution so packages like @typescript-eslint/utils/ts-eslint resolve properly without forcing Node16 module format
+    "moduleResolution": "bundler",
+    // Allow importing JSON modules (needed for contracts/api wrapper dynamic import fallback)
+    "resolveJsonModule": true,
+    // Preserve existing emit metadata defaults for Angular decorators in per-project tsconfigs
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2022",
     "module": "es2022",
-    "lib": ["es2022", "dom"],
+    "lib": [
+      "es2022",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -20,7 +27,12 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    // Helpful for JSON/CJS interop without needing esModuleInterop at every project level
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

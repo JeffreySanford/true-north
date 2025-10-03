@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AppComponent } from './app';
-import { LayoutModule } from './layout/layout.module';
+import { RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
+import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from './pages/pages.module';
 import { SwaggerModule } from './swagger/swagger.module';
-import { UIServicesModuleService } from './shared/ui-services/ui-services-module';
+import { UIServicesModule } from './shared/ui-services/ui-services-module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,8 +18,7 @@ import { UIServicesModuleService } from './shared/ui-services/ui-services-module
     LayoutModule,
     PagesModule,
     SwaggerModule,
-    MatSnackBarModule,
-    UIServicesModuleService,
+    UIServicesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

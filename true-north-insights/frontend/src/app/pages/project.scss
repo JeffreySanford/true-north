@@ -1,0 +1,28 @@
+.kanban-board {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.kanban-list {
+  flex: 1;
+  background: #f0f0f0;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.kanban-list-items {
+  min-height: 200px;
+}
+
+.kanban-item {
+  padding: 16px;
+  margin-bottom: 16px;
+  background: white;
+  border-radius: 4px;
+  cursor: move;
+}
+
+.view-toggle {
+    margin-left: auto;
+}

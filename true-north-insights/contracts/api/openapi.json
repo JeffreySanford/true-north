@@ -1,0 +1,10 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "True North API (Placeholder)",
+    "version": "0.0.0",
+    "description": "Placeholder OpenAPI spec until TypeSpec pipeline is enabled."
+  },
+  "paths": {},
+  "components": {}
+}

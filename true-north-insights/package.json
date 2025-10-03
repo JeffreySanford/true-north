@@ -3,34 +3,51 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "build": "npm run build:prod",
+    "dev": "npm run build:dev",
+    "start": "npm run start:frontend",
+    "test": "nx run-many --target=test --all",
+    "lint": "npm run lint:all",
+    "verify": "npm run validate:all",
+
+    "lint:eslint": "nx run-many --target=lint --all",
+    "lint:eslint:fix": "nx run-many --target=lint --all --fix",
     "lint:scss": "stylelint \"**/*.scss\" --fix",
     "lint:scss:check": "stylelint \"**/*.scss\"",
-    "lint:all": "nx run-many --target=lint --all && npm run lint:scss:check",
-    "lint:fix": "nx run-many --target=lint --all --fix && npm run lint:scss",
-    "test": "nx run-many --target=test --all",
+    "lint:all": "run-s lint:eslint lint:scss:check",
+    "lint:fix": "run-s lint:eslint:fix lint:scss",
+    "lint:draconian": "eslint . --fix",
+
     "test:unit": "nx run-many --target=test --all",
     "test:e2e": "nx run-many --target=e2e --all",
     "test:frontend": "nx test frontend",
     "test:backend": "nx test backend",
     "test:e2e:frontend": "nx e2e frontend-e2e",
     "test:e2e:backend": "nx e2e backend-e2e",
-    "test:all": "npm run test:unit && npm run test:e2e",
+    "test:all": "run-s test:unit test:e2e",
     "test:coverage": "nx run-many --target=test --all --code-coverage",
+    "test:draconian": "jest",
+
     "build:prod": "nx run-many --target=build --all --configuration=production",
     "build:dev": "nx run-many --target=build --all --configuration=development",
     "start:ci": "nx serve frontend --host 0.0.0.0 --port 4200",
-    "validate:security": "npm audit --audit-level high",
-    "validate:lighthouse": "lhci autorun",
-    "enforce:pre-commit": "node .githooks/pre-commit",
-    "enforce:pre-push": "npm run validate:all",
-    "enforce:install-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
     "start:all": "nx run-many --target=serve --projects=frontend,backend --parallel",
     "start:frontend": "nx serve frontend",
     "start:backend": "nx serve backend",
-    "validate:draconian": "npm run flush && npm run lint:draconian && npm run test:draconian",
+
+    "validate:security": "npm audit --audit-level high",
+    "validate:lighthouse": "lhci autorun",
+    "validate:all": "run-s lint:all test:unit ci:check-standalone validate:security",
+    "validate:draconian": "run-s flush lint:draconian test:draconian",
+
+    "enforce:pre-commit": "node .githooks/pre-commit",
+    "enforce:pre-push": "npm run validate:all",
+    "enforce:install-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
+
     "flush": "rimraf dist tmp",
-    "lint:draconian": "eslint . --fix",
-    "test:draconian": "jest"
+    "ci:check-standalone": "findstr /S /I /C:\"standalone: true\" frontend\\src\\*.ts >nul 2>&1 && (echo ❌ Found forbidden standalone component usage & exit 1) || echo ✅ No standalone components",
+
+    "api-contract:build": "node scripts/build-api-contract.mjs"
   },
   "private": true,
   "devDependencies": {
@@ -93,7 +110,8 @@
     "tsx": "^4.19.2",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "npm-run-all": "^4.1.5"
   },
   "workspaces": [
     "packages/*"
@@ -104,6 +122,7 @@
     "@angular/common": "~20.3.0",
     "@angular/compiler": "~20.3.0",
     "@angular/core": "~20.3.0",
+    "@angular/flex-layout": "^15.0.0-beta.42",
     "@angular/forms": "~20.3.0",
     "@angular/material": "^20.2.5",
     "@angular/platform-browser": "~20.3.0",

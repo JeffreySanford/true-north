@@ -10,6 +10,7 @@ import { LoggingService } from '../shared/ui-services/logging.service';
   templateUrl: './development.html',
   styleUrl: './development.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DevelopmentComponent implements OnInit, OnDestroy {
   public readonly title = 'True North Insights';
@@ -19,7 +20,7 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
   private readonly logger = inject(LoggingService);
 
   public ngOnInit(): void {
-    this.logger.log('INFO', 'DevelopmentComponent initialized', 'COMPONENT_LIFECYCLE');
+    this.logger.info('DevelopmentComponent initialized', 'COMPONENT_LIFECYCLE');
   }
 
   public onDemonstrateToaster(): void {

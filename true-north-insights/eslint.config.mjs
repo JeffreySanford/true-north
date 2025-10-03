@@ -23,6 +23,26 @@ export default [
           ],
         },
       ],
+      // Disallow use of Angular standalone components in this codebase
+      // Matches: @Component({ ..., standalone: true, ... })
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'Property[key.name="standalone"][value.value=true]'}
+      ],
+      // Disallow bootstrapApplication (standalone app bootstrap) to enforce NgModule architecture
+      'no-restricted-imports': [
+        'error',
+        {
+          'patterns': [
+            {
+              group: ['@angular/platform-browser'],
+              importNames: ['bootstrapApplication'],
+              message: 'Use traditional NgModule bootstrap (main.ts) instead of bootstrapApplication.'
+            }
+          ]
+        }
+      ],
     },
   },
 ];

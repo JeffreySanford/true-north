@@ -2,7 +2,7 @@
 /* Material 3 Expressive Tactical Theme */
 
 /* Import tactical toaster styles */
-@import './app/shared/ui-services/tactical-toaster';
+@use './app/shared/ui-services/tactical-toaster';
 
 /* Global Material 3 Expressive variables */
 :root {

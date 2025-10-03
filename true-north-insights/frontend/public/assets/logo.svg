@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="40" viewBox="0 0 140 40" role="img" aria-labelledby="title desc">
+    <title id="title">True North Insights Logo</title>
+    <desc id="desc">Stylized compass arrow pointing north forming the letter N with wordmark.</desc>
+    <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1976d2" />
+            <stop offset="100%" stop-color="#42a5f5" />
+        </linearGradient>
+    </defs>
+    <!-- Compass circle -->
+    <circle cx="20" cy="20" r="18" fill="none" stroke="url(#grad)" stroke-width="2" />
+    <!-- North arrow -->
+    <path d="M20 6 L25 20 L20 18 L15 20 Z" fill="#1976d2" />
+    <!-- Stylized N (using two verticals and a diagonal) -->
+    <path d="M12 30 V14 L20 22 L28 14 V30" fill="none" stroke="#0d47a1" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Wordmark -->
+    <text x="50" y="26" font-family="'Segoe UI', Arial, sans-serif" font-size="16" font-weight="600" fill="#0d47a1" letter-spacing="0.5">
+    TRUE <tspan fill="#1976d2">NORTH</tspan>
+    </text>
+    <text x="50" y="36" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#424242" letter-spacing="0.5">INSIGHTS</text>
+</svg>

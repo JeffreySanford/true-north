@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { ToasterService } from './shared/ui-services/toaster.service';
 import { LoggingService } from './shared/ui-services/logging.service';
+
 
 /**
  * TRADITIONAL ANGULAR ROOT COMPONENT
@@ -19,31 +20,21 @@ import { LoggingService } from './shared/ui-services/logging.service';
  */
 @Component({
   selector: 'app-root',
-  standalone: false,
   templateUrl: './app.html',
   styleUrl: './app.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 /**
  * @description Root application component providing tactical dashboard framework with enterprise logging and notification systems
  * @author Development Team
  * @since 2025-10-02
  */
-export class App implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   public readonly title = 'True North Insights';
   private readonly destroy$ = new Subject<void>();
-
-  /**
-   * @description Constructor for App component - initializes services for tactical notifications and logging
-   * @param {ToasterService} toaster - Injected toaster service for displaying notifications
-   * @param {LoggingService} logger - Injected logging service for application audit trails
-   * @author True North Development Team
-   * @since October 2, 2025
-   */
-  constructor(
-    private readonly toaster: ToasterService,
-    private readonly logger: LoggingService
-  ) {}
+  private readonly toaster = inject(ToasterService);
+  private readonly logger = inject(LoggingService);
 
   /**
    * @description Initialize application and demonstrate tactical notifications
@@ -99,17 +90,62 @@ export class App implements OnInit, OnDestroy {
     timer(9000).pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.toaster.showSuccess(
         'Traditional NgModule architecture fully operational - Zero standalone components detected',
-        'CONTINUE'
+        'SUCCESS'
       ).pipe(takeUntil(this.destroy$)).subscribe();
     });
 
-    // Information about next steps
-    timer(12000).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.toaster.showInfo(
-        'Ready for Phase 2: Dual Persistence Implementation - Observable patterns enforced',
-        'BEGIN'
-      ).pipe(takeUntil(this.destroy$)).subscribe();
-    });
+    // timer(12000).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.toaster.showInfo(
+    //     'Database testing will commence in 3 seconds',
+    //     'PREPARE'
+    //   ).pipe(takeUntil(this.destroy$)).subscribe();
+    // });
+
+    // // Database testing logs
+    // timer(15000).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.logger.logStep('Database Testing', 1, 3, 'Starting MongoDB container');
+    // });
+
+    // timer(16500).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.toaster.showStepProgress('Database Testing', 2, 3, 'Creating test data')
+    //     .pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //       this.logger.logStep('Database Testing', 2, 3, 'Creating test data');
+    //     });
+    // });
+
+    // timer(18000).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.toaster.showStepProgress('Database Testing', 3, 3, 'Validating data integrity')
+    //     .pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //       this.logger.logStep('Database Testing', 3, 3, 'Validating data integrity');
+    //     });
+    // });
+
+    // // Authentication flow logs
+    // timer(20000).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.toaster.showInfo(
+    //     'Authentication flow simulation starting',
+    //     'AUTH_DEMO'
+    //   ).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //     this.logger.logAuthFlow('LOGIN', 'START', { component: 'AppComponent' });
+    //   });
+    // });
+
+    // timer(21500).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.toaster.showStepProgress('Authentication', 1, 2, 'Multi-factor authentication required')
+    //     .pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //       this.logger.logAuthFlow('MFA', 'START');
+    //     });
+    // });
+
+    // timer(23000).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.toaster.showSuccess(
+    //     'Authentication successful',
+    //     'AUTH_SUCCESS'
+    //   ).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //     this.logger.logAuthFlow
+    //     ('LOGIN', 'SUCCESS', { userId: 'demo-user' });
+    //   });
+    // });
   }
 
   /**
@@ -148,25 +184,25 @@ export class App implements OnInit, OnDestroy {
    * @returns {void}
    */
   public onTestDatabaseOperations(): void {
-    this.logger.logStep('Database Testing', 1, 3, 'Starting MongoDB connection test');
+    // this.logger.logStep('Database Testing', 1, 3, 'Starting MongoDB connection test');
     
-    this.toaster.showDatabaseOperation('CREATE', 'User', 'START').pipe(
-      takeUntil(this.destroy$)
-    ).subscribe();
+    // this.toaster.showDatabaseOperation('CREATE', 'User', 'START').pipe(
+    //   takeUntil(this.destroy$)
+    // ).subscribe();
 
-    timer(2000).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.logger.logStep('Database Testing', 2, 3, 'Creating test user record');
-      this.toaster.showDatabaseOperation('CREATE', 'User', 'SUCCESS').pipe(
-        takeUntil(this.destroy$)
-      ).subscribe();
-    });
+    // timer(2000).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.logger.logStep('Database Testing', 2, 3, 'Creating test user record');
+    //   this.toaster.showDatabaseOperation('CREATE', 'User', 'SUCCESS').pipe(
+    //     takeUntil(this.destroy$)
+    //   ).subscribe();
+    // });
 
-    timer(4000).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.logger.logStep('Database Testing', 3, 3, 'Validating dual persistence sync');
-      this.toaster.showDatabaseOperation('READ', 'User', 'SUCCESS', 'Dual persistence validated').pipe(
-        takeUntil(this.destroy$)
-      ).subscribe();
-    });
+    // timer(4000).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.logger.logStep('Database Testing', 3, 3, 'Validating dual persistence sync');
+    //   this.toaster.showDatabaseOperation('READ', 'User', 'SUCCESS', 'Dual persistence validated').pipe(
+    //     takeUntil(this.destroy$)
+    //   ).subscribe();
+    // });
   }
 
   /**
@@ -174,25 +210,25 @@ export class App implements OnInit, OnDestroy {
    * @returns {void}
    */
   public onTestAuthenticationFlow(): void {
-    this.logger.logAuthFlow('LOGIN', 'START', { component: 'AppComponent' });
+    // this.logger.logAuthFlow('LOGIN', 'START', { component: 'AppComponent' });
     
-    this.toaster.showAuthFlow('LOGIN', 'START').pipe(
-      takeUntil(this.destroy$)
-    ).subscribe();
+    // this.toaster.showAuthFlow('LOGIN', 'START').pipe(
+    //   takeUntil(this.destroy$)
+    // ).subscribe();
 
-    timer(2000).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.logger.logAuthFlow('MFA', 'START');
-      this.toaster.showAuthFlow('MFA', 'START').pipe(
-        takeUntil(this.destroy$)
-      ).subscribe();
-    });
+    // timer(2000).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.logger.logAuthFlow('MFA', 'START');
+    //   this.toaster.showAuthFlow('MFA', 'START').pipe(
+    //     takeUntil(this.destroy$)
+    //   ).subscribe();
+    // });
 
-    timer(4000).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.logger.logAuthFlow('LOGIN', 'SUCCESS', { userId: 'demo-user-123' });
-      this.toaster.showAuthFlow('LOGIN', 'SUCCESS', 'Welcome back, Commander').pipe(
-        takeUntil(this.destroy$)
-      ).subscribe();
-    });
+    // timer(4000).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    //   this.logger.logAuthFlow('LOGIN', 'SUCCESS', { userId: 'demo-user-123' });
+    //   this.toaster.showAuthFlow('LOGIN', 'SUCCESS', 'Welcome back, Commander').pipe(
+    //     takeUntil(this.destroy$)
+    //   ).subscribe();
+    // });
   }
 
   /**

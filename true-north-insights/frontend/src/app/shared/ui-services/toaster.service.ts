@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { shareReplay, takeUntil, tap } from 'rxjs/operators';
@@ -33,6 +33,7 @@ export interface ToasterConfig extends MatSnackBarConfig {
 export class ToasterService implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
   private readonly messagesSubject$ = new BehaviorSubject<ToasterMessage[]>([]);
+  private readonly snackBar = inject(MatSnackBar);
   
   // Hot observable for message history
   public readonly messages$ = this.messagesSubject$.pipe(
@@ -49,14 +50,6 @@ export class ToasterService implements OnDestroy {
     progress: 'tactical-progress',
     tactical: 'tactical-primary'
   };
-
-  /**
-   * @description Constructor for ToasterService - initializes the service with required dependencies
-   * @param {MatSnackBar} snackBar - The injected Material snack bar service for displaying notifications
-   * @author True North Development Team
-   * @since October 2, 2025
-   */
-  constructor(private readonly snackBar: MatSnackBar) {}
 
   /**
    * @description Display success notification with tactical green theme
@@ -275,7 +268,8 @@ export class ToasterService implements OnDestroy {
         this.tacticalColors[type],
         options.showTimestamp ? 'with-timestamp' : ''
       ].filter(Boolean),
-      verticalPosition: 'top',
+      // Updated default placement to bottom-right per UX request
+      verticalPosition: 'bottom',
       horizontalPosition: 'right',
       ...options
     };

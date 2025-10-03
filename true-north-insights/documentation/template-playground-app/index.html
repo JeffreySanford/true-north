@@ -311,6 +311,10 @@
             100% { transform: rotate(360deg); }
         }
 
+        .template-metadata.hidden {
+            display: none;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .playground-content {
@@ -375,7 +379,7 @@
                             <option value="controller">Controller</option>
                             <option value="overview">Overview</option>
                             <option value="miscellaneous">Miscellaneous</option>
-                        </select>
+                    <div class="template-metadata hidden" id="templateMetadata">
                     </div>
 
                     <!-- Template Metadata -->

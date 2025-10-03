@@ -1,22 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { App } from './app';
+import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { LayoutModule } from './layout/layout.module';
 
-describe('App', () => {
+describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterModule.forRoot([])],
-      declarations: [App],
+      imports: [RouterModule.forRoot([]), LayoutModule],
+      declarations: [AppComponent],
     }).compileComponents();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
+  it('should render the header', () => {
+    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const headerElement = compiled.querySelector('h1');
-    expect(headerElement && headerElement.textContent).toContain(
-      'True North Insights'
-    );
+    expect(compiled.querySelector('app-header')).not.toBeNull();
   });
 });

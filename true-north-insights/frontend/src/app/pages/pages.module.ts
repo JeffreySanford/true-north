@@ -1,21 +1,20 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../shared/material.module';
+import { FormsModule } from '@angular/forms';
 
-import { AboutComponent } from './about';
-import { BlogComponent } from './blog';
-import { ContactComponent } from './contact';
-import { DevelopmentComponent } from './development';
-import { HomeComponent } from './home';
-import { ServicesComponent } from './services';
+import { AboutComponent } from './about.component';
+import { ContactComponent } from './contact.component';
+import { DevelopmentComponent } from './development.component';
+import { HomeComponent } from './home.component';
+import { ServicesComponent } from './services.component';
 
 import { pagesRoutes } from './pages.routes';
 
 @NgModule({
   declarations: [
     AboutComponent,
-    BlogComponent,
     ContactComponent,
     DevelopmentComponent,
     HomeComponent,
@@ -23,6 +22,9 @@ import { pagesRoutes } from './pages.routes';
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    MaterialModule,
+    FormsModule,
     RouterModule.forChild(pagesRoutes),
   ],
 })

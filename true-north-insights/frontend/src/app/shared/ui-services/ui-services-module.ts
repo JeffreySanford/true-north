@@ -34,4 +34,4 @@ import { LoggingService } from './logging.service';
  * @author Development Team
  * @since 2025-10-02
  */
-export class UIServicesModuleService { }
+export class UIServicesModule { }

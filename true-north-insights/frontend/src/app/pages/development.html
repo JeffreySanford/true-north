@@ -1,136 +1,84 @@
-<!-- TRUE NORTH INSIGHTS - LEGENDARY TACTICAL INTERFACE -->
-<div class="tactical-container">
-  <!-- Header -->
-  <header class="tactical-header">
-    <div class="tactical-title">
-      <h1>{{ title }}</h1>
-      <p class="tactical-subtitle">Traditional Angular Architecture - Material 3 Expressive</p>
-    </div>
-    <div class="tactical-status">
-      <span class="status-indicator success"></span>
-      <span class="status-text">All Systems Operational</span>
-    </div>
-  </header>
-
-  <!-- Main Control Panel -->
-  <main class="tactical-main">
-    <div class="tactical-grid">
-      
-      <!-- Notification System Demo -->
-      <section class="tactical-card primary">
-        <h2>🔥 Tactical Notification System</h2>
-        <p>Material 3 Expressive toaster with legendary UX feedback</p>
-        <div class="tactical-actions">
-          <button 
-            mat-raised-button 
-            color="primary" 
-            (click)="onDemonstrateToaster()"
-            class="tactical-button">
-            Demonstrate All Notifications
-          </button>
-        </div>
-      </section>
-
-      <!-- Database Operations Demo -->
-      <section class="tactical-card success">
-        <h2>🗄️ Database Operations</h2>
-        <p>Observable dual persistence with step-by-step feedback</p>
-        <div class="tactical-actions">
-          <button 
-            mat-raised-button 
-            color="accent" 
-            (click)="onTestDatabaseOperations()"
-            class="tactical-button">
-            Test Database Operations
-          </button>
-        </div>
-      </section>
-
-      <!-- Authentication Flow Demo -->
-      <section class="tactical-card warning">
-        <h2>🔐 Authentication Flow</h2>
-        <p>JWT + MFA authentication with audit logging</p>
-        <div class="tactical-actions">
-          <button 
-            mat-raised-button 
-            color="warn" 
-            (click)="onTestAuthenticationFlow()"
-            class="tactical-button">
-            Test Auth Flow
-          </button>
-        </div>
-      </section>
-
-      <!-- Architecture Status -->
-      <section class="tactical-card info">
-        <h2>🏛️ Architecture Status</h2>
-        <div class="architecture-status">
-          <div class="status-item">
-            <span class="label">NgModules:</span>
-            <span class="value success">✅ Traditional</span>
-          </div>
-          <div class="status-item">
-            <span class="label">Standalone Components:</span>
-            <span class="value error">❌ FORBIDDEN</span>
-          </div>
-          <div class="status-item">
-            <span class="label">Observable Patterns:</span>
-            <span class="value success">✅ Hot Observables</span>
-          </div>
-          <div class="status-item">
-            <span class="label">Change Detection:</span>
-            <span class="value success">✅ OnPush</span>
-          </div>
-          <div class="status-item">
-            <span class="label">Material Design:</span>
-            <span class="value success">✅ v3 Expressive</span>
-          </div>
-        </div>
-      </section>
-
-    </div>
-
-    <!-- Phase Status -->
-    <section class="phase-status">
-      <h2>🚀 Development Phases</h2>
-      <div class="phase-grid">
-        <div class="phase-item completed">
-          <div class="phase-number">1</div>
-          <div class="phase-content">
-            <h3>Architectural Foundation</h3>
-            <p>Core setup and component design.</p>
-          </div>
-        </div>
-        <div class="phase-item in-progress">
-          <div class="phase-number">2</div>
-          <div class="phase-content">
-            <h3>Feature Implementation</h3>
-            <p>Building out key functionalities.</p>
-          </div>
-        </div>
-        <div class="phase-item">
-          <div class="phase-number">3</div>
-          <div class="phase-content">
-            <h3>Integration & Testing</h3>
-            <p>End-to-end testing and QA.</p>
-          </div>
-        </div>
-        <div class="phase-item">
-          <div class="phase-number">4</div>
-          <div class="phase-content">
-            <h3>Deployment</h3>
-            <p>Go-live and production setup.</p>
-          </div>
-        </div>
+<div class="tactical-container" fxLayout="column" fxLayoutGap="20px">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ title }}</mat-card-title>
+      <mat-card-subtitle>Traditional Angular Architecture - Material 3 Expressive</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="tactical-status" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <span class="status-indicator success"></span>
+        <span class="status-text">All Systems Operational</span>
       </div>
-    </section>
-  </main>
+    </mat-card-content>
+  </mat-card>
 
-  <!-- Footer -->
-  <footer class="tactical-footer">
-    <p>&copy; 2025 True North Insights. All Rights Reserved.</p>
-    <p>Unauthorized access is strictly prohibited and will be prosecuted to the fullest extent of the law.</p>
-  </footer>
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <mat-card fxFlex="1 1  calc(33.3% - 20px)">
+      <mat-card-header>
+        <mat-card-title>🔥 Tactical Notification System</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Material 3 Expressive toaster with legendary UX feedback</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onDemonstrateToaster()">Demonstrate All Notifications</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card fxFlex="1 1 calc(33.3% - 20px)">
+      <mat-card-header>
+        <mat-card-title>🗄️ Database Operations</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Observable dual persistence with step-by-step feedback</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="onTestDatabaseOperations()">Test Database Operations</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card fxFlex="1 1 calc(33.3% - 20px)">
+      <mat-card-header>
+        <mat-card-title>🔐 Authentication Flow</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>JWT + MFA authentication with audit logging</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="warn" (click)="onTestAuthenticationFlow()">Test Auth Flow</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card fxFlex="1 1 100%">
+      <mat-card-header>
+        <mat-card-title>🏛️ Architecture Status</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <span matListItemTitle>NgModules:</span>
+            <span matListItemLine class="value success">✅ Traditional</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Standalone Components:</span>
+            <span matListItemLine class="value error">❌ FORBIDDEN</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Observable Patterns:</span>
+            <span matListItemLine class="value success">✅ Hot Observables</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Change Detection:</span>
+            <span matListItemLine class="value success">✅ OnPush</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Material Design:</span>
+            <span matListItemLine class="value success">✅ v3 Expressive</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

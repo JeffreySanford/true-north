@@ -6,7 +6,8 @@ declare const SwaggerUIBundle: any;
 @Component({
   selector: 'app-swagger',
   templateUrl: './swagger.html',
-  styleUrl: './swagger.css'
+  styleUrl: './swagger.scss',
+  standalone: false,
 })
 export class SwaggerComponent implements OnInit {
   ngOnInit(): void {
@@ -17,7 +18,7 @@ export class SwaggerComponent implements OnInit {
         SwaggerUIBundle.presets.apis,
         SwaggerUIBundle.SwaggerUIStandalonePreset
       ],
-      layout: 'StandaloneLayout'
+      layout: 'BaseLayout'
     });
   }
 }
