@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
@@ -10,8 +15,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class ContactBriefingComponent implements OnInit {
   form!: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
+  private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.form = this.fb.group({

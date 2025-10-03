@@ -1,7 +1,7 @@
 # True North Insights – Go-To-Market Playbook
 
-Status: Draft  
-Last Updated: 2025-10-03
+Status: Draft (Expanded)  
+Last Updated: 2025-10-03 (Community & Visual Enhancements)
 
 ---
 
@@ -16,7 +16,27 @@ Source: `5-year-marketting-plan.md`
 - Real-time systems (Forge-Board, Time-Forge, Blockchain Auditing)
 - Veteran workforce (90% veteran employment, True North Academy)
 - Federal contracting growth (Micro-purchase, SAT awards, set-asides)
-- Community impact (ND universities, meetups, distance learning)
+- Community & fraternal impact (ND universities, meetups, distance learning, Elks, Legion, VFW, Rotary, Lions, DAV, Team Rubicon)
+
+#### 5-Year Horizon (Visual)
+
+```mermaid
+gantt
+  title True North 5-Year Horizon
+  dateFormat  YYYY-MM
+  section Foundation
+  Launch Site & MVPs          :done, 2025-01, 3m
+  University & Meetups        :active, 2025-03, 6m
+  section Market Penetration
+  First SAT Awards            :2025-06, 6m
+  Subcontract Wins            :2025-08, 8m
+  section Scaling
+  100 Veterans Employed       :2026-07, 18m
+  Regional Meetups (ND)       :2026-09, 12m
+  section National Model
+  SDVOSB Certified            :2027-01, 6m
+  500 Veterans Employed       :2029-01, 12m
+```
 
 ## 2. Positioning & Differentiation
 
@@ -30,6 +50,16 @@ Source: Capability Statement (future doc) & Product–Marketing Alignment
 4. Anchored in North Dakota (local trust + national scale)
 
 ### Value Pillars
+
+```mermaid
+mindmap
+  root((Value Pillars))
+    Accelerated Insight Velocity
+    Secure & Transparent Architecture
+    Veteran Talent Flywheel
+    Contract-Ready Agility
+    Traceable Outcomes
+```
 
 - Accelerated Insight Velocity
 - Secure & Transparent Architecture
@@ -52,9 +82,21 @@ Source: Capture Funnel
 | 5. Pilot             | Active scoped MVP delivery     | Kickoff executed                 | Pilot success review + next award request | Pilot→Award %          |
 | 6. Award / Expansion | Contract / recurring value     | Award executed                   | Expansion path logged                     | Expansion Rate         |
 
-### Conversion Targets
+### Conversion Targets & Funnel
+
+```mermaid
+graph TD
+  A[Awareness] -->|12%| B[Engaged]
+  B -->|40%| C[Qualified]
+  C -->|60% Positioned| D[Positioned]
+  D -->|Pilot Start| E[Pilot]
+  E -->|55%| F[Award]
+  F -->|30%| G[Expansion]
+```
 
 - Awareness→Engaged: 12%
+- Engaged→Qualified: 40%
+- Qualified→Positioned: 60%
 - Pilot→Award: 55%
 - Award→Expansion: 30%
 
@@ -69,6 +111,18 @@ Source: Capture Funnel
 Source: Outreach Cadence
 
 ### Weekly Operating Rhythm
+
+```mermaid
+gantt
+  title Weekly Outreach Rhythm (Rolling)
+  dateFormat  ddd
+  section Weekly Ops
+  Mon :active, mon, 1d
+  Tue :tue, 1d
+  Wed :wed, 1d
+  Thu :thu, 1d
+  Fri :fri, 1d
+```
 
 | Day | Focus                | Anchor Activity                 | Logged Asset              |
 | --- | -------------------- | ------------------------------- | ------------------------- |
@@ -105,20 +159,35 @@ VA Program Execs · Contracting Specialists · Prime Capture Leads · Technical 
 
 Accelerated insight · Secure architecture · Veteran flywheel · Contract-ready agility · Traceable outcomes
 
+### Fraternal & Civic Persona (Added)
+
+| Aspect      | Detail                                                                                                      |
+| ----------- | ----------------------------------------------------------------------------------------------------------- |
+| Pain        | Underutilized veteran technical potential; desire for visible impact                                        |
+| Positioning | True North converts service discipline into high-signal analytics delivery for federal + community outcomes |
+| Proof       | Talent Track metrics, cohort project demos, community hackathon outputs                                     |
+| CTA         | Co-sponsor academy cohort / host meetup / scholarship fund                                                  |
+
 ## 6. Metrics & Accountability
 
 Source: Marketing Metrics
 
 ### Core KPIs (Targets by Q4 2026)
 
-| KPI                   | Target |
-| --------------------- | ------ |
-| SAT pilot awards      | 3      |
-| Subcontract wins      | 2      |
-| Veteran employment %  | 55%    |
-| Universities engaged  | 3      |
-| Inbound leads / month | 12     |
-| Demo conversion rate  | 40%    |
+| KPI                   | Current (Baseline Placeholder) | Target | Notes                                      |
+| --------------------- | ------------------------------ | ------ | ------------------------------------------ |
+| SAT pilot awards      | 0                              | 3      | At least 1 within first 2 cycles           |
+| Subcontract wins      | 0                              | 2      | Via primes needing veteran analytics niche |
+| Veteran employment %  | (TBD)                          | 55%    | Track monthly; target 40% mid-year         |
+| Universities engaged  | 0                              | 3      | NDSU, UND, Jamestown U candidates          |
+| Inbound leads / month | 0                              | 12     | Blend OSDBU + fraternal + webinars         |
+| Demo conversion rate  | 0                              | 40%    | After messaging refinement                 |
+
+```mermaid
+pie title Veteran Employment Goal (55% by Q4 2026)
+  "Veterans" : 40
+  "Non-Veterans" : 60
+```
 
 ### Review Cadence
 
@@ -134,9 +203,21 @@ Source: Marketing Metrics
 
 Source: Veteran Talent Track
 
-### Cohort Lifecycle
+### Cohort Lifecycle (Flywheel)
 
-Recruit → Assess → Onboard → Core Curriculum → Applied Project → Deployment → Alumni
+Recruit → Assess → Onboard → Core Curriculum → Applied Project → Deployment → Alumni → Referrals → New Cohorts
+
+```mermaid
+graph LR
+  R[Recruit] --> A[Assess]
+  A --> O[Onboard]
+  O --> C[Core Curriculum]
+  C --> P[Applied Project]
+  P --> D[Deployment]
+  D --> AL[Alumni]
+  AL --> RF[Referral Loop]
+  RF --> R
+```
 
 ### Curriculum Modules
 
@@ -168,6 +249,15 @@ Source: Product–Marketing Alignment
 ### Roadmap Theme Clusters
 
 Foundation hardening · Insight acceleration · Contract-ready proof · Talent amplification · Trust & traceability
+
+```mermaid
+flowchart LR
+  FH[Foundation Hardening] --> IA[Insight Acceleration]
+  IA --> CR[Contract-Ready Proof]
+  CR --> TA[Talent Amplification]
+  TA --> TT[Trust & Traceability]
+  TT --> IA
+```
 
 ### KPI Links
 
@@ -211,3 +301,28 @@ flowchart TD
 ## Appendix
 
 Cross-links: `5-year-marketting-plan.md`, `product-marketing-alignment.md`, `messaging-matrix.md`, `marketing-metrics.md`, `veteran-talent-track.md`, `capture-funnel.md`, `outreach-cadence.md`.
+
+Additional Programs: `move-to-jamestown-veterans.md` (Veteran Relocation Accelerator), `design/tasks-backlog.md` (Design & Experience Backlog).
+
+### Veteran Relocation Accelerator (Excerpt)
+
+Strategic add-on initiative: Move-to-Jamestown program integrates workforce (Talent Track), housing stabilization, and civic/fraternal onboarding to reinforce retention and differentiate capability posture. See `move-to-jamestown-veterans.md` for full KPI table, partnership matrix, and rollout Gantt.
+
+---
+
+## Pending Task Backlog (Derived from Enhancements)
+
+| ID     | Task                                        | Category    | Rationale                  | Effort (d) |
+| ------ | ------------------------------------------- | ----------- | -------------------------- | ---------- |
+| GTM-1  | Add source-map bundle analysis script       | Performance | Support budget tuning      | 0.5        |
+| GTM-2  | Re-enable modern Material theme API         | Theming     | Consistent design tokens   | 1          |
+| GTM-3  | Implement `@defer` on non-critical sections | Performance | Reduce initial bundle      | 0.5        |
+| GTM-4  | Add analytics service scaffold              | Insights    | Track funnel nav & CTA     | 0.5        |
+| GTM-5  | Add a11y automated axe scan script          | Quality     | Guard regressions          | 0.5        |
+| GTM-6  | Create fraternal partner outreach kit       | Community   | Accelerate network growth  | 1          |
+| GTM-7  | Metrics dashboard automation (export)       | Ops         | Reduce manual compilation  | 1          |
+| GTM-8  | Talent Track dashboard (ramp metrics)       | Talent      | Real-time program health   | 1.5        |
+| GTM-9  | Add OpenAPI auth scopes placeholders        | API         | Prep for security layering | 0.5        |
+| GTM-10 | Implement route-based preloading strategy   | Performance | Improve perceived nav      | 0.5        |
+
+_Note: Security & auditing tasks tracked separately in `security-auditing-backlog.md`._
