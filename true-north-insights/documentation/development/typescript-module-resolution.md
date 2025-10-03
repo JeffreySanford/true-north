@@ -165,13 +165,7 @@ The root now declares project references so the TypeScript server treats the wor
 {
   "extends": "./tsconfig.base.json",
   "files": [],
-  "references": [
-    { "path": "./frontend" },
-    { "path": "./backend" },
-    { "path": "./contracts/api" },
-    { "path": "./frontend-e2e" },
-    { "path": "./backend-e2e" }
-  ]
+  "references": [{ "path": "./frontend" }, { "path": "./backend" }, { "path": "./contracts/api" }, { "path": "./frontend-e2e" }, { "path": "./backend-e2e" }]
 }
 ```
 
@@ -192,15 +186,7 @@ An optional aggregator used solely by the editor (not by builds):
     "forceConsistentCasingInFileNames": true
   },
   "files": [],
-  "references": [
-    { "path": "./frontend/tsconfig.app.json" },
-    { "path": "./frontend/tsconfig.spec.json" },
-    { "path": "./backend/tsconfig.app.json" },
-    { "path": "./backend/tsconfig.spec.json" },
-    { "path": "./contracts/api/tsconfig.json" },
-    { "path": "./frontend-e2e/tsconfig.json" },
-    { "path": "./backend-e2e/tsconfig.json" }
-  ]
+  "references": [{ "path": "./frontend/tsconfig.app.json" }, { "path": "./frontend/tsconfig.spec.json" }, { "path": "./backend/tsconfig.app.json" }, { "path": "./backend/tsconfig.spec.json" }, { "path": "./contracts/api/tsconfig.json" }, { "path": "./frontend-e2e/tsconfig.json" }, { "path": "./backend-e2e/tsconfig.json" }]
 }
 ```
 
