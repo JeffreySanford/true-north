@@ -1,84 +1,88 @@
-<div class="tactical-container" fxLayout="column" fxLayoutGap="20px">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{ title }}</mat-card-title>
-      <mat-card-subtitle>Traditional Angular Architecture - Material 3 Expressive</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="tactical-status" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-        <span class="status-indicator success"></span>
-        <span class="status-text">All Systems Operational</span>
+<section class="dev-page">
+  <header class="dev-page__intro">
+    <div class="dev-page__intro-head">
+      <h1 class="dev-page__title">{{ title }}</h1>
+      <p class="dev-page__subtitle">
+        Traditional Angular Architecture · Material 3 Expressive
+      </p>
+    </div>
+    <div class="dev-page__status" aria-label="system status">
+      <span class="status-indicator success" aria-hidden="true"></span>
+      <span class="status-text">All Systems Operational</span>
+    </div>
+  </header>
+
+  <div class="dev-page__grid">
+    <article class="tactical-card primary dev-tile">
+      <h2 class="dev-tile__title">Tactical Notification System</h2>
+      <p class="dev-tile__body">
+        Material 3 Expressive toaster with legendary UX feedback.
+      </p>
+      <div class="dev-tile__actions">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onDemonstrateToaster()"
+        >
+          Demo Notifications
+        </button>
       </div>
-    </mat-card-content>
-  </mat-card>
+    </article>
 
-  <div fxLayout="row wrap" fxLayoutGap="20px grid">
-    <mat-card fxFlex="1 1  calc(33.3% - 20px)">
-      <mat-card-header>
-        <mat-card-title>🔥 Tactical Notification System</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Material 3 Expressive toaster with legendary UX feedback</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="onDemonstrateToaster()">Demonstrate All Notifications</button>
-      </mat-card-actions>
-    </mat-card>
+    <article class="tactical-card info dev-tile">
+      <h2 class="dev-tile__title">Database Operations</h2>
+      <p class="dev-tile__body">
+        Observable dual persistence with step-by-step feedback.
+      </p>
+      <div class="dev-tile__actions">
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="onTestDatabaseOperations()"
+        >
+          Test DB Ops
+        </button>
+      </div>
+    </article>
 
-    <mat-card fxFlex="1 1 calc(33.3% - 20px)">
-      <mat-card-header>
-        <mat-card-title>🗄️ Database Operations</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Observable dual persistence with step-by-step feedback</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="accent" (click)="onTestDatabaseOperations()">Test Database Operations</button>
-      </mat-card-actions>
-    </mat-card>
+    <article class="tactical-card warning dev-tile">
+      <h2 class="dev-tile__title">Authentication Flow</h2>
+      <p class="dev-tile__body">JWT + MFA authentication with audit logging.</p>
+      <div class="dev-tile__actions">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="onTestAuthenticationFlow()"
+        >
+          Test Auth Flow
+        </button>
+      </div>
+    </article>
 
-    <mat-card fxFlex="1 1 calc(33.3% - 20px)">
-      <mat-card-header>
-        <mat-card-title>🔐 Authentication Flow</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>JWT + MFA authentication with audit logging</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="warn" (click)="onTestAuthenticationFlow()">Test Auth Flow</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card fxFlex="1 1 100%">
-      <mat-card-header>
-        <mat-card-title>🏛️ Architecture Status</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item>
-            <span matListItemTitle>NgModules:</span>
-            <span matListItemLine class="value success">✅ Traditional</span>
-          </mat-list-item>
-          <mat-list-item>
-            <span matListItemTitle>Standalone Components:</span>
-            <span matListItemLine class="value error">❌ FORBIDDEN</span>
-          </mat-list-item>
-          <mat-list-item>
-            <span matListItemTitle>Observable Patterns:</span>
-            <span matListItemLine class="value success">✅ Hot Observables</span>
-          </mat-list-item>
-          <mat-list-item>
-            <span matListItemTitle>Change Detection:</span>
-            <span matListItemLine class="value success">✅ OnPush</span>
-          </mat-list-item>
-          <mat-list-item>
-            <span matListItemTitle>Material Design:</span>
-            <span matListItemLine class="value success">✅ v3 Expressive</span>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
+    <article class="tactical-card success dev-tile dev-tile--wide">
+      <h2 class="dev-tile__title">Architecture Status</h2>
+      <ul class="dev-status-list" aria-label="Architecture checklist">
+        <li>
+          <span class="label">NgModules</span
+          ><span class="value success">Traditional ✅</span>
+        </li>
+        <li>
+          <span class="label">Standalone Components</span
+          ><span class="value error">Forbidden ❌</span>
+        </li>
+        <li>
+          <span class="label">Observable Patterns</span
+          ><span class="value success">Hot Observables ✅</span>
+        </li>
+        <li>
+          <span class="label">Change Detection</span
+          ><span class="value success">OnPush ✅</span>
+        </li>
+        <li>
+          <span class="label">Material Design</span
+          ><span class="value success">v3 Expressive ✅</span>
+        </li>
+      </ul>
+    </article>
   </div>
-</div>
-
-<router-outlet></router-outlet>
+</section>

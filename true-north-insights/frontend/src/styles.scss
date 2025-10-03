@@ -1,10 +1,10 @@
 /* TRUE NORTH INSIGHTS - GLOBAL STYLES */
 /* Material 3 Expressive Tactical Theme */
 
-/* Import tactical toaster styles */
+/* All @use directives must come before any CSS rules */
+@use 'sass:map';
+@use '@angular/material' as mat;
 @use './app/shared/ui-services/tactical-toaster';
-
-/* Import shared style system (tokens, mixins, utilities) */
 @use './styles/index' as *;
 
 /* Global Material 3 Expressive variables */
@@ -27,6 +27,90 @@
   --tactical-shadow-light: #{$shadow-light};
   --tactical-shadow-medium: #{$shadow-medium};
   --tactical-shadow-heavy: #{$shadow-heavy};
+}
+
+/* Patriotic Material 3 Palette (Primary Navy, Secondary Crimson, Tertiary Gold) */
+
+$primary-base: #0d2240;
+$primary-container: #1e3a63;
+$secondary-base: #9d2235;
+$secondary-container: #b73a4b;
+$tertiary-base: #cda349;
+$neutral-bg: #f5f7fa;
+$surface-variant: #e2e8f0;
+$error-base: #ba1a1a;
+
+/* TODO: Re-enable custom theming once correct Angular Material theming API functions confirmed for v20.
+   Temporarily disabled to unblock build (define-palette undefined in current setup). */
+// $true-north-primary: mat.define-palette(mat.$indigo-palette, 900);
+// $true-north-accent: mat.define-palette(mat.$red-palette, 700);
+// $true-north-warn: mat.define-palette(mat.$red-palette);
+// $true-north-theme: mat.define-light-theme(( color: ( primary: $true-north-primary, accent: $true-north-accent, warn: $true-north-warn, )));
+// @include mat.all-component-themes($true-north-theme);
+
+/* Override surfaces for patriotic backdrop */
+body {
+  background: $neutral-bg;
+}
+
+.mat-toolbar.tactical-header {
+  background: linear-gradient(90deg, $primary-base, $primary-container);
+  color: #fff;
+}
+
+.navigation-links a.active-link {
+  position: relative;
+  font-weight: 600;
+}
+.navigation-links a.active-link::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 4px;
+  height: 3px;
+  border-radius: 2px;
+  background: $secondary-base;
+  animation: linkPulse 0.6s ease;
+}
+
+@keyframes linkPulse {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scaleX(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Utility background classes */
+.bg-navy {
+  background: $primary-base !important;
+  color: #fff !important;
+}
+.bg-crimson {
+  background: $secondary-base !important;
+  color: #fff !important;
+}
+.bg-gold {
+  background: $tertiary-base !important;
+  color: #0d2240 !important;
+}
+
+/* Tokenized elevation helpers */
+.elev-1 {
+  box-shadow: var(--tactical-shadow-light);
+}
+.elev-2 {
+  box-shadow: var(--tactical-shadow-medium);
+}
+.elev-3 {
+  box-shadow: var(--tactical-shadow-heavy);
 }
 
 /* Base application styling */
@@ -89,4 +173,31 @@ body {
 /* Focus indicators */
 *:focus-visible {
   @include focus-ring(var(--tactical-info));
+}
+
+/* On-view animation primitives */
+.pre-view {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pre-view.fade-scale {
+  transform: translateY(12px) scale(0.96);
+}
+.pre-view.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.fade-scale.in-view {
+  animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes scaleIn {
+  0% {
+    transform: translateY(12px) scale(0.94);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }

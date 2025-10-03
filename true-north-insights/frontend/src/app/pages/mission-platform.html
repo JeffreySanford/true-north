@@ -1,0 +1,32 @@
+<section class="hero" appOnView="fade-up">
+  <div class="hero__content">
+    <h1>Advancing Veteran Impact Through Secure, Accelerated Insight</h1>
+    <p class="tagline">Dual persistence architecture + veteran talent flywheel delivering measurable mission outcomes.</p>
+    <div class="hero__stats">
+      <div class="stat" *ngFor="let s of heroStats" appOnView="fade-scale">
+        <div class="stat__value">{{ s.value }}<span class="suffix">{{ s.suffix }}</span></div>
+        <div class="stat__label">{{ s.label }}</div>
+        <div class="stat__desc">{{ s.description }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pillars" appOnView="fade-up">
+  <h2 class="section-title">Value Pillars</h2>
+  <div class="pillar-grid">
+    <mat-card class="pillar" *ngFor="let pillar of [
+      {title:'Accelerated Insight Velocity',desc:'Reduce time from raw data to validated decision insight.'},
+      {title:'Secure & Transparent Architecture',desc:'Governed dual persistence + auditable lineage.'},
+      {title:'Veteran Talent Flywheel',desc:'Mission-aligned talent pipeline converting aptitude into delivery.'},
+      {title:'Contract-Ready Agility',desc:'Rapid pilot path and acquisition clarity.'},
+      {title:'Traceable Outcomes',desc:'Instrumentation & lineage linking actions to impact.'}
+    ]" appOnView="fade-scale">
+      <mat-card-header>
+        <mat-icon>military_tech</mat-icon>
+        <mat-card-title>{{ pillar.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>{{ pillar.desc }}</mat-card-content>
+    </mat-card>
+  </div>
+</section>

@@ -1,6 +1,28 @@
 /* TRUE NORTH INSIGHTS - LEGENDARY TACTICAL INTERFACE */
 /* Material 3 Expressive Design with Military-Grade Aesthetics */
 
+/* Layout variables */
+:root {
+  /* Default (desktop) toolbar height; matches Material baseline + custom padding */
+  --app-header-height: 64px;
+  /* Mobile condensed height */
+  --app-header-height-mobile: 56px;
+}
+
+@media (width < 768px) {
+  :root {
+    --app-header-height: var(--app-header-height-mobile);
+  }
+}
+
+/* Main wrapper offset by fixed header */
+.app-shell-main {
+  min-height: calc(100vh - var(--app-header-height));
+  padding-top: var(--app-header-height);
+  display: block;
+  box-sizing: border-box;
+}
+
 .tactical-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -29,7 +51,12 @@
   left: -50%;
   width: 200%;
   height: 100%;
-  background: linear-gradient(45deg, transparent 30%, rgb(255 255 255 / 10%) 50%, transparent 70%);
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgb(255 255 255 / 10%) 50%,
+    transparent 70%
+  );
   animation: tactical-sweep 3s ease-in-out infinite;
 }
 
@@ -283,29 +310,35 @@
 
 /* Animations */
 @keyframes tactical-sweep {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes tactical-pulse-dot {
-  0%, 100% { 
-    opacity: 1; 
+  0%,
+  100% {
+    opacity: 1;
     transform: scale(1);
   }
 
-  50% { 
-    opacity: 0.7; 
+  50% {
+    opacity: 0.7;
     transform: scale(1.2);
   }
 }
 
 @keyframes tactical-pulse-card {
-  0%, 100% { 
+  0%,
+  100% {
     transform: scale(1);
     box-shadow: var(--tactical-shadow-medium);
   }
 
-  50% { 
+  50% {
     transform: scale(1.02);
     box-shadow: var(--tactical-shadow-heavy);
   }
@@ -318,20 +351,20 @@
     text-align: center;
     gap: 1rem;
   }
-  
+
   .tactical-title h1 {
     font-size: 2rem;
   }
-  
+
   .tactical-main {
     padding: 1rem;
   }
-  
+
   .tactical-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .phase-grid {
     grid-template-columns: 1fr;
   }
@@ -342,7 +375,7 @@
   .tactical-card {
     border-width: 3px;
   }
-  
+
   .status-item {
     border-left-width: 4px;
   }
@@ -355,7 +388,7 @@
   .phase-item.current {
     animation: none !important;
   }
-  
+
   .tactical-card,
   .tactical-button {
     transition: none !important;

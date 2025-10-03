@@ -1,0 +1,31 @@
+<section class="talent-hero" appOnView="fade-up">
+  <h1>Veteran Talent & Impact</h1>
+  <p class="lead">
+    Structured academy accelerating analytic contribution while reinforcing
+    mission credibility.
+  </p>
+</section>
+<section class="lifecycle" appOnView="fade-up">
+  <h2>Cohort Lifecycle</h2>
+  <div class="steps">
+    <div
+      class="step"
+      *ngFor="let s of lifecycle; let i = index"
+      appOnView="fade-scale"
+    >
+      <div class="step__index">{{ i + 1 }}</div>
+      <div class="step__label">{{ s }}</div>
+    </div>
+  </div>
+</section>
+<section class="talent-metrics" appOnView="fade-up">
+  <h2>Key Targets</h2>
+  <div class="metric-grid">
+    <div class="metric" *ngFor="let m of metrics" appOnView="fade-scale">
+      <div class="metric__value">
+        {{ m.value }}<span class="suffix">{{ m.suffix }}</span>
+      </div>
+      <div class="metric__label">{{ m.label }}</div>
+    </div>
+  </div>
+</section>

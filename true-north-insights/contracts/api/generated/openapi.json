@@ -1,0 +1,66 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api": {
+      "get": {
+        "operationId": "AppController_getData",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Application greeting with timestamp and request count"
+          }
+        },
+        "summary": "Get main application data",
+        "tags": [
+          "root"
+        ]
+      }
+    },
+    "/api/realtime": {
+      "get": {
+        "operationId": "AppController_getRealtimeData",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get realtime data emission (demo)",
+        "tags": [
+          "root"
+        ]
+      }
+    },
+    "/api/stats": {
+      "get": {
+        "operationId": "AppController_getStats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Current request count total"
+          }
+        },
+        "summary": "Get application statistics",
+        "tags": [
+          "root"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "True North API",
+    "description": "Core API for True North Insights",
+    "version": "0.1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "root",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {}
+  }
+}

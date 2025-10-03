@@ -11,7 +11,21 @@
   left: 0;
   right: 0;
   z-index: 1000;
+  height: var(--app-header-height);
+  box-sizing: border-box;
 }
+
+/* Flex utility classes replacing @angular/flex-layout directives */
+.header-flex { display: flex; justify-content: space-between; align-items: center; }
+.logo-flex { display: flex; align-items: center; }
+.flex-row { display: flex; flex-direction: row; }
+.align-center { align-items: center; }
+.justify-end { justify-content: flex-end; }
+.gap-4 { gap: 4px; }
+.gap-8 { gap: 8px; }
+.grow { flex: 1 1 auto; }
+
+.nav-flex { display: flex; }
 
 .logo {
   display: flex;

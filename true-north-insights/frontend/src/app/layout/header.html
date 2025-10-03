@@ -1,16 +1,6 @@
-<mat-toolbar
-  color="primary"
-  class="tactical-header"
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
->
-  <div class="logo" fxFlex="none">
-    <a
-      routerLink="/home"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      fxLayoutGap="8px"
-    >
+<mat-toolbar color="primary" class="tactical-header header-flex">
+  <div class="logo logo-flex">
+    <a routerLink="/home" class="logo-link flex-row gap-8 align-center">
       <img
         src="assets/logo.svg"
         alt="True North Insights Logo"
@@ -22,53 +12,33 @@
     </a>
   </div>
 
-  <div
-    class="navigation-links"
-    fxFlex
-    fxLayout="row"
-    fxLayoutAlign="start center"
-  >
-    <a mat-button routerLink="/home" routerLinkActive="active-link">Home</a>
-    <a mat-button routerLink="/about" routerLinkActive="active-link">About</a>
-    <a mat-button routerLink="/services" routerLinkActive="active-link"
-      >Services</a
+  <div class="navigation-links nav-flex flex-row gap-4 align-center grow">
+    <a mat-button routerLink="/mission" routerLinkActive="active-link"
+      >Mission</a
     >
-    <a mat-button routerLink="/projects" routerLinkActive="active-link"
-      >Projects</a
+    <a mat-button routerLink="/capabilities" routerLinkActive="active-link"
+      >Capabilities</a
     >
-    <a mat-button routerLink="/contact" routerLinkActive="active-link"
-      >Contact</a
+    <a mat-button routerLink="/readiness" routerLinkActive="active-link"
+      >Readiness</a
     >
-    <a mat-button routerLink="/development" routerLinkActive="active-link"
-      >Development</a
+    <a mat-button routerLink="/talent" routerLinkActive="active-link">Talent</a>
+    <a mat-button routerLink="/engagement" routerLinkActive="active-link"
+      >Engagement</a
     >
-    <button mat-button [matMenuTriggerFor]="docsMenu">
-      <mat-icon>description</mat-icon>
-      <span>Docs</span>
-    </button>
-    <mat-menu #docsMenu="matMenu">
-      <a mat-menu-item routerLink="/swagger">
-        <mat-icon>api</mat-icon>
-        <span>Backend API</span>
-      </a>
-      <a
-        mat-menu-item
-        href="http://localhost:4201"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <mat-icon>code</mat-icon>
-        <span>Frontend Code</span>
-      </a>
-    </mat-menu>
+    <a mat-button routerLink="/briefing" routerLinkActive="active-link"
+      >Briefing</a
+    >
+    <a
+      mat-button
+      routerLink="/development"
+      routerLinkActive="active-link"
+      class="dev-link"
+      >Dev</a
+    >
   </div>
 
-  <div
-    class="header-actions"
-    fxLayout="row"
-    fxLayoutAlign="end center"
-    fxLayoutGap="8px"
-  >
+  <div class="header-actions flex-row gap-8 align-center justify-end">
     <!-- Global view mode toggle: Table (off) / Kanban (on) -->
     <mat-slide-toggle
       color="accent"
