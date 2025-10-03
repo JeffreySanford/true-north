@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [],
+    "references": [
+        {
+            "path": "./frontend/tsconfig.app.json"
+        },
+        {
+            "path": "./frontend/tsconfig.spec.json"
+        },
+        {
+            "path": "./backend/tsconfig.app.json"
+        },
+        {
+            "path": "./backend/tsconfig.spec.json"
+        },
+        {
+            "path": "./contracts/api/tsconfig.json"
+        },
+        {
+            "path": "./frontend-e2e/tsconfig.json"
+        },
+        {
+            "path": "./backend-e2e/tsconfig.json"
+        }
+    ]
+}

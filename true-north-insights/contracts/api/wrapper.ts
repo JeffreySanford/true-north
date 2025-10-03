@@ -11,7 +11,8 @@ interface OpenApiDocLike {
 
 export async function loadOpenApi(): Promise<UnknownRecord> {
   // The generated file may not exist yet; we intentionally lazy import the future generated artifact first.
-  const specPromise: Promise<any> = import('./generated/openapi.json');
+  const specPromise: Promise<UnknownRecord | { default: UnknownRecord }> =
+    import('./generated/openapi.json');
   let spec: UnknownRecord | { default: UnknownRecord };
   try {
     spec = await specPromise;

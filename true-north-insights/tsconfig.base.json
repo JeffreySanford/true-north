@@ -4,8 +4,7 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-  // (moduleResolution bundler removed) We use default classic/node resolution for compatibility with mixed CJS/ESM tools.
-  // Re-enable later per-project if needed for package exports or conditional ESM support.
+    "moduleResolution": "bundler",
     // Allow importing JSON modules (needed for contracts/api wrapper dynamic import fallback)
     "resolveJsonModule": true,
     // Preserve existing emit metadata defaults for Angular decorators in per-project tsconfigs
@@ -21,7 +20,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "@typescript-eslint/utils/ts-eslint": [
+        "node_modules/@typescript-eslint/utils/dist/ts-eslint/index.d.ts"
+      ],
+      "@styles/*": [
+        "frontend/src/styles/*"
+      ],
+      "@types/*": [
+        "types/*"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,

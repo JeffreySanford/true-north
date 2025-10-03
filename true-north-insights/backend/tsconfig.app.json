@@ -3,13 +3,20 @@
   "compilerOptions": {
     "outDir": "../dist/out-tsc",
     "module": "es2022",
-    "moduleResolution": "node",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     // Align target with root (es2022) for consistency
     "target": "es2022"
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "jest.config.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts"
+  ]
 }

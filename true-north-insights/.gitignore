@@ -19,6 +19,18 @@ pnpm-lock.yaml
 /tmp/
 /out-tsc/
 /coverage/
+/documentation/**/*.html
+/documentation/js/
+/documentation/styles/
+/documentation/images/
+/documentation/components/
+/documentation/injectables/
+/documentation/interfaces/
+/documentation/modules/
+/documentation/miscellaneous/
+/documentation/template-playground*/
+/documentation/graph/
+/dist/compodoc/
 
 # Log files
 *.log

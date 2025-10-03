@@ -1,15 +1,15 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "allowJs": true,
     "outDir": "../dist/out-tsc",
     "sourceMap": false,
-    "module": "commonjs",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler"
   },
   "include": [
     "**/*.ts",

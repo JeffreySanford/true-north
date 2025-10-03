@@ -1,0 +1,26 @@
+/* Design Tokens: Colors, Typography, Spacing, Elevation */
+
+// Color Palette
+$color-success: #00ff41;
+$color-error: #ff0040;
+$color-warning: #ffab00;
+$color-info: #2196f3;
+$color-progress: #9c27b0;
+$color-primary: #607d8b;
+
+// RGB helpers (if needed for alpha overlays)
+$color-success-rgb: 0, 255, 65;
+$color-error-rgb: 255, 0, 64;
+$color-warning-rgb: 255, 171, 0;
+$color-info-rgb: 33, 150, 243;
+$color-progress-rgb: 156, 39, 176;
+$color-primary-rgb: 96, 125, 139;
+
+// Typography
+$font-mono: 'Roboto Mono', 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+$font-sans: 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+
+// Shadows (can be used in mixins)
+$shadow-light: 0 4px 12px rgb(0 0 0 / 10%);
+$shadow-medium: 0 8px 24px rgb(0 0 0 / 15%);
+$shadow-heavy: 0 16px 48px rgb(0 0 0 / 20%);

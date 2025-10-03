@@ -4,34 +4,34 @@
 /* Import tactical toaster styles */
 @use './app/shared/ui-services/tactical-toaster';
 
+/* Import shared style system (tokens, mixins, utilities) */
+@use './styles/index' as *;
+
 /* Global Material 3 Expressive variables */
+/* Expose SCSS tokens as CSS custom properties for runtime theming */
 :root {
-  /* Tactical Color Palette */
-  --tactical-success: #00ff41;
-  --tactical-success-rgb: 0, 255, 65;
-  --tactical-error: #ff0040;
-  --tactical-error-rgb: 255, 0, 64;
-  --tactical-warning: #ffab00;
-  --tactical-warning-rgb: 255, 171, 0;
-  --tactical-info: #2196f3;
-  --tactical-info-rgb: 33, 150, 243;
-  --tactical-progress: #9c27b0;
-  --tactical-progress-rgb: 156, 39, 176;
-  --tactical-primary: #607d8b;
-  --tactical-primary-rgb: 96, 125, 139;
-  
-  /* Typography */
-  --tactical-font-mono: 'Roboto Mono', 'SF Mono', 'Monaco', 'Inconsolata', monospace;
-  --tactical-font-sans: 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
-  
-  /* Shadows */
-  --tactical-shadow-light: 0 4px 12px rgb(0 0 0 / 10%);
-  --tactical-shadow-medium: 0 8px 24px rgb(0 0 0 / 15%);
-  --tactical-shadow-heavy: 0 16px 48px rgb(0 0 0 / 20%);
+  --tactical-success: #{$color-success};
+  --tactical-success-rgb: #{$color-success-rgb};
+  --tactical-error: #{$color-error};
+  --tactical-error-rgb: #{$color-error-rgb};
+  --tactical-warning: #{$color-warning};
+  --tactical-warning-rgb: #{$color-warning-rgb};
+  --tactical-info: #{$color-info};
+  --tactical-info-rgb: #{$color-info-rgb};
+  --tactical-progress: #{$color-progress};
+  --tactical-progress-rgb: #{$color-progress-rgb};
+  --tactical-primary: #{$color-primary};
+  --tactical-primary-rgb: #{$color-primary-rgb};
+  --tactical-font-mono: #{$font-mono};
+  --tactical-font-sans: #{$font-sans};
+  --tactical-shadow-light: #{$shadow-light};
+  --tactical-shadow-medium: #{$shadow-medium};
+  --tactical-shadow-heavy: #{$shadow-heavy};
 }
 
 /* Base application styling */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   font-family: var(--tactical-font-sans);
@@ -88,7 +88,5 @@ html, body {
 
 /* Focus indicators */
 *:focus-visible {
-  outline: 2px solid var(--tactical-info);
-  outline-offset: 2px;
-  border-radius: 4px;
+  @include focus-ring(var(--tactical-info));
 }

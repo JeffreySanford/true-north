@@ -9,7 +9,6 @@
     "test": "nx run-many --target=test --all",
     "lint": "npm run lint:all",
     "verify": "npm run validate:all",
-
     "lint:eslint": "nx run-many --target=lint --all",
     "lint:eslint:fix": "nx run-many --target=lint --all --fix",
     "lint:scss": "stylelint \"**/*.scss\" --fix",
@@ -17,7 +16,6 @@
     "lint:all": "run-s lint:eslint lint:scss:check",
     "lint:fix": "run-s lint:eslint:fix lint:scss",
     "lint:draconian": "eslint . --fix",
-
     "test:unit": "nx run-many --target=test --all",
     "test:e2e": "nx run-many --target=e2e --all",
     "test:frontend": "nx test frontend",
@@ -27,27 +25,23 @@
     "test:all": "run-s test:unit test:e2e",
     "test:coverage": "nx run-many --target=test --all --code-coverage",
     "test:draconian": "jest",
-
     "build:prod": "nx run-many --target=build --all --configuration=production",
     "build:dev": "nx run-many --target=build --all --configuration=development",
     "start:ci": "nx serve frontend --host 0.0.0.0 --port 4200",
     "start:all": "nx run-many --target=serve --projects=frontend,backend --parallel",
     "start:frontend": "nx serve frontend",
     "start:backend": "nx serve backend",
-
     "validate:security": "npm audit --audit-level high",
     "validate:lighthouse": "lhci autorun",
-    "validate:all": "run-s lint:all test:unit ci:check-standalone validate:security",
+    "validate:all": "run-s lint:all test:unit ci:check-standalone typecheck:backend validate:security",
     "validate:draconian": "run-s flush lint:draconian test:draconian",
-
     "enforce:pre-commit": "node .githooks/pre-commit",
     "enforce:pre-push": "npm run validate:all",
     "enforce:install-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
-
     "flush": "rimraf dist tmp",
     "ci:check-standalone": "findstr /S /I /C:\"standalone: true\" frontend\\src\\*.ts >nul 2>&1 && (echo ❌ Found forbidden standalone component usage & exit 1) || echo ✅ No standalone components",
-
-    "api-contract:build": "node scripts/build-api-contract.mjs"
+    "api-contract:build": "node scripts/build-api-contract.mjs",
+    "typecheck:backend": "tsc --project backend/tsconfig.app.json --noEmit"
   },
   "private": true,
   "devDependencies": {

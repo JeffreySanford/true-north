@@ -1,0 +1,14 @@
+/* Reusable mixins */
+
+@use 'sass:color';
+
+@mixin focus-ring($color, $offset: 2px) {
+  outline: 2px solid $color;
+  outline-offset: $offset;
+  border-radius: 4px;
+}
+
+@mixin elevation($shadow) {
+  box-shadow: $shadow;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}

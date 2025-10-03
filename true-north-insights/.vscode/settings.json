@@ -4,12 +4,15 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.defaultLanguage": "typescript",
-  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  // Disable noisy project-wide diagnostics on libraries; we rely on build + lint instead
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
   "typescript.inlayHints.parameterNames.enabled": "literals",
   "typescript.inlayHints.variableTypes.enabled": true,
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

@@ -1,0 +1,29 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "moduleResolution": "bundler",
+        "types": [
+            "node",
+            "jest",
+            "playwright"
+        ],
+        "allowJs": true
+    },
+    "include": [
+        "frontend/**/*.ts",
+        "backend/**/*.ts",
+        "contracts/**/*.ts",
+        "tools/**/*.ts",
+        "frontend-e2e/**/*.ts",
+        "backend-e2e/**/*.ts",
+        "jest.config.ts",
+        "types/**/*.d.ts"
+    ],
+    "exclude": [
+        "**/dist/**",
+        "**/coverage/**",
+        "**/.angular/**",
+        "node_modules"
+    ]
+}

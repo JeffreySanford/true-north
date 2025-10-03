@@ -18,11 +18,13 @@
 .kanban-item {
   padding: 16px;
   margin-bottom: 16px;
-  background: white;
+
+  /* Use shorthand hex instead of named color for Stylelint compliance */
+  background: #fff;
   border-radius: 4px;
   cursor: move;
 }
 
 .view-toggle {
-    margin-left: auto;
+  margin-left: auto;
 }

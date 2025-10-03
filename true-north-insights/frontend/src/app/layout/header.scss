@@ -4,8 +4,8 @@
   align-items: center;
   padding: 0 24px;
   background-color: #1a237e;
-  color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #ffffff;
+  color: #fff;
 }
 
 .logo img {
@@ -46,27 +46,27 @@
 }
 
 .header-actions .mat-icon-button {
-  color: #ffffff;
+  color: #fff;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .navigation-links {
     display: flex;
     gap: 16px;
   }
 
   .navigation-links .mat-button {
-    color: #ffffff;
+    color: #fff;
     font-weight: 500;
     transition: background-color 0.3s ease;
   }
 
   .navigation-links .mat-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgb(255 255 255 / 10%);
   }
 
   .navigation-links .active-link {
-    border-bottom: 2px solid #ffffff;
+    border-bottom: 2px solid #fff;
     border-radius: 0;
   }
 }
