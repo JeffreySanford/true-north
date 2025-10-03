@@ -4,8 +4,8 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    // Use modern bundler-style resolution so packages like @typescript-eslint/utils/ts-eslint resolve properly without forcing Node16 module format
-    "moduleResolution": "bundler",
+  // (moduleResolution bundler removed) We use default classic/node resolution for compatibility with mixed CJS/ESM tools.
+  // Re-enable later per-project if needed for package exports or conditional ESM support.
     // Allow importing JSON modules (needed for contracts/api wrapper dynamic import fallback)
     "resolveJsonModule": true,
     // Preserve existing emit metadata defaults for Angular decorators in per-project tsconfigs
