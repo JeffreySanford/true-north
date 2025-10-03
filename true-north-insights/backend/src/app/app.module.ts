@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from '../auth/auth.module';
+import { DevStatsModule } from '../dev-stats/dev-stats.module';
 
 /**
  * @description Root application module for True North Insights backend services
@@ -8,7 +10,7 @@ import { AppService } from './app.service';
  * @since October 2, 2025
  */
 @Module({
-  imports: [],
+  imports: [AuthModule, DevStatsModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -45,6 +45,48 @@
           "root"
         ]
       }
+    },
+    "/api/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/dev-stats": {
+      "get": {
+        "operationId": "DevStatsController_getStats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "DevStats"
+        ]
+      }
+    },
+    "/api/dev-stats/secure": {
+      "get": {
+        "operationId": "DevStatsController_getSecure",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "DevStats"
+        ]
+      }
     }
   },
   "info": {

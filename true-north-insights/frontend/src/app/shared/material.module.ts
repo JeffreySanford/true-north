@@ -11,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   exports: [
@@ -25,7 +27,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatMenuModule,
     MatSnackBarModule,
     MatToolbarModule,
-  MatSlideToggleModule,
+    MatSlideToggleModule,
+    MatTableModule,
+    DragDropModule,
   ],
 })
 export class MaterialModule {}

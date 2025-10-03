@@ -4,7 +4,10 @@
  */
 
 // Using dynamic import so bundlers can split it if needed.
-type UnknownRecord = Record<string, unknown>;
+// Prefer explicit index signature over Record utility types.
+interface UnknownRecord {
+  [key: string]: unknown;
+}
 interface OpenApiDocLike {
   info?: { title?: string; version?: string; description?: string };
 }
@@ -22,7 +25,9 @@ export async function loadOpenApi(): Promise<UnknownRecord> {
       | { default: UnknownRecord };
   }
   // Normalize CommonJS/ESM interop style default export without lingering any
-  const maybeDefault = spec as { default?: UnknownRecord } | UnknownRecord;
+  const maybeDefault: { default?: UnknownRecord } | UnknownRecord = spec as
+    | { default?: UnknownRecord }
+    | UnknownRecord;
   const resolved =
     (maybeDefault as { default?: UnknownRecord }).default ?? maybeDefault;
   return resolved as UnknownRecord;

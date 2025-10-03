@@ -10,10 +10,29 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { AppModule } from './app/app.module';
+import { Role } from './auth/roles.enum';
 
 async function bootstrap(): Promise<void> {
   const nestApplication = await NestFactory.create(AppModule, {
     logger: false,
+  });
+
+  // Demo baseline user injection (Option A minimal public stats)
+  nestApplication.use((req: any, _res: any, next: () => void) => {
+    if (
+      process.env['DEMO_MODE'] === '1' &&
+      !req.headers['authorization'] &&
+      !req.user
+    ) {
+      req.user = {
+        id: 'demo-baseline',
+        sub: 'demo-baseline',
+        email: 'demo@local',
+        displayName: 'Demo Visitor',
+        roles: [Role.USER],
+      };
+    }
+    next();
   });
   const globalPrefix = 'api';
   nestApplication.setGlobalPrefix(globalPrefix);
