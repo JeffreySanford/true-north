@@ -1,0 +1,219 @@
+<div class="planning-top-section">
+  <div class="planning-header">
+    <h1>Planning Board</h1>
+    <mat-form-field appearance="fill" class="project-dropdown">
+      <mat-label>Project</mat-label>
+      <mat-select
+        [(ngModel)]="selectedProjectId"
+        (selectionChange)="onProjectChange($event.value)"
+      >
+        <mat-option *ngFor="let project of projects" [value]="project.id">
+          {{ project.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Add Project</button>
+    <mat-slide-toggle [(ngModel)]="kanbanView">Kanban View</mat-slide-toggle>
+  </div>
+  <div class="planning-actions">
+    <button mat-stroked-button color="accent">Filter</button>
+    <button mat-stroked-button color="accent">Sort</button>
+    <button mat-stroked-button color="accent">Export</button>
+    <mat-button-toggle-group
+      [(ngModel)]="tableMode"
+      aria-label="Table Mode"
+      class="table-mode-toggle"
+    >
+      <mat-button-toggle value="full">Full Table</mat-button-toggle>
+      <mat-button-toggle value="category">Category Tables</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
+
+<div *ngIf="kanbanView; else tableView">
+  <div class="kanban-board-horizontal" cdkDropListGroup>
+    <div
+      class="kanban-column-stylized"
+      *ngFor="let category of categories"
+      cdkDropList
+      [cdkDropListData]="getTasksByCategory(category)"
+      (cdkDropListDropped)="onTaskDrop($event, category)"
+      [ngStyle]="{ 'background': getCategoryColor(category) + '22', 'borderColor': getCategoryColor(category) }"
+    >
+      <div class="kanban-column-header">
+        <h2>{{ category | titlecase }}</h2>
+      </div>
+      <ng-container
+        *ngIf="getTasksByCategory(category).length > 0; else noTasks"
+      >
+        <div
+          class="kanban-card-stylized"
+          *ngFor="let task of getTasksByCategory(category)"
+          cdkDrag
+          (dblclick)="openTask(task)"
+          [ngStyle]="{
+            'background': getCategoryColor(category) + '18',
+            'borderColor': task.status === 'impeded' ? getCategoryColor(category) : '',
+            'boxShadow': task.status === 'impeded' ? '0 0 0 3px ' + getCategoryColor(category) : ''
+          }"
+          [class.impeded-task]="task.status === 'impeded'"
+        >
+          <div class="card-header">
+            <span class="task-title">{{ task.title }}</span>
+            <span class="task-status-icon">
+              <mat-icon matTooltip="{{ task.status | titlecase }}">
+                {{ task.status === 'active' ? 'play_circle' : task.status ===
+                'completed' ? 'check_circle' : task.status === 'backlog' ?
+                'hourglass_empty' : 'info' }}
+              </mat-icon>
+            </span>
+          </div>
+          <div class="card-body" *ngIf="expandedTask === task">
+            <p>{{ task.description }}</p>
+            <span *ngIf="task.startedAt">Start: {{ task.startedAt }}</span>
+            <span *ngIf="task.completedAt">End: {{ task.completedAt }}</span>
+          </div>
+          <button mat-icon-button (click)="toggleExpand(task)">
+            <mat-icon
+              >{{ expandedTask === task ? 'expand_less' : 'expand_more'
+              }}</mat-icon
+            >
+          </button>
+        </div>
+      </ng-container>
+      <ng-template #noTasks>
+        <div class="no-tasks">No tasks in this category.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<ng-template #tableView>
+  <div *ngIf="tableMode === 'full'">
+    <table
+      mat-table
+      [dataSource]="allTasks"
+      class="mat-elevation-z8 planning-table"
+    >
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let task" (dblclick)="openTask(task)">
+          {{ task.title }}
+          <button mat-icon-button (click)="toggleExpand(task)">
+            <mat-icon
+              >{{ expandedTask === task ? 'expand_less' : 'expand_more'
+              }}</mat-icon
+            >
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>Category</th>
+        <td mat-cell *matCellDef="let task">
+          <span
+            class="category-chip"
+            [ngStyle]="{ 'background': getCategoryColor(task.category) + '33', 'color': getCategoryColor(task.category) }"
+            >{{ task.category | titlecase }}</span
+          >
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let task">
+          <mat-icon
+            [ngStyle]="{ color: task.status === 'impeded' ? '#c62828' : '#388e3c' }"
+          >
+            {{ task.status === 'impeded' ? 'block' : task.status === 'active' ?
+            'play_circle' : task.status === 'completed' ? 'check_circle' :
+            'hourglass_empty' }}
+          </mat-icon>
+          <span [ngClass]="{ 'impeded-status': task.status === 'impeded' }"
+            >{{ task.status | titlecase }}</span
+          >
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; when: isExpandedRow"
+      >
+        <td colspan="3">
+          <div>
+            <p>{{ row.description }}</p>
+            <span *ngIf="row.startedAt">Start: {{ row.startedAt }}</span>
+            <span *ngIf="row.completedAt">End: {{ row.completedAt }}</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="tableMode === 'category'">
+    <div class="category-tables-wrapper">
+      <div
+        *ngFor="let category of categories"
+        class="category-table-animated"
+        [ngStyle]="{ 'borderColor': getCategoryColor(category), 'background': getCategoryColor(category) + '18' }"
+      >
+        <div
+          class="category-table-header"
+          [ngStyle]="{ 'background': getCategoryColor(category) + '33', 'color': getCategoryColor(category) }"
+        >
+          <mat-icon
+            class="category-table-icon"
+            [ngStyle]="{ color: getCategoryColor(category) }"
+            >category</mat-icon
+          >
+          <span>{{ category | titlecase }}</span>
+        </div>
+        <table
+          mat-table
+          [dataSource]="getTasksByCategory(category)"
+          class="mat-elevation-z8 category-table"
+        >
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let task" (dblclick)="openTask(task)">
+              {{ task.title }}
+              <button mat-icon-button (click)="toggleExpand(task)">
+                <mat-icon
+                  >{{ expandedTask === task ? 'expand_less' : 'expand_more'
+                  }}</mat-icon
+                >
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let task">
+              <mat-icon
+                [ngStyle]="{ color: task.status === 'impeded' ? '#c62828' : getCategoryColor(category) }"
+              >
+                {{ task.status === 'impeded' ? 'block' : task.status ===
+                'active' ? 'play_circle' : task.status === 'completed' ?
+                'check_circle' : 'hourglass_empty' }}
+              </mat-icon>
+              <span [ngClass]="{ 'impeded-status': task.status === 'impeded' }"
+                >{{ task.status | titlecase }}</span
+              >
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="['title', 'status']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['title', 'status'];"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['title', 'status']; when: isExpandedRow"
+          >
+            <td colspan="2">
+              <div>
+                <p>{{ row.description }}</p>
+                <span *ngIf="row.startedAt">Start: {{ row.startedAt }}</span>
+                <span *ngIf="row.completedAt">End: {{ row.completedAt }}</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-template>

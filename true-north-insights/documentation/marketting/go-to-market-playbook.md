@@ -11,6 +11,8 @@ Source: `5-year-marketting-plan.md`
 
 **Mission:** Become America’s Veteran Tech Company — legendary solutions, veteran-built, real-time ready.
 
+Brand Architecture: Company = True North Insights; public site/campaign shorthand = "True North Insight".
+
 ### Core Axes
 
 - Real-time systems (Forge-Board, Time-Forge, Blockchain Auditing)
@@ -44,8 +46,8 @@ Source: Capability Statement (future doc) & Product–Marketing Alignment
 
 ### Differentiators
 
-1. Veteran workforce focus (90% target)
-2. MVP-first, fixed-price SAT pilots
+1. Veteran workforce focus (90% target) — Veteran Initiative is a flagship program
+2. MVP-first, fixed-price SAT pilots (< $250K complete-delivery packages)
 3. Observable, real-time dashboards (vs. batch reports)
 4. Anchored in North Dakota (local trust + national scale)
 
@@ -105,6 +107,7 @@ graph TD
 - CRM stage fields + workflow triggers
 - Automated “pilot success” summary template
 - Playbook snippet library for responses
+- Planning View (PV) URLs attached to each active opportunity and pilot for transparent status
 
 ## 4. Outreach Rhythm
 
@@ -124,13 +127,13 @@ gantt
   Fri :fri, 1d
 ```
 
-| Day | Focus                | Anchor Activity                 | Logged Asset              |
-| --- | -------------------- | ------------------------------- | ------------------------- |
-| Mon | Federal reach-outs   | Targeted micro-purchase angle   | Outreach log              |
-| Tue | Prime introductions  | Prime matrix update             | Partner sheet delta       |
-| Wed | Veteran cohort touch | Talent pipeline sync            | Cohort dashboard snapshot |
-| Thu | Capability briefing  | Briefing deck revision          | Versioned deck ID         |
-| Fri | Metrics review       | KPI trend check + atomize 1 win | Atomized snippet link     |
+| Day | Focus                | Anchor Activity                 | Logged Asset                        |
+| --- | -------------------- | ------------------------------- | ----------------------------------- |
+| Mon | Federal reach-outs   | Targeted micro-purchase angle   | Outreach log                        |
+| Tue | Prime introductions  | Prime matrix update             | Partner sheet delta                 |
+| Wed | Veteran cohort touch | Talent pipeline sync            | Cohort dashboard snapshot           |
+| Thu | Capability briefing  | Briefing deck revision          | Versioned deck ID                   |
+| Fri | Metrics review       | KPI trend check + atomize 1 win | Atomized snippet link + PV snapshot |
 
 ### Monthly / Quarterly Layers
 
@@ -199,7 +202,7 @@ pie title Veteran Employment Goal (55% by Q4 2026)
 - Slow pilot acquisition (<1 lead/mo)
 - Veteran hiring lag (<30% after 2 hires)
 
-## 7. Veteran Talent Flywheel
+## 7. Veteran Talent Flywheel (Initiative)
 
 Source: Veteran Talent Track
 

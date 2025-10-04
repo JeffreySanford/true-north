@@ -6,11 +6,13 @@
 
 True North Insights is more than a veteran-led consulting company; we are a movement rooted in Jamestown, North Dakota. Founded by veterans and patriots, we combine cutting-edge technology with the values of discipline, service, and accountability. Our mission is simple yet powerful: **We are legendary** — building secure, innovative, real-time solutions that strengthen government, empower veterans, and uplift local communities.
 
+Brand Architecture: Company = True North Insights (parent). Public website/campaign shorthand = "True North Insight".
+
 ### Core Value Proposition
 
 - **Veteran employment focus:** Targeting 90% veteran employment, creating a sustainable transition pathway into technology careers.
 - **Specialists in real-time systems:** Dashboards, auditing, and time/accountability platforms built with Angular + NestJS + RxJS hot observables.
-- **Agile federal delivery:** Positioned to win micro-purchases (≤ $15k) and Simplified Acquisition Threshold contracts (< $250k) where speed and clarity win.
+- **Agile federal delivery:** Positioned to win micro-purchases (≤ $15k) and Simplified Acquisition Threshold contracts (< $250k) where speed and clarity win, with complete-delivery MVP packages and a client Planning View for transparent execution.
 - **Community-driven impact:** Anchored in North Dakota universities, meetups, and veteran networks – multiplying economic and social resilience.
 
 ---
@@ -58,7 +60,7 @@ True North Insights is more than a veteran-led consulting company; we are a move
 
 ### Service Model
 
-- **30–90 day fixed-price MVP deployments** with transparent scope control.
+- **30–90 day fixed-price MVP deployments** with transparent scope control and a standard Planning View (Kanban/table) shared with clients.
 - White-label dashboards agencies can internalize and extend.
 - Direct SAT awards + subcontract augmentation for primes needing fast modernization deliverables.
 - Future: Training-as-a-service; agencies sponsor veteran cohorts mastering True North platforms.

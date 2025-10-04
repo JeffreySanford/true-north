@@ -12,10 +12,11 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
+      '@typescript-eslint/no-empty-function': 'off',
       // TRADITIONAL ANGULAR ARCHITECTURE - DISABLE STANDALONE ENFORCEMENT
       '@angular-eslint/prefer-standalone': 'off',
       '@angular-eslint/prefer-standalone-component': 'off',
-      
+
       '@angular-eslint/directive-selector': [
         'error',
         {

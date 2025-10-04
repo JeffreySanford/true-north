@@ -13,45 +13,38 @@
   </div>
 
   <div class="navigation-links nav-flex flex-row gap-4 align-center grow">
-    <a mat-button routerLink="/mission" routerLinkActive="active-link"
-      >Mission</a
-    >
-    <a mat-button routerLink="/capabilities" routerLinkActive="active-link"
-      >Capabilities</a
-    >
-    <a mat-button routerLink="/readiness" routerLinkActive="active-link"
-      >Readiness</a
-    >
-    <a mat-button routerLink="/talent" routerLinkActive="active-link">Talent</a>
-    <a mat-button routerLink="/engagement" routerLinkActive="active-link"
-      >Engagement</a
-    >
-    <a mat-button routerLink="/briefing" routerLinkActive="active-link"
-      >Briefing</a
-    >
-    <a
-      mat-button
-      routerLink="/development"
-      routerLinkActive="active-link"
-      class="dev-link"
-      >Dev</a
-    >
+    <ng-container *ngIf="navItems$ | async as navItems">
+      <a
+        *ngFor="let item of navItems"
+        mat-button
+        [routerLink]="item.path"
+        routerLinkActive="active-link"
+      >
+        {{ item.title }}
+      </a>
+    </ng-container>
   </div>
 
   <div class="header-actions flex-row gap-8 align-center justify-end">
     <!-- Global view mode toggle: Table (off) / Kanban (on) -->
-    <mat-slide-toggle
-      color="accent"
-      [checked]="kanbanActive"
-      (change)="toggleMode()"
-      aria-label="Toggle Kanban view"
-    >
-      {{ kanbanActive ? 'Kanban' : 'Table' }} View
-    </mat-slide-toggle>
+    <ng-container *ngIf="showKanbanToggle">
+      <mat-slide-toggle
+        color="accent"
+        [checked]="kanbanActive"
+        (change)="toggleMode()"
+        aria-label="Toggle Kanban view"
+      >
+        {{ kanbanActive ? 'Kanban' : 'Table' }} View
+      </mat-slide-toggle>
+    </ng-container>
     <button mat-icon-button aria-label="Search button">
       <mat-icon>search</mat-icon>
     </button>
-    <button mat-icon-button aria-label="User account button">
+    <button
+      mat-icon-button
+      aria-label="User account button"
+      (click)="toggleAuth()"
+    >
       <mat-icon>account_circle</mat-icon>
     </button>
     <button

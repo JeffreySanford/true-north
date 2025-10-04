@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProjectComponent } from '../pages/project.component';
 
 // Dedicated route for lazy-loaded Projects feature
-const routes: Routes = [
-  { path: '', component: ProjectComponent }
-];
+import { ProjectsComponent } from './projects.component';
+const routes: Routes = [{ path: '', component: ProjectsComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ProjectsRoutingModule {}

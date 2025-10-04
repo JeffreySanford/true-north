@@ -1,0 +1,58 @@
+/* Development Page Layout */
+// stylelint-disable-next-line no-empty-source
+
+.dev-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.dev-page__intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--tactical-shadow-medium);
+  position: relative;
+}
+
+.dev-page__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.75rem, 2.2rem, 2.5rem);
+  font-weight: 700;
+  background: linear-gradient(
+    90deg,
+    var(--tactical-primary),
+    var(--tactical-info)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dev-page__subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.75;
+  font-family: var(--tactical-font-mono);
+}
+
+.dev-page__status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, var(--tactical-success) 0%, #2e7d32 100%);
+  border-radius: 12px;
+  color: #fff;
+  font-family: var(--tactical-font-mono);
+  font-size: 0.85rem;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+}

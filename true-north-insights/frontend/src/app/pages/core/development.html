@@ -1,0 +1,62 @@
+<section class="dev-page">
+  <header class="dev-page__intro">
+    <div class="dev-page__intro-head">
+      <h1 class="dev-page__title">{{ title }}</h1>
+      <p class="dev-page__subtitle">
+        Traditional Angular Architecture · Material 3 Expressive
+      </p>
+    </div>
+    <div class="dev-page__status" aria-label="system status">
+      <span class="status-indicator success" aria-hidden="true"></span>
+      <span class="status-text">All Systems Operational</span>
+    </div>
+  </header>
+
+  <div class="dev-page__grid">
+    <article class="tactical-card primary dev-tile">
+      <h2 class="dev-tile__title">Tactical Notification System</h2>
+      <p class="dev-tile__body">
+        Material 3 Expressive toaster with legendary UX feedback.
+      </p>
+      <div class="dev-tile__actions">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onDemonstrateToaster()"
+        >
+          Demo Notifications
+        </button>
+      </div>
+    </article>
+
+    <article class="tactical-card info dev-tile">
+      <h2 class="dev-tile__title">Database Operations</h2>
+      <p class="dev-tile__body">
+        Observable dual persistence with step-by-step feedback.
+      </p>
+      <div class="dev-tile__actions">
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="onTestDatabaseOperations()"
+        >
+          Test DB Ops
+        </button>
+      </div>
+    </article>
+
+    <article class="tactical-card warning dev-tile">
+      <h2 class="dev-tile__title">Authentication Flow</h2>
+      <p class="dev-tile__body">JWT + MFA authentication with audit logging.</p>
+      <div class="dev-tile__actions">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="onTestAuthenticationFlow()"
+        >
+          Test Auth Flow
+        </button>
+      </div>
+    </article>
+  </div>
+</section>

@@ -13,6 +13,12 @@ This folder houses strategic and operational marketing artifacts for True North 
 - `veteran-talent-track.md` – Workforce / academy development plan
 - `product-marketing-alignment.md` – Feature → Federal value mapping
 
+## Current Focus (Q4 2025)
+
+- Emphasize Veteran Initiative as a flagship workforce and community program under the broader True North Insights brand.
+- Pursue Simplified Acquisition Threshold (< $250K) complete-delivery MVP packages (30–90 day fixed price) as primary federal entry motion.
+- Provide a client-facing Planning View (transparent Kanban/table) for every engagement to increase trust, predictability, and outcome traceability.
+
 ## Governance
 
 | Artifact             | Owner              | Review Cadence         |
@@ -35,3 +41,4 @@ This folder houses strategic and operational marketing artifacts for True North 
 - Add NAICS + PSC code references
 - Add FedRAMP / security posture summary block (future)
 - Integrate metrics into automated dashboard (future)
+- Add short “Brand Architecture” note across docs clarifying: Company = True North Insights; "True North Insight" = website/campaign property

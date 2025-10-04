@@ -4,7 +4,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     loadChildren: () =>
-      import('./pages/pages.module').then((m) => m.PagesModule),
+      import('./pages/core/core.module').then((m) => m.CoreModule),
   },
   { path: '**', redirectTo: '' },
 ];

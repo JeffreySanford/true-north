@@ -1,29 +1,31 @@
 # Capability Statement (Draft)
 
-**Company:** True North Insights
+**Company:** True North Insights (brand parent; site property: "True North Insight")
 
 **Location:** Jamestown, North Dakota (Remote-capable, Veteran-led)
 
 **Core Identity:** Legendary solutions. Veteran built. Real-time ready.
+
+**Primary Federal Motion (2025–2026):** Fixed-price, complete-delivery MVP packages under the Simplified Acquisition Threshold (< $250K) with transparent scope, rapid timelines (30–90 days), and a client Planning View for progress traceability.
 
 ## Core Competencies
 
 - Real-time operational dashboards (Forge-Board)
 - Time, accountability & activity telemetry (Time-Forge)
 - Auditable event trails (Blockchain-enabled prototype)
-- Rapid MVP delivery (30–90 day fixed-price engagements)
+- Rapid MVP delivery (30–90 day fixed-price engagements) aligned to SAT (< $250K)
 - Frontend: Angular (Material 3), RxJS hot observables
 - Backend: NestJS (primary), emerging Go & Rust microservices
 
 ## Differentiators
 
-| Attribute               | True North Insights                | Typical Vendor           |
-| ----------------------- | ---------------------------------- | ------------------------ |
-| Veteran Workforce Focus | Target 90% veteran employment      | General staffing         |
-| Delivery Model          | MVP-first, fixed-price SAT pilots  | Hourly augmentation      |
-| Real-Time Pattern       | Observable streaming UI            | Polling / batch refresh  |
-| Community Anchor        | ND universities + veteran pipeline | Outsourced / remote only |
-| Accountability          | Built-in audit + telemetry design  | Add-on / afterthought    |
+| Attribute               | True North Insights                        | Typical Vendor           |
+| ----------------------- | ------------------------------------------ | ------------------------ |
+| Veteran Workforce Focus | Target 90% veteran employment              | General staffing         |
+| Delivery Model          | MVP-first, fixed-price SAT pilots (<$250K) | Hourly augmentation      |
+| Real-Time Pattern       | Observable streaming UI                    | Polling / batch refresh  |
+| Community Anchor        | ND universities + veteran pipeline         | Outsourced / remote only |
+| Accountability          | Built-in audit + telemetry design          | Add-on / afterthought    |
 
 ### Differentiator Quadrant (Visual)
 
@@ -60,6 +62,12 @@ flowchart TD
 - Incident response dashboards (DHS / FEMA)
 - Workforce modernization & training analytics
 
+## Planning View (Client-Facing Transparency)
+
+- Every engagement includes a Planning View (Kanban and table modes) with agreed scope, milestones, and status signals.
+- Designed to improve trust, accelerate approvals, and compress time-to-decision.
+- Demonstrable at proposal stage; snapshots included in weekly updates.
+
 ## NAICS / Codes (Initial Focus)
 
 | NAICS  | Description                     |
@@ -83,12 +91,12 @@ flowchart TD
 
 ## Engagement Model
 
-| Stage               | Artifact         | Exit Criteria                 |
-| ------------------- | ---------------- | ----------------------------- |
-| Discovery (1–2 wks) | Pilot Brief      | Approved scope + fixed price  |
-| Build (2–10 wks)    | MVP Increment(s) | Demonstrable feature slice(s) |
-| Deploy (1 wk)       | Hardened MVP     | Live environment + training   |
-| Extend (ongoing)    | Backlog Roadmap  | Option exercised / follow-on  |
+| Stage               | Artifact           | Exit Criteria                         |
+| ------------------- | ------------------ | ------------------------------------- |
+| Discovery (1–2 wks) | Pilot Brief + Plan | Approved scope + fixed price + PV URL |
+| Build (2–10 wks)    | MVP Increment(s)   | Demonstrable feature slice(s)         |
+| Deploy (1 wk)       | Hardened MVP       | Live environment + training           |
+| Extend (ongoing)    | Backlog Roadmap    | Option exercised / follow-on          |
 
 ## Past Performance (Foundational / Internal Pilots)
 
@@ -135,5 +143,6 @@ pie title Workforce Composition Target
 - Add FedRAMP readiness outline (scoped)
 - Append NAICS expansion + PSC mapping table
 - Link to `security-auditing-backlog.md` for roadmap traceability
+- Add sample Planning View screenshot and redacted link example
 
 > This is a draft; refine with past performance identifiers, UEI/CAGE (once issued), and security posture summary.

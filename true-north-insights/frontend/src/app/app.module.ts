@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { LayoutModule } from './layout/layout.module';
-import { PagesModule } from './pages/pages.module';
+import { CoreModule } from './pages/core/core.module';
 import { SwaggerModule } from './swagger/swagger.module';
 import { UIServicesModule } from './shared/ui-services/ui-services-module';
 
@@ -16,7 +16,7 @@ import { UIServicesModule } from './shared/ui-services/ui-services-module';
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     LayoutModule,
-    PagesModule,
+    CoreModule,
     SwaggerModule,
     UIServicesModule,
   ],
