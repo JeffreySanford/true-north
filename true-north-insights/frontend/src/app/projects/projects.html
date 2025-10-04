@@ -1,53 +1,76 @@
 <mat-card class="planning-top-section condensed-top mat-elevation-z6">
-  <div class="planning-single-row">
-    <mat-icon class="planning-title-icon" color="primary">dashboard</mat-icon>
-    <span class="planning-title">Planning Board</span>
-    <span class="project-summary">{{ projects.length }} Projects</span>
-    <ng-container *ngIf="cumulativeTotals$ | async as totals">
-      <div class="totals-container">
-        <div class="totals-item">
-          <mat-icon color="primary" inline>trending_up</mat-icon>
-          <div class="totals-label">Exp:</div>
-          <div class="totals-value">{{ totals.expected }}h</div>
-        </div>
-        <div class="totals-item">
-          <mat-icon color="accent" inline>timer</mat-icon>
-          <div class="totals-label">Used:</div>
-          <div class="totals-value">{{ totals.used }}h</div>
-        </div>
-        <div class="totals-item">
-          <mat-icon color="warn" inline>hourglass_bottom</mat-icon>
-          <div class="totals-label">Rem:</div>
-          <div class="totals-value">{{ totals.remaining }}h</div>
-        </div>
+  <div class="planning-top-flex">
+    <div class="planning-title-stack">
+      <mat-icon class="planning-title-icon" color="primary">dashboard</mat-icon>
+      <div class="planning-title-group">
+        <span class="planning-title">Planning Board</span>
+        <span class="project-summary">{{ projects.length }} Projects</span>
       </div>
-    </ng-container>
-    <mat-form-field
-      appearance="outline"
-      class="project-dropdown condensed-dropdown"
-    >
-      <mat-label>Project</mat-label>
-      <mat-select
-        [(ngModel)]="selectedProjectId"
-        (selectionChange)="onProjectChange($event.value)"
+    </div>
+    <div class="planning-stats-center">
+      <ng-container *ngIf="cumulativeTotals$ | async as totals">
+        <div class="totals-container">
+          <div class="totals-item">
+            <mat-icon color="primary" inline>trending_up</mat-icon>
+            <div class="totals-label">Exp:</div>
+            <div class="totals-value">{{ totals.expected }}h</div>
+          </div>
+          <div class="totals-item">
+            <mat-icon color="accent" inline>timer</mat-icon>
+            <div class="totals-label">Used:</div>
+            <div class="totals-value">{{ totals.used }}h</div>
+          </div>
+          <div class="totals-item">
+            <mat-icon color="warn" inline>hourglass_bottom</mat-icon>
+            <div class="totals-label">Rem:</div>
+            <div class="totals-value">{{ totals.remaining }}h</div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="planning-controls-right">
+      <mat-form-field
+        appearance="outline"
+        class="project-dropdown condensed-dropdown"
       >
-        <mat-option *ngFor="let project of projects" [value]="project.id"
-          >{{ project.name }}</mat-option
+        <mat-label>Project</mat-label>
+        <mat-select
+          [(ngModel)]="selectedProjectId"
+          (selectionChange)="onProjectChange($event.value)"
         >
-      </mat-select>
-    </mat-form-field>
-    <button mat-icon-button color="primary" aria-label="Add Project">
-      <mat-icon>add</mat-icon>
-    </button>
-    <mat-slide-toggle [(ngModel)]="kanbanView">Kanban View</mat-slide-toggle>
-    <mat-button-toggle-group
-      [(ngModel)]="tableMode"
-      aria-label="Table Mode"
-      class="table-mode-toggle"
-    >
-      <mat-button-toggle value="full">Full Table</mat-button-toggle>
-      <mat-button-toggle value="category">Category Tables</mat-button-toggle>
-    </mat-button-toggle-group>
+          <mat-option *ngFor="let project of projects" [value]="project.id"
+            >{{ project.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button color="primary" aria-label="Add Project">
+        <mat-icon>add</mat-icon>
+      </button>
+      <div class="view-toggle-group">
+        <span class="toggle-label">View:</span>
+        <mat-button-toggle-group
+          [(ngModel)]="kanbanView"
+          aria-label="View Mode"
+          class="kanban-table-toggle"
+          [value]="kanbanView"
+        >
+          <mat-button-toggle [value]="true">Kanban</mat-button-toggle>
+          <mat-button-toggle [value]="false">Table</mat-button-toggle>
+        </mat-button-toggle-group>
+        <ng-container *ngIf="!kanbanView">
+          <mat-button-toggle-group
+            [(ngModel)]="tableMode"
+            aria-label="Table Mode"
+            class="table-mode-toggle"
+          >
+            <mat-button-toggle value="full">Full Table</mat-button-toggle>
+            <mat-button-toggle value="category"
+              >Category Tables</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </ng-container>
+      </div>
+    </div>
   </div>
 </mat-card>
 
@@ -89,10 +112,21 @@
               </mat-icon>
             </span>
           </div>
-          <div class="card-body" *ngIf="expandedTask === task">
-            <p>{{ task.description }}</p>
-            <span *ngIf="task.startedAt">Start: {{ task.startedAt }}</span>
-            <span *ngIf="task.completedAt">End: {{ task.completedAt }}</span>
+          <div class="card-body expanded-body" *ngIf="expandedTask === task">
+            <div class="calendar-bg-wrapper">
+              <app-mini-calendar
+                [startDate]="task.startedAt || ''"
+                [endDate]="task.completedAt || ''"
+                [highlight]="true"
+              ></app-mini-calendar>
+              <div class="card-body-content">
+                <p>{{ task.description }}</p>
+                <span *ngIf="task.startedAt">Start: {{ task.startedAt }}</span>
+                <span *ngIf="task.completedAt"
+                  >End: {{ task.completedAt }}</span
+                >
+              </div>
+            </div>
           </div>
           <button mat-icon-button (click)="toggleExpand(task)">
             <mat-icon

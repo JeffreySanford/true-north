@@ -47,6 +47,32 @@ export const PROJECTS: ProjectSeed[] = [
         timeRemaining: 0,
       },
       {
+        id: 'tni-20251004-side-1',
+        title: 'Documentation Review & Update',
+        description:
+          'Reviewed and updated project documentation for new planning view and UI changes.',
+        category: 'completed',
+        status: 'completed',
+        startedAt: '2025-10-04',
+        completedAt: '2025-10-04',
+        timeExpected: 2,
+        timeUsed: 2,
+        timeRemaining: 0,
+      },
+      {
+        id: 'tni-20251004-side-2',
+        title: 'Seed Data Task Creation',
+        description:
+          'Created and estimated time for new seed tasks for today’s side projects.',
+        category: 'completed',
+        status: 'completed',
+        startedAt: '2025-10-04',
+        completedAt: '2025-10-04',
+        timeExpected: 1,
+        timeUsed: 1,
+        timeRemaining: 0,
+      },
+      {
         id: 'tni-backlog-1',
         title: 'Draft 1–3–5 Year Plan',
         description:

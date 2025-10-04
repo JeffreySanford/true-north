@@ -10,10 +10,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProjectsRoutingModule } from './projects-routing.module';
 
 import { ProjectsComponent } from './projects.component';
+import { MiniCalendarComponent } from './mini-calendar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [ProjectsComponent],
+  declarations: [ProjectsComponent, MiniCalendarComponent],
   imports: [
     CommonModule,
     MaterialModule,
