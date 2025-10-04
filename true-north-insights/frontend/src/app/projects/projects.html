@@ -1,24 +1,45 @@
-<div class="planning-top-section">
-  <div class="planning-header">
-    <h1>Planning Board</h1>
-    <mat-form-field appearance="fill" class="project-dropdown">
+<mat-card class="planning-top-section condensed-top mat-elevation-z6">
+  <div class="planning-single-row">
+    <mat-icon class="planning-title-icon" color="primary">dashboard</mat-icon>
+    <span class="planning-title">Planning Board</span>
+    <span class="project-summary">{{ projects.length }} Projects</span>
+    <ng-container *ngIf="cumulativeTotals$ | async as totals">
+      <div class="totals-container">
+        <div class="totals-item">
+          <mat-icon color="primary" inline>trending_up</mat-icon>
+          <div class="totals-label">Exp:</div>
+          <div class="totals-value">{{ totals.expected }}h</div>
+        </div>
+        <div class="totals-item">
+          <mat-icon color="accent" inline>timer</mat-icon>
+          <div class="totals-label">Used:</div>
+          <div class="totals-value">{{ totals.used }}h</div>
+        </div>
+        <div class="totals-item">
+          <mat-icon color="warn" inline>hourglass_bottom</mat-icon>
+          <div class="totals-label">Rem:</div>
+          <div class="totals-value">{{ totals.remaining }}h</div>
+        </div>
+      </div>
+    </ng-container>
+    <mat-form-field
+      appearance="outline"
+      class="project-dropdown condensed-dropdown"
+    >
       <mat-label>Project</mat-label>
       <mat-select
         [(ngModel)]="selectedProjectId"
         (selectionChange)="onProjectChange($event.value)"
       >
-        <mat-option *ngFor="let project of projects" [value]="project.id">
-          {{ project.name }}
-        </mat-option>
+        <mat-option *ngFor="let project of projects" [value]="project.id"
+          >{{ project.name }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="primary">Add Project</button>
+    <button mat-icon-button color="primary" aria-label="Add Project">
+      <mat-icon>add</mat-icon>
+    </button>
     <mat-slide-toggle [(ngModel)]="kanbanView">Kanban View</mat-slide-toggle>
-  </div>
-  <div class="planning-actions">
-    <button mat-stroked-button color="accent">Filter</button>
-    <button mat-stroked-button color="accent">Sort</button>
-    <button mat-stroked-button color="accent">Export</button>
     <mat-button-toggle-group
       [(ngModel)]="tableMode"
       aria-label="Table Mode"
@@ -28,7 +49,7 @@
       <mat-button-toggle value="category">Category Tables</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
-</div>
+</mat-card>
 
 <div *ngIf="kanbanView; else tableView">
   <div class="kanban-board-horizontal" cdkDropListGroup>

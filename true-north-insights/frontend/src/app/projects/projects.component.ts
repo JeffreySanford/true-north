@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PROJECTS, ProjectSeed, TaskSeed } from './projects-seed';
 
 @Component({
@@ -8,6 +9,11 @@ import { PROJECTS, ProjectSeed, TaskSeed } from './projects-seed';
   standalone: false,
 })
 export class ProjectsComponent implements OnInit {
+  cumulativeTotals$ = new BehaviorSubject<{
+    expected: number;
+    used: number;
+    remaining: number;
+  }>({ expected: 0, used: 0, remaining: 0 });
   tableMode: 'full' | 'category' = 'full';
   setTableMode(mode: 'full' | 'category') {
     this.tableMode = mode;
@@ -52,10 +58,41 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateProjectView(this.selectedProjectId);
+    this.updateCumulativeTotals();
   }
 
   onProjectChange(projectId: string): void {
     this.updateProjectView(projectId);
+    this.updateCumulativeTotals();
+  }
+  updateCumulativeTotals(): void {
+    const project = this.projects.find((p) => p.id === this.selectedProjectId);
+    if (!project) {
+      (
+        this.cumulativeTotals$ as BehaviorSubject<{
+          expected: number;
+          used: number;
+          remaining: number;
+        }>
+      ).next({ expected: 0, used: 0, remaining: 0 });
+      return;
+    }
+    const expected = project.tasks.reduce(
+      (sum, t) => sum + (t.timeExpected || 0),
+      0
+    );
+    const used = project.tasks.reduce((sum, t) => sum + (t.timeUsed || 0), 0);
+    const remaining = project.tasks.reduce(
+      (sum, t) => sum + (t.timeRemaining || 0),
+      0
+    );
+    (
+      this.cumulativeTotals$ as BehaviorSubject<{
+        expected: number;
+        used: number;
+        remaining: number;
+      }>
+    ).next({ expected, used, remaining });
   }
 
   updateProjectView(projectId: string): void {

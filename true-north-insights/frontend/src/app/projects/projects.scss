@@ -1,3 +1,33 @@
+.planning-single-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2em;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.totals-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+}
+.totals-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  background: #f7f9fa;
+  border-radius: 8px;
+  padding: 0.3em 0.8em;
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.07);
+}
+.project-dropdown {
+  min-width: 180px;
+  margin-left: 1em;
+}
+.table-mode-toggle {
+  margin-left: 1em;
+}
 .planning-table {
   width: 100%;
   border-radius: 12px;
