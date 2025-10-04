@@ -1,5 +1,9 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarConfig,
+  MatSnackBarRef,
+} from '@angular/material/snack-bar';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { shareReplay, takeUntil, tap } from 'rxjs/operators';
 
@@ -13,7 +17,13 @@ export interface ToasterMessage {
   readonly persistent?: boolean;
 }
 
-export type ToasterType = 'success' | 'error' | 'warning' | 'info' | 'progress' | 'tactical';
+export type ToasterType =
+  | 'success'
+  | 'error'
+  | 'warning'
+  | 'info'
+  | 'progress'
+  | 'tactical';
 
 export interface ToasterConfig extends MatSnackBarConfig {
   readonly type?: ToasterType;
@@ -28,27 +38,27 @@ export interface ToasterConfig extends MatSnackBarConfig {
  * @since 2025-10-02
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToasterService implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
   private readonly messagesSubject$ = new BehaviorSubject<ToasterMessage[]>([]);
   private readonly snackBar = inject(MatSnackBar);
-  
+
   // Hot observable for message history
   public readonly messages$ = this.messagesSubject$.pipe(
     shareReplay(1),
     takeUntil(this.destroy$)
   );
-  
+
   // Tactical color scheme for Material 3 Expressive
   private readonly tacticalColors = {
     success: 'tactical-success',
-    error: 'tactical-error', 
+    error: 'tactical-error',
     warning: 'tactical-warning',
     info: 'tactical-info',
     progress: 'tactical-progress',
-    tactical: 'tactical-primary'
+    tactical: 'tactical-primary',
   };
 
   /**
@@ -58,7 +68,11 @@ export class ToasterService implements OnDestroy {
    * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 4000)
    * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
-  public showSuccess(message: string, action?: string, duration = 4000): Observable<ToasterMessage> {
+  public showSuccess(
+    message: string,
+    action?: string,
+    duration = 4000
+  ): Observable<ToasterMessage> {
     return this.show(message, 'success', { action, duration });
   }
 
@@ -69,11 +83,15 @@ export class ToasterService implements OnDestroy {
    * @param {boolean} [persistent] - Whether the notification should persist until manually dismissed (default: false)
    * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
-  public showError(message: string, action?: string, persistent = false): Observable<ToasterMessage> {
-    return this.show(message, 'error', { 
-      action, 
-      persistent, 
-      duration: persistent ? 0 : 8000 
+  public showError(
+    message: string,
+    action?: string,
+    persistent = false
+  ): Observable<ToasterMessage> {
+    return this.show(message, 'error', {
+      action,
+      persistent,
+      duration: persistent ? 0 : 8000,
     });
   }
 
@@ -84,7 +102,11 @@ export class ToasterService implements OnDestroy {
    * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 6000)
    * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
-  public showWarning(message: string, action?: string, duration = 6000): Observable<ToasterMessage> {
+  public showWarning(
+    message: string,
+    action?: string,
+    duration = 6000
+  ): Observable<ToasterMessage> {
     return this.show(message, 'warning', { action, duration });
   }
 
@@ -95,7 +117,11 @@ export class ToasterService implements OnDestroy {
    * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 4000)
    * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
-  public showInfo(message: string, action?: string, duration = 4000): Observable<ToasterMessage> {
+  public showInfo(
+    message: string,
+    action?: string,
+    duration = 4000
+  ): Observable<ToasterMessage> {
     return this.show(message, 'info', { action, duration });
   }
 
@@ -105,7 +131,10 @@ export class ToasterService implements OnDestroy {
    * @param {boolean} [persistent] - Whether the notification should persist until manually dismissed (default: true)
    * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
-  public showProgress(message: string, persistent = true): Observable<ToasterMessage> {
+  public showProgress(
+    message: string,
+    persistent = true
+  ): Observable<ToasterMessage> {
     return this.show(message, 'progress', { persistent, duration: 0 });
   }
 
@@ -116,7 +145,11 @@ export class ToasterService implements OnDestroy {
    * @param {number} [duration] - Duration in milliseconds before auto-dismiss (default: 5000)
    * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
-  public showTactical(message: string, action?: string, duration = 5000): Observable<ToasterMessage> {
+  public showTactical(
+    message: string,
+    action?: string,
+    duration = 5000
+  ): Observable<ToasterMessage> {
     return this.show(message, 'tactical', { action, duration });
   }
 
@@ -129,28 +162,20 @@ export class ToasterService implements OnDestroy {
    * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   public showStepProgress(
-    operationName: string, 
-    currentStep: number, 
-    totalSteps: number, 
+    operationName: string,
+    currentStep: number,
+    totalSteps: number,
     stepDescription: string
   ): Observable<ToasterMessage> {
     const progressMessage = `${operationName}: Step ${currentStep}/${totalSteps} - ${stepDescription}`;
-    
+
     return this.show(progressMessage, 'progress', {
       persistent: currentStep < totalSteps,
       duration: currentStep === totalSteps ? 3000 : 0,
-      showTimestamp: true
+      showTimestamp: true,
     }).pipe(
       tap((message: ToasterMessage) => {
         // Audit logging integration point
-        console.log('STEP_PROGRESS:', {
-          operation: operationName,
-          step: currentStep,
-          total: totalSteps,
-          description: stepDescription,
-          messageId: message.id,
-          timestamp: message.timestamp
-        });
       })
     );
   }
@@ -169,15 +194,25 @@ export class ToasterService implements OnDestroy {
     status: 'START' | 'SUCCESS' | 'ERROR',
     details?: string
   ): Observable<ToasterMessage> {
-    const message = `${operation} ${entity}: ${status}${details ? ` - ${details}` : ''}`;
-    
+    const message = `${operation} ${entity}: ${status}${
+      details ? ` - ${details}` : ''
+    }`;
+
     switch (status) {
       case 'START':
-        return this.showProgress(`Starting ${operation.toLowerCase()} operation on ${entity}...`);
+        return this.showProgress(
+          `Starting ${operation.toLowerCase()} operation on ${entity}...`
+        );
       case 'SUCCESS':
-        return this.showSuccess(`${operation} ${entity} completed successfully`);
+        return this.showSuccess(
+          `${operation} ${entity} completed successfully`
+        );
       case 'ERROR':
-        return this.showError(`${operation} ${entity} failed${details ? `: ${details}` : ''}`, 'RETRY', true);
+        return this.showError(
+          `${operation} ${entity} failed${details ? `: ${details}` : ''}`,
+          'RETRY',
+          true
+        );
       default:
         return this.showInfo(message);
     }
@@ -196,22 +231,26 @@ export class ToasterService implements OnDestroy {
     details?: string
   ): Observable<ToasterMessage> {
     const stepNames = {
-      'LOGIN': 'Login',
-      'MFA': 'Multi-Factor Authentication',
-      'REFRESH': 'Token Refresh', 
-      'LOGOUT': 'Logout'
+      LOGIN: 'Login',
+      MFA: 'Multi-Factor Authentication',
+      REFRESH: 'Token Refresh',
+      LOGOUT: 'Logout',
     };
-    
+
     const stepName = stepNames[step];
     const message = `${stepName}: ${status}${details ? ` - ${details}` : ''}`;
-    
+
     switch (status) {
       case 'START':
         return this.showProgress(`${stepName} in progress...`);
       case 'SUCCESS':
         return this.showTactical(`${stepName} successful`, 'CONTINUE');
       case 'ERROR':
-        return this.showError(`${stepName} failed${details ? `: ${details}` : ''}`, 'RETRY', true);
+        return this.showError(
+          `${stepName} failed${details ? `: ${details}` : ''}`,
+          'RETRY',
+          true
+        );
       default:
         return this.showInfo(message);
     }
@@ -242,8 +281,8 @@ export class ToasterService implements OnDestroy {
    * @returns {Observable<ToasterMessage>} Observable containing the created toaster message
    */
   private show(
-    message: string, 
-    type: ToasterType, 
+    message: string,
+    type: ToasterType,
     options: Partial<ToasterConfig> = {}
   ): Observable<ToasterMessage> {
     const toasterMessage: ToasterMessage = {
@@ -253,7 +292,7 @@ export class ToasterService implements OnDestroy {
       timestamp: new Date(),
       duration: options.duration,
       action: options.action,
-      persistent: options.persistent
+      persistent: options.persistent,
     };
 
     // Add to message history
@@ -262,21 +301,21 @@ export class ToasterService implements OnDestroy {
 
     // Configure Material 3 Expressive styling
     const config: MatSnackBarConfig = {
-      duration: options.persistent ? 0 : (options.duration || 4000),
+      duration: options.persistent ? 0 : options.duration || 4000,
       panelClass: [
         'tactical-toaster',
         this.tacticalColors[type],
-        options.showTimestamp ? 'with-timestamp' : ''
+        options.showTimestamp ? 'with-timestamp' : '',
       ].filter(Boolean),
       // Updated default placement to bottom-right per UX request
       verticalPosition: 'bottom',
       horizontalPosition: 'right',
-      ...options
+      ...options,
     };
 
     // Display with Material 3 Expressive design
     const snackBarRef: MatSnackBarRef<unknown> = this.snackBar.open(
-      options.showTimestamp 
+      options.showTimestamp
         ? `[${toasterMessage.timestamp.toLocaleTimeString()}] ${message}`
         : message,
       options.action,
@@ -285,15 +324,12 @@ export class ToasterService implements OnDestroy {
 
     // Handle action clicks
     if (options.action) {
-      snackBarRef.onAction().pipe(
-        takeUntil(this.destroy$)
-      ).subscribe(() => {
-        console.log('TOASTER_ACTION:', {
-          messageId: toasterMessage.id,
-          action: options.action,
-          timestamp: new Date()
+      snackBarRef
+        .onAction()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          // TOASTER_ACTION log removed
         });
-      });
     }
 
     return new BehaviorSubject(toasterMessage).pipe(

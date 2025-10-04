@@ -39,30 +39,32 @@ export interface AuditEntry extends LogEntry {
  * @since 2025-10-02
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoggingService implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
   private readonly logsSubject$ = new BehaviorSubject<LogEntry[]>([]);
   private readonly auditSubject$ = new BehaviorSubject<AuditEntry[]>([]);
-  
+
   // Hot observables for real-time log monitoring
   public readonly logs$ = this.logsSubject$.pipe(
     shareReplay(1),
     takeUntil(this.destroy$)
   );
-  
+
   public readonly auditLogs$ = this.auditSubject$.pipe(
     shareReplay(1),
     takeUntil(this.destroy$)
   );
-  
+
   // Session and user context
   private sessionId: string = this.generateSessionId();
   private userId?: string;
-  
+
   // Performance monitoring
-  private readonly performanceSubject$ = new BehaviorSubject<Map<string, number>>(new Map());
+  private readonly performanceSubject$ = new BehaviorSubject<
+    Map<string, number>
+  >(new Map());
   public readonly performance$ = this.performanceSubject$.pipe(
     shareReplay(1),
     takeUntil(this.destroy$)
@@ -71,7 +73,7 @@ export class LoggingService implements OnDestroy {
   /**
    * @description Constructor for LoggingService - initializes logging with session tracking
    * @param None - No parameters required
-   * @returns {void} No return value  
+   * @returns {void} No return value
    * @author Development Team
    * @since 2025-10-02
    */
@@ -79,7 +81,7 @@ export class LoggingService implements OnDestroy {
     this.info('LoggingService initialized', 'SYSTEM', {
       sessionId: this.sessionId,
       timestamp: new Date(),
-      userAgent: navigator.userAgent
+      userAgent: navigator.userAgent,
     });
   }
 
@@ -88,7 +90,12 @@ export class LoggingService implements OnDestroy {
    * @param {string} userId - The unique identifier for the authenticated user
    * @returns {void} No return value
    */
-  public log(level: LogLevel, message: string, category: string, metadata?: Record<string, unknown>): void {
+  public log(
+    level: LogLevel,
+    message: string,
+    category: string,
+    metadata?: Record<string, unknown>
+  ): void {
     const logEntry: LogEntry = {
       id: this.generateUuid(),
       timestamp: new Date(),
@@ -99,17 +106,9 @@ export class LoggingService implements OnDestroy {
       sessionId: this.sessionId,
       userId: this.userId,
     };
-    
     const currentLogs = this.logsSubject$.getValue();
     this.logsSubject$.next([...currentLogs, logEntry]);
-    
-    // For critical errors, you might want to send them to a remote server
-    if (level === 'ERROR' || level === 'FATAL') {
-      // this.sendToRemote(logEntry);
-      console.error(logEntry);
-    } else {
-      console.log(logEntry);
-    }
+    // Optionally send critical errors to remote server here
   }
 
   /**
@@ -119,7 +118,11 @@ export class LoggingService implements OnDestroy {
    * @param {Record<string, unknown>} [metadata] - Optional metadata
    * @returns {void} No return value
    */
-  public debug(message: string, category: string, metadata?: Record<string, unknown>): void {
+  public debug(
+    message: string,
+    category: string,
+    metadata?: Record<string, unknown>
+  ): void {
     this.log('DEBUG', message, category, metadata);
   }
 
@@ -130,7 +133,11 @@ export class LoggingService implements OnDestroy {
    * @param {Record<string, unknown>} [metadata] - Optional metadata
    * @returns {void} No return value
    */
-  public info(message: string, category: string, metadata?: Record<string, unknown>): void {
+  public info(
+    message: string,
+    category: string,
+    metadata?: Record<string, unknown>
+  ): void {
     this.log('INFO', message, category, metadata);
   }
 
@@ -141,7 +148,11 @@ export class LoggingService implements OnDestroy {
    * @param {Record<string, unknown>} [metadata] - Optional metadata
    * @returns {void} No return value
    */
-  public warn(message: string, category: string, metadata?: Record<string, unknown>): void {
+  public warn(
+    message: string,
+    category: string,
+    metadata?: Record<string, unknown>
+  ): void {
     this.log('WARN', message, category, metadata);
   }
 
@@ -153,7 +164,12 @@ export class LoggingService implements OnDestroy {
    * @param {Record<string, unknown>} [metadata] - Optional metadata
    * @returns {void} No return value
    */
-  public error(message: string, category: string, error: Error, metadata?: Record<string, unknown>): void {
+  public error(
+    message: string,
+    category: string,
+    error: Error,
+    metadata?: Record<string, unknown>
+  ): void {
     const logEntry: LogEntry = {
       id: this.generateUuid(),
       timestamp: new Date(),
@@ -165,10 +181,10 @@ export class LoggingService implements OnDestroy {
       userId: this.userId,
       stackTrace: error.stack,
     };
-    
+
     const currentLogs = this.logsSubject$.getValue();
     this.logsSubject$.next([...currentLogs, logEntry]);
-    
+
     // this.sendToRemote(logEntry);
     console.error(logEntry);
   }
@@ -181,7 +197,12 @@ export class LoggingService implements OnDestroy {
    * @param {Record<string, unknown>} [metadata] - Optional metadata
    * @returns {void} No return value
    */
-  public fatal(message: string, category: string, error: Error, metadata?: Record<string, unknown>): void {
+  public fatal(
+    message: string,
+    category: string,
+    error: Error,
+    metadata?: Record<string, unknown>
+  ): void {
     const logEntry: LogEntry = {
       id: this.generateUuid(),
       timestamp: new Date(),
@@ -193,10 +214,10 @@ export class LoggingService implements OnDestroy {
       userId: this.userId,
       stackTrace: error.stack,
     };
-    
+
     const currentLogs = this.logsSubject$.getValue();
     this.logsSubject$.next([...currentLogs, logEntry]);
-    
+
     // this.sendToRemote(logEntry);
     console.error(logEntry);
   }
@@ -209,7 +230,12 @@ export class LoggingService implements OnDestroy {
    * @param {unknown} [newValue] - The new value of the resource
    * @returns {void} No return value
    */
-  public audit(action: string, resource: string, previousValue?: unknown, newValue?: unknown): void {
+  public audit(
+    action: string,
+    resource: string,
+    previousValue?: unknown,
+    newValue?: unknown
+  ): void {
     const auditEntry: AuditEntry = {
       id: this.generateUuid(),
       timestamp: new Date(),
@@ -225,7 +251,7 @@ export class LoggingService implements OnDestroy {
       ipAddress: '127.0.0.1', // Placeholder - should be retrieved from request
       userAgent: navigator.userAgent,
     };
-    
+
     const currentAuditLogs = this.auditSubject$.getValue();
     this.auditSubject$.next([...currentAuditLogs, auditEntry]);
   }
@@ -248,7 +274,11 @@ export class LoggingService implements OnDestroy {
     const startTime = this.performanceSubject$.getValue().get(operation);
     if (startTime) {
       const duration = performance.now() - startTime;
-      this.info(`Operation '${operation}' completed in ${duration.toFixed(2)}ms`, 'PERFORMANCE', { duration });
+      this.info(
+        `Operation '${operation}' completed in ${duration.toFixed(2)}ms`,
+        'PERFORMANCE',
+        { duration }
+      );
       this.performanceSubject$.getValue().delete(operation);
     }
   }
@@ -260,7 +290,7 @@ export class LoggingService implements OnDestroy {
    */
   public getLogsByCategory(category: string): Observable<LogEntry[]> {
     return this.logs$.pipe(
-      map(logs => logs.filter(log => log.category === category))
+      map((logs) => logs.filter((log) => log.category === category))
     );
   }
 
@@ -271,7 +301,7 @@ export class LoggingService implements OnDestroy {
    */
   public getLogsByLevel(level: LogLevel): Observable<LogEntry[]> {
     return this.logs$.pipe(
-      map(logs => logs.filter(log => log.level === level))
+      map((logs) => logs.filter((log) => log.level === level))
     );
   }
 
@@ -288,10 +318,14 @@ export class LoggingService implements OnDestroy {
    * @returns {string} A UUID
    */
   private generateUuid(): string {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0,
+          v = c == 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    );
   }
 
   /**
