@@ -1,11 +1,15 @@
 <mat-card class="planning-top-section condensed-top mat-elevation-z6">
   <div class="planning-top-flex">
+    <div class="planning-title-stack planning-title-horizontal">
+      <mat-icon class="planning-title-icon main-page-icon" color="primary"
+        >dashboard</mat-icon
+      >
+      <span class="planning-title main-title">Planning Board</span>
+    </div>
     <div class="planning-title-stack">
-      <mat-icon class="planning-title-icon" color="primary">dashboard</mat-icon>
-      <div class="planning-title-group">
-        <span class="planning-title">Planning Board</span>
-        <span class="project-summary">{{ projects.length }} Projects</span>
-      </div>
+      <span class="project-summary main-project-count"
+        >{{ projects.length }} Projects</span
+      >
     </div>
     <div class="planning-stats-center">
       <ng-container *ngIf="cumulativeTotals$ | async as totals">
