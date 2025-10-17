@@ -5,6 +5,7 @@ import { coreRoutes } from './core.routes';
 import { AboutModule } from './about.module';
 import { ContactModule } from './contact.module';
 import { DevelopmentModule } from './development.module';
+import { SamModule } from './sam.module';
 
 @NgModule({
   declarations: [],
@@ -13,6 +14,7 @@ import { DevelopmentModule } from './development.module';
     AboutModule,
     ContactModule,
     DevelopmentModule,
+    SamModule,
     RouterModule.forChild([
       ...coreRoutes,
       { path: '', redirectTo: 'overview', pathMatch: 'full' },

@@ -69,6 +69,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const coreRoutes: Route[] = [
       { path: 'overview', data: { title: 'Overview' } },
       { path: 'projects', data: { title: 'Planning' } },
+      { path: 'sam', data: { title: 'SAM Contracts' } },
       { path: 'dashboard', data: { title: 'Dashboard' } },
       { path: 'reports', data: { title: 'Reports' } },
       { path: 'contact', data: { title: 'Contact' } },

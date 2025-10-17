@@ -8,14 +8,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx webpack-cli build",
-        "args": ["--node-env=production"],
-        "cwd": "backend"
-      },
-      "configurations": {
-        "development": {
-          "args": ["--node-env=development"]
-        }
+        "command": "tsc --project backend/tsconfig.app.json"
       }
     },
     "prune-lockfile": {
@@ -44,21 +37,9 @@
       "executor": "nx:noop"
     },
     "serve": {
-      "continuous": true,
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
       "options": {
-        "buildTarget": "backend:build",
-        "runBuildTargetDependencies": false
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "backend:build:development"
-        },
-        "production": {
-          "buildTarget": "backend:build:production"
-        }
+        "command": "node dist/backend/main.js"
       }
     },
     "test": {

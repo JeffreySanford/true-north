@@ -1,9 +1,10 @@
 const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
-const { join } = require('path');
+const path = require('path');
 
 module.exports = {
   output: {
-    path: join(__dirname, '../dist/backend'),
+    path: path.resolve(__dirname, '../../dist/backend'),
+    filename: 'main.js',
   },
   plugins: [
     new NxAppWebpackPlugin({

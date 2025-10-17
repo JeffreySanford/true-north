@@ -13,6 +13,7 @@ import { AppModule } from './app/app.module';
 import { Role } from './auth/roles.enum';
 
 async function bootstrap(): Promise<void> {
+  console.log('Bootstrap starting...');
   const nestApplication = await NestFactory.create(AppModule, {
     logger: false,
   });

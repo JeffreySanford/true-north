@@ -46,6 +46,20 @@
         ]
       }
     },
+    "/api/api/sam-contracts": {
+      "get": {
+        "operationId": "SamController_getSamContracts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sam"
+        ]
+      }
+    },
     "/api/auth/login": {
       "post": {
         "operationId": "AuthController_login",

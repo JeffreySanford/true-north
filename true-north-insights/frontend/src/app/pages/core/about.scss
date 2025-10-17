@@ -2,3 +2,45 @@
 	Keeps page structure; replace with real styles or remove this comment block.
 */
 // stylelint-disable-next-line no-empty-source
+.about-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.about-page h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a237e;
+}
+
+.about-card {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  background: #f5f7fa;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.about-card h2 {
+  font-size: 1.5rem;
+  color: #3949ab;
+  margin-bottom: 0.5rem;
+}
+
+.about-card ul {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.about-card li {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}

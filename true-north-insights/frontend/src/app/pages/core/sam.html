@@ -1,0 +1,41 @@
+<div class="sam-summary mat-elevation-z2">
+  <h1>SAM Contract Opportunities</h1>
+  <div class="sam-totals">
+    <span>Total Contracts: <strong>{{ totalContracts }}</strong></span>
+    <span>Total Value: <strong>${{ totalValue | number }}</strong></span>
+  </div>
+</div>
+
+<mat-card class="sam-table-card">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let contract">{{ contract.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let contract">{{ contract.title }}</td>
+    </ng-container>
+    <ng-container matColumnDef="agency">
+      <th mat-header-cell *matHeaderCellDef>Agency</th>
+      <td mat-cell *matCellDef="let contract">{{ contract.agency }}</td>
+    </ng-container>
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef>Value</th>
+      <td mat-cell *matCellDef="let contract">
+        ${{ contract.value | number }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let contract">{{ contract.status }}</td>
+    </ng-container>
+    <ng-container matColumnDef="postedDate">
+      <th mat-header-cell *matHeaderCellDef>Posted</th>
+      <td mat-cell *matCellDef="let contract">{{ contract.postedDate }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>

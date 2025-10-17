@@ -3,20 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "description": "Parent repository for True North Holdings software platform",
-  "scripts": {
-    "install:all": "cd true-north-insights && npm install",
-    "dev": "cd true-north-insights && npm run start:dev",
-    "serve": "cd true-north-insights && npm run serve",
-    "start:all": "cd true-north-insights && npm run start:all",
-    "build": "cd true-north-insights && npm run build:prod",
-    "test": "cd true-north-insights && npm run test:all",
-    "lint": "cd true-north-insights && npm run lint:all",
-    "validate": "cd true-north-insights && npm run validate:draconian",
-    "validate:draconian": "cd true-north-insights && npm run validate:draconian"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  },
   "engines": {
     "node": ">=20.19.0"
   },

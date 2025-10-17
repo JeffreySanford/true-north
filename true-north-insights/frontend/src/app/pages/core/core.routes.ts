@@ -29,6 +29,11 @@ export const coreRoutes: Route[] = [
       import('./development.module').then((m) => m.DevelopmentModule),
     data: { title: 'Development' },
   },
+  {
+    path: 'sam',
+    loadChildren: () => import('./sam.module').then((m) => m.SamModule),
+    data: { title: 'SAM Contracts' },
+  },
   // Scaffold for future views
   {
     path: 'dashboard',
