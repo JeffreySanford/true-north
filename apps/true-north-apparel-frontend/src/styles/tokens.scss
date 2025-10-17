@@ -1,0 +1,39 @@
+
+// Color tokens
+$tn-primary: #0b3d91;
+$tn-primary-700: #002147;
+$tn-primary-500: #1976d2;
+$tn-primary-300: #64b5f6;
+$tn-accent: #c8102e;
+$tn-accent-2: #ffb703;
+$tn-accent-700: #a10a22;
+$tn-accent-500: #c8102e;
+$tn-accent-300: #ff6b6b;
+$tn-surface: #ffffff;
+$tn-surface-alt: #f7f9fb;
+$tn-on-surface: #222222;
+$tn-on-primary: #ffffff;
+$tn-on-accent: #ffffff;
+$tn-success: #43a047;
+$tn-warning: #ffd600;
+$tn-error: #d32f2f;
+
+// Spacing tokens
+$tn-spacing-xs: 0.25rem;
+$tn-spacing-sm: 0.5rem;
+$tn-spacing-md: 1rem;
+$tn-spacing-lg: 2rem;
+$tn-spacing-xl: 4rem;
+
+// Typography tokens
+$tn-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+$tn-font-size-base: 1rem;
+$tn-font-size-lg: 1.25rem;
+$tn-font-size-xl: 2rem;
+$tn-font-weight-normal: 400;
+$tn-font-weight-bold: 700;
+
+// Elevation tokens
+$tn-elevation-1: 0 1px 4px rgba(0,0,0,0.08);
+$tn-elevation-2: 0 4px 12px rgba(0,0,0,0.12);
+$tn-elevation-3: 0 8px 24px rgba(0,0,0,0.16);

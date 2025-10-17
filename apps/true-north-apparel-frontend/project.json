@@ -1,0 +1,67 @@
+{
+  "name": "true-north-apparel-frontend",
+  "root": "apps/true-north-apparel-frontend",
+  "sourceRoot": "apps/true-north-apparel-frontend/src",
+  "projectType": "application",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/true-north-apparel-frontend/src/**/*.ts"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "options": {
+        "outputPath": "dist/apps/true-north-apparel-frontend",
+        "index": "apps/true-north-apparel-frontend/src/index.html",
+        "main": "apps/true-north-apparel-frontend/src/main.ts",
+        "styles": [
+          "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/true-north-apparel-frontend/src/styles/material-theme.scss",
+          "apps/true-north-apparel-frontend/src/styles.scss",
+          "apps/true-north-apparel-frontend/src/styles/global.scss"
+        ],
+        "tsConfig": "apps/true-north-apparel-frontend/tsconfig.app.json",
+        "assets": [
+          "apps/true-north-apparel-frontend/src/assets"
+        ],
+        "fileReplacements": [],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/true-north-apparel-frontend/src/styles"]
+        }
+        ,"customWebpackConfig": {
+          "path": "apps/true-north-apparel-frontend/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {},
+        "development": {}
+      }
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "buildTarget": "true-north-apparel-frontend:build:development"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "true-north-apparel-frontend:build:production"
+        },
+        "development": {
+          "buildTarget": "true-north-apparel-frontend:build:development"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/true-north-apparel-frontend/jest.config.js",
+        "passWithNoTests": true,
+        "coverageReporters": ["json-summary", "text", "lcov"]
+      }
+    }
+  }
+}

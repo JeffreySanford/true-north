@@ -1,0 +1,60 @@
+
+
+<main class="shop" role="main" aria-labelledby="shop-hero-heading">
+  <mat-card class="primary-border">
+  <h1>True North Apparel</h1>
+    <header class="hero" role="region" aria-label="Shop introduction">
+      <mat-card class="accent-border">
+        <div class="hero-content">
+          <h1 id="shop-hero-heading">True North Apparel — Crafted for the Adventurous</h1>
+          <p class="lead">Quality tees, hoodies, and performance wear inspired by the great outdoors. Sustainably made, proudly worn.</p>
+          <div class="hero-ctas">
+            <a mat-raised-button color="primary" class="cta" routerLink="/products" aria-label="Browse products">Browse Products</a>
+          </div>
+        </div>
+        <div class="hero-media" aria-hidden="true">
+          <img src="/assets/hero-people.jpg" alt="People wearing True North Apparel" />
+        </div>
+      </mat-card>
+      <aside class="featured" *ngIf="featuredProduct" aria-label="Featured product">
+        <mat-card class="success-border featured-card">
+          <mat-card-header>
+            <mat-card-title>{{ featuredProduct?.name }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image [src]="featuredProduct?.imageUrl || '/assets/product-placeholder.jpg'" alt="{{ featuredProduct?.name }}">
+          <mat-card-content>
+            <p class="price">{{ (featuredProduct?.priceCents || 0) / 100 | currency }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <a mat-stroked-button color="primary" routerLink="/products" aria-label="View products">See More</a>
+          </mat-card-actions>
+        </mat-card>
+      </aside>
+    </header>
+
+    <section class="product-list" aria-label="Available Products">
+      <div class="product-tiles">
+        <mat-card *ngFor="let product of products" class="product-tile mat-elevation-z4 accent-border" role="article">
+          <mat-card-header>
+            <mat-card-title>{{ product.name }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image [src]="product.imageUrl || '/assets/product-placeholder.jpg'" alt="{{ product.name }}" />
+          <mat-card-content>
+            <p>{{ product.material }} &mdash; {{ product.fit }} {{ product.type }}</p>
+            <p class="price">{{ (product.priceCents || 0) / 100 | currency }}</p>
+            <p class="desc">{{ product.brand }} &mdash; {{ product.color }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-stroked-button color="primary">View Details</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </section>
+
+    <section class="secondary-cta" aria-hidden="false">
+      <mat-card class="accent-border">
+        <a class="shop-link" mat-flat-button color="accent" routerLink="/products">Shop New Arrivals</a>
+      </mat-card>
+    </section>
+  </mat-card>
+</main>

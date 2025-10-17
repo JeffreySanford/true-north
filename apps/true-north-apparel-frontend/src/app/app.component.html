@@ -1,0 +1,18 @@
+<header class="app-header">
+  <div class="brand">
+    <a routerLink="/" class="brand-link">True North Apparel</a>
+  </div>
+  <nav class="main-nav">
+    <a routerLink="/" routerLinkActive="active">Home</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
+    <a routerLink="/shop" routerLinkActive="active">Shop</a>
+    <a routerLink="/security" routerLinkActive="active">Security</a>
+  </nav>
+</header>
+
+<main class="app-main">
+  <mat-card class="primary-border">
+    <router-outlet></router-outlet>
+  </mat-card>
+</main>
+

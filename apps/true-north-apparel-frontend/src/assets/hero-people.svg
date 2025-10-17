@@ -1,0 +1,10 @@
+<svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="200" fill="#e3f2fd"/>
+  <circle cx="80" cy="120" r="40" fill="#90caf9"/>
+  <circle cx="200" cy="100" r="50" fill="#42a5f5"/>
+  <circle cx="320" cy="120" r="40" fill="#90caf9"/>
+  <ellipse cx="80" cy="170" rx="30" ry="10" fill="#bbdefb"/>
+  <ellipse cx="200" cy="170" rx="40" ry="12" fill="#bbdefb"/>
+  <ellipse cx="320" cy="170" rx="30" ry="10" fill="#bbdefb"/>
+  <text x="200" y="40" text-anchor="middle" font-size="24" fill="#1976d2" font-family="Arial, sans-serif">Hero People</text>
+</svg>

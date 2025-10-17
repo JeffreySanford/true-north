@@ -1,0 +1,16 @@
+// Central Sass tokens (no top-level CSS). Importable via `@use`.
+$spacing-lg: 2rem !default;
+$surface: #fff !default;
+$on-surface: #222 !default;
+$font-headline: 'Roboto', 'Arial', sans-serif !default;
+$headline-size: 2rem !default;
+
+// Brand tokens
+$tn-primary: #0b3d91 !default;
+$tn-accent: #c8102e !default;
+$tn-accent-2: #ffb703 !default;
+
+// Additional accent shades for vibrant gradients
+$tn-accent-700: #a10a22 !default;
+$tn-accent-500: #c8102e !default;
+$tn-accent-300: #ff6b6b !default;

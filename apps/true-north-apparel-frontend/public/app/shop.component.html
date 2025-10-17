@@ -1,0 +1,8 @@
+<section class="p-4">
+  <mat-card>
+    <h2>True North Apparel</h2>
+    <mat-list>
+      <mat-list-item *ngFor="let p of products">{{ p.name }} — {{ p.priceCents/100 | currency }}</mat-list-item>
+    </mat-list>
+  </mat-card>
+</section>

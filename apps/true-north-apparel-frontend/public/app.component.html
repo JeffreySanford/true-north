@@ -1,0 +1,29 @@
+<header class="app-header">
+  <div class="brand">
+    <a routerLink="/" class="brand-link">True North Apparel</a>
+  </div>
+  <nav class="main-nav">
+    <a routerLink="/" routerLinkActive="active">Home</a>
+    <a routerLink="/brand" routerLinkActive="active">Brand</a>
+    <a routerLink="/products" routerLinkActive="active">Products</a>
+    <a routerLink="/security" routerLinkActive="active">Security</a>
+  </nav>
+</header>
+
+<main class="app-main">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Made in America. Built to Last.</h1>
+      <p class="lead">Classic, dependable apparel crafted by Americans who love this country.</p>
+      <div class="hero-actions">
+        <a routerLink="/products" class="mat-mdc-button mat-mdc-raised-button primary">Shop Products</a>
+        <a routerLink="/brand" class="mat-mdc-button mat-mdc-stroked-button">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="flag-bg"></div>
+    </div>
+  </section>
+
+  <router-outlet></router-outlet>
+</main>

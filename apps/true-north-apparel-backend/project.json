@@ -1,0 +1,53 @@
+{
+  "name": "true-north-apparel-backend",
+  "root": "apps/true-north-apparel-backend",
+  "sourceRoot": "apps/true-north-apparel-backend/src",
+  "projectType": "application",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/true-north-apparel-backend/src/**/*.ts"
+        ]
+      }
+    },
+    "build": {
+  "executor": "@nx/js:tsc",
+        "options": {
+          "main": "apps/true-north-apparel-backend/src/main.ts",
+          "tsConfig": "apps/true-north-apparel-backend/tsconfig.json",
+          "outputPath": "dist/apps/true-north-apparel-backend"
+        },
+        "configurations": {
+          "production": {},
+          "development": {}
+        }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "true-north-apparel-backend:build:development",
+        "watch": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "true-north-apparel-backend:build:production",
+          "watch": false
+        },
+        "development": {
+          "buildTarget": "true-north-apparel-backend:build:development",
+          "watch": true
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/true-north-apparel-backend/jest.config.js",
+        "passWithNoTests": true,
+        "coverageReporters": ["json-summary", "text", "lcov"]
+      }
+    }
+  }
+}
