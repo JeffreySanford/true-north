@@ -137,7 +137,7 @@
     "@nestjs/platform-socket.io": "^11.1.6",
     "@nestjs/swagger": "^11.0.2",
     "@nestjs/websockets": "^11.1.6",
-    "axios": "^1.6.0",
+    "axios": "^1.13.5",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
